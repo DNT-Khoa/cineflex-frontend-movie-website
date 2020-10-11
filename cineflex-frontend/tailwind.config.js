@@ -1,20 +1,28 @@
-require('dotenv').config();
-const enablePurge = process.env.ENABLE_PURGE || false;
+// require('dotenv').config();
+// const enablePurge = process.env.ENABLE_PURGE || false;
 module.exports = {
   future: {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
   purge: {
-    enabled: enablePurge,
-    content: [
-      './src/**/*.html',
-      './src/**/*.scss'
-    ]
+    // enabled: enablePurge,
+    // content: [
+    //   './src/**/*.html',
+    //   './src/**/*.scss'
+    // ]
   },
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#ff0000'
+      }
+    },
   },
-  variants: {},
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'active'],
+    transitionDuration: ['responsive', 'hover', 'focus'],
+    textColor: ['responsive', 'hover', 'focus', 'group-hover']
+  },
   plugins: [],
 }
