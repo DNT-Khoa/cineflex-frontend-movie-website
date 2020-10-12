@@ -1,3 +1,9 @@
 #main-form {
-    height: 550px;
+    height: 630px;
+}
+
+@media screen and (min-width: 768px) {
+    #main-form {
+        height: 550px;
+    }
 }

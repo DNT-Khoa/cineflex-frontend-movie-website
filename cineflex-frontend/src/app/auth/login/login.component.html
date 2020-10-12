@@ -12,17 +12,19 @@
             <h1 class="text-4xl font-extrabold text-gray-900 text-right">Log In</h1>
             <p class="text-right">Become a CineFlex member. <a class="text-blue-500 cursor-pointer" routerLink="/auth/signup">Join</a></p>
 
-            <form class="mt-10 relative">
+            <form class="mt-10 relative" [formGroup]="loginForm">
                 <!-- Email input  -->
-                <div class="mt-10">
+                <div class="mt-10 h-24">
                     <label for="email" class="font-bold block mb-1">Email</label>
-                    <input type="text" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
+                    <input [formControlName]="'email'" type="text" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
+                    <span class="block">Hello</span>
                 </div>
 
                 <!-- Password input -->
-                <div class="mt-10">
+                <div class="mt-8 h-24">
                     <label for="password" class="font-bold block mb-1">Password</label>
-                    <input type="text" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
+                    <input [formControlName]="'password'" type="text" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
+                    <span class="block">Hello</span>
                 </div>
 
                 <!-- Singup button -->
