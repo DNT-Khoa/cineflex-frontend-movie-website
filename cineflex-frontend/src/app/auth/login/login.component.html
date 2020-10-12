@@ -1,0 +1,42 @@
+<section id="authentication-section" class="w-screen h-screen bg-red-500 flex items-center justify-center relative">
+    <img src="../../../assets/img/CineFlex Official Logo.png" alt="CineFlex logo" class="w-32 top-0 left-0 ml-1 mt-1 md:ml-5 md:mt-5 absolute">
+    <div class="flex bg-white shadow-2xl max-w-screen-lg flex-grow mx-5 -mt-10" id="main-form">
+        <!-- left image -->
+        <div class="w-1/2 relative hidden md:block">
+            <img src="../../../assets/img/login-image.jpg" class="absolute inset-0 w-full h-full">
+        </div>
+
+        <!-- right form -->
+        <div class="md:w-1/2 px-10 py-5 flex-none w-full">
+
+            <h1 class="text-4xl font-extrabold text-gray-900 text-right">Log In</h1>
+            <p class="text-right">Become a CineFlex member. <a class="text-blue-500 cursor-pointer" routerLink="/auth/signup">Join</a></p>
+
+            <form class="mt-10 relative">
+                <!-- Email input  -->
+                <div class="mt-10">
+                    <label for="email" class="font-bold block mb-1">Email</label>
+                    <input type="text" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
+                </div>
+
+                <!-- Password input -->
+                <div class="mt-10">
+                    <label for="password" class="font-bold block mb-1">Password</label>
+                    <input type="text" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
+                </div>
+
+                <!-- Singup button -->
+                <div class="mt-24 mb-3 text-center">
+                    <button type="submit" class="focus:outline-none">
+                        <a class="text-white font-bold px-10 py-3 bg-primary rounded-full hover:bg-white duration-200 border-primary border-solid border-2 hover:text-primary focus:outline-none">Login</a>
+                    </button>
+                </div>
+                <div class="text-center mt-5 underline">
+                    <a class="cursor-pointer text-blue-600" routerLink="/">
+                        Back to Home
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
