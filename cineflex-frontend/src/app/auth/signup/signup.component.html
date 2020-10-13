@@ -6,7 +6,7 @@
             <h1 class="text-4xl font-extrabold text-gray-900">Sign Up</h1>
             <p class="">Already a member? <a class="text-blue-500 cursor-pointer" routerLink="/auth/login">Login</a></p>
 
-            <form class="mt-10" [formGroup]="signupForm">
+            <form class="mt-10" [formGroup]="signupForm" (ngSubmit)="signup()">
                 <div class="flex justify-between flex-col md:flex-row">
                     <!-- first name input -->
                     <div class="md:w-1/2 w-full h-24">
@@ -43,8 +43,15 @@
 
                 <!-- Singup button -->
                 <div class="mt-6 mb-3 text-center md:mt-12">
-                    <button type="submit" class="focus:outline-none">
-                        <a class="text-white font-bold px-10 py-3 bg-primary rounded-full hover:bg-white duration-200 border-primary border-solid border-2 hover:text-primary focus:outline-none">Sign Up</a>
+                    <button type="submit" class="focus:outline-none relative" [ngClass]="{'cursor-not-allowed': !signupForm.valid || isLoading}">
+                        <!-- loading spinner -->
+                        <div class="loadingio-spinner-spinner-8e51mcrbiyx absolute inline-block ml-10 -mt-5" *ngIf="isLoading"><div class="ldio-g5juwyp9ree">
+                        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                        </div></div>
+
+                        <a [ngClass]="{'bg-red-300': !signupForm.valid || isLoading, 'bg-primary border-primary border-solid border-2 hover:text-primary hover:bg-white': signupForm.valid && !isLoading}" class="text-white font-bold px-10 py-3 rounded-full duration-200 focus:outline-none">
+                            <span [ngClass]="{'invisible': isLoading}">Sign Up</span>
+                        </a>
                     </button>
                 </div>
 

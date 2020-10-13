@@ -14,23 +14,27 @@
 
             <form class="mt-10 relative" [formGroup]="loginForm">
                 <!-- Email input  -->
-                <div class="mt-10 h-24">
+                <div class="mt-12 h-24">
                     <label for="email" class="font-bold block mb-1">Email</label>
                     <input [formControlName]="'email'" type="text" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
-                    <span class="block">Hello</span>
+                    <span *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched" class="block text-sm text-red-600 font-semibold">Please fill in a valid email</span>
                 </div>
 
                 <!-- Password input -->
-                <div class="mt-8 h-24">
+                <div class="mt-8 h-24 relative">
                     <label for="password" class="font-bold block mb-1">Password</label>
-                    <input [formControlName]="'password'" type="text" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
-                    <span class="block">Hello</span>
+                    <input #password [formControlName]="'password'" [type]="isPasswordVisible ? 'text': 'password'" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
+                    <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched" class="block text-sm text-red-600 font-semibold">Please fill in a valid password</span>
+                    <span class="absolute right-0 inline-block mr-3 mt-2 cursor-pointer" *ngIf="password.value" (click)="isPasswordVisible = !isPasswordVisible">
+                        <i class="fa fa-eye text-xl" *ngIf="!isPasswordVisible"></i>
+                        <i class="fa fa-eye-slash text-xl" *ngIf="isPasswordVisible"></i>
+                    </span>
                 </div>
 
                 <!-- Singup button -->
-                <div class="mt-24 mb-3 text-center">
-                    <button type="submit" class="focus:outline-none">
-                        <a class="text-white font-bold px-10 py-3 bg-primary rounded-full hover:bg-white duration-200 border-primary border-solid border-2 hover:text-primary focus:outline-none">Login</a>
+                <div class="mt-16 mb-3 text-center md:mt-12">
+                    <button type="submit" class="focus:outline-none" [ngClass]="{'cursor-not-allowed': !loginForm.valid}">
+                        <a [ngClass]="{'bg-red-300': !loginForm.valid, 'bg-primary border-primary border-solid border-2 hover:text-primary hover:bg-white': loginForm.valid}" class="text-white font-bold px-10 py-3 rounded-full duration-200 focus:outline-none">Login</a>
                     </button>
                 </div>
                 <div class="text-center mt-5 underline">
