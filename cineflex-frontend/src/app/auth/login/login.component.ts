@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
               this.router.navigateByUrl('/');
               this.toastr.success('Login Successful');
             } else if (data.role === 'Admin') {
+              this.router.navigateByUrl('/admin');
               this.toastr.success('Welcome Admin');
             }
           }
