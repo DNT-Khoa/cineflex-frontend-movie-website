@@ -1,7 +1,7 @@
 <header>
     <div class="container mx-auto ">
-        <div class="flex justify-between px-3 md:px-2">
-            <div class="md:hidden self-center" (click)="toggleDropdown()">
+        <div class="flex justify-between px-3 md:px-2 relative">
+            <div class="md:hidden self-center" (click)="isDropdownOpen = !isDropdownOpen">
                 <i class="fa fa-bars" style="color: white; font-size: 30px;" *ngIf="!isDropdownOpen"></i>
                 <i class="fa fa-times" style="color: white; font-size: 30px" *ngIf="isDropdownOpen"></i>
             </div>
@@ -19,12 +19,20 @@
                 </div>
             </div>
             <!-- right side -->
-            <div class="md:self-end self-center">
-                <a routerLink="/auth/login" class="md:inline-block text-white bg-primary font-semibold px-6 py-2 cursor-pointer duration-200 border-primary border-2 border-solid rounded-full hover:bg-white hover:text-primary">Login</a>
+            <div class="md:self-end self-center relative">
+                <a routerLink="/auth/login" class="md:inline-block text-white bg-primary font-semibold px-6 py-2 cursor-pointer duration-200 border-primary border-2 border-solid rounded-full hover:bg-white hover:text-primary" *ngIf="!isUserLoggedIn">Login</a>
+                <button class="cursor-pointer focus:outline-none active:outline-none focus:shadow" (click)="isUserDropdownOpen = !isUserDropdownOpen" *ngIf="isUserLoggedIn">
+                    <img src="../../../assets/img/anonymous-user.jpg" class="w-12 rounded-full">
+                </button>
+                <!-- Dropdown user -->
+                <div class="absolute bg-white right-0 p-1 w-40 mt-2 shadow-md rounded-md" *ngIf="isUserDropdownOpen && isUserLoggedIn" [@userDropdownAnimation]>
+                    <a class="block px-4 py-2 text-md cursor-pointer text-gray-700 hover:bg-gray-300 duration-200 font-semibold">My Profile</a>
+                    <a class="block px-4 py-2 text-md cursor-pointer text-gray-700 hover:bg-gray-300 duration-200 font-semibold" (click)="logOut()">Log Out</a>
+                </div>
             </div>
         </div>
         <!-- Dropdown menu -->
-        <div class=" px-5 mt-20 md:hidden dropdown-menu" *ngIf="isDropdownOpen" [@inOutAnimation]>
+        <div class=" px-5 mt-20 md:hidden dropdown-menu absolute w-full" *ngIf="isDropdownOpen" [@hamburgerDropdownAnimation]>
             <a class="block font-semibold text-white my-5 text-center text-lg duration-200 hover:text-primary">Movies</a>
             <a class="block font-semibold text-white my-5 text-center text-lg duration-200 hover:text-primary">Category</a>
             <a class="block font-semibold text-white my-5 text-center text-lg duration-200 hover:text-primary">Recommended</a>
