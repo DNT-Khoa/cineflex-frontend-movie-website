@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { AuthService } from 'src/app/auth/shared/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -49,16 +50,17 @@ import { AuthService } from 'src/app/auth/shared/auth.service';
     )
   ]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   isDropdownOpen = false;
   isUserDropdownOpen = false;
   isUserLoggedIn: boolean;
+  subscription: Subscription;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.isUserLoggedIn = this.authService.isUserLoggedIn();
-    this.authService.loggedInSubject.subscribe(
+    this.subscription = this.authService.loggedInSubject.subscribe(
       (loggedInStatus: boolean) => {
         this.isUserLoggedIn = loggedInStatus;
       }
@@ -67,6 +69,10 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

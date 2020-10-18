@@ -1,9 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { fromEvent, Subscription, Observable } from 'rxjs';
 import { CategoriesService } from './shared/categories.service';
 import { CategoryModal } from './shared/category.modal';
+import { debounceTime, delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-categories',
@@ -54,11 +56,16 @@ import { CategoryModal } from './shared/category.modal';
     )
   ]
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
   isUpdateModalOpen = false;
   isAddModalOpen = false;
   isDeleteModalOpen = false;
   selectedCategory: CategoryModal;
+
+  @ViewChild('searchInput') searchInput: ElementRef;
+  keyUpSubscription: Subscription;
+  searchResults: CategoryModal[];
+  isSearching = false;
   
   updateCategoryForm: FormGroup;
   addCategoryForm: FormGroup;
@@ -73,6 +80,37 @@ export class CategoriesComponent implements OnInit {
     this.initializeAddCategoryForm();
     this.initializeUpdateCategoryForm();
     this.initializeDeleteCategoryForm();
+  }
+
+  // Because we user @Viewchild so we should use ngAfterViewInit
+  ngAfterViewInit() {
+    // Listen for user keydown and start searching 
+    this.keyUpSubscription = fromEvent(this.searchInput.nativeElement, 'keyup')
+      .pipe(
+        debounceTime(500),
+        map((event: Event) => (<HTMLInputElement>event.target).value),
+        distinctUntilChanged(),
+        tap(() => {
+          this.isSearching = true;
+        }),
+        delay(300),
+        switchMap(value => this.categoriesService.searchCategoryByName(value))
+      ).subscribe ( data => {
+          if (this.searchInput.nativeElement.value === '') {
+            this.searchResults = [];
+          } else {
+            this.searchResults = data;
+          }
+          this.isSearching = false;
+      }, error => {
+        console.log(error);
+        this.isSearching = false;
+      }
+      )
+  }
+
+  ngOnDestroy() {
+    this.keyUpSubscription.unsubscribe();
   }
 
   getAllCategories() {

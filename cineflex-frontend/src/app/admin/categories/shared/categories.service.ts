@@ -25,4 +25,14 @@ export class CategoriesService {
     deleteCategoryById(id: bigint) {
         return this.httpClient.delete(this.httpConfigService.getBaseUrl() + "/admin/categories/" + id);
     }
+
+    searchCategoryByName(searchKey: string) {
+        return this.httpClient.get<CategoryModal[]>(this.httpConfigService.getBaseUrl() + "/admin/categories/search", 
+            {
+               params: {
+                   searchKey: searchKey
+               } 
+            }
+        )
+    }
 }

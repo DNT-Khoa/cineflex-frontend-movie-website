@@ -8,7 +8,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { NewsComponent } from './news/news.component';
 import { MoviesComponent } from './movies/movies.component';
 import { AdminsComponent } from './admins/admins.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AdminModule { }

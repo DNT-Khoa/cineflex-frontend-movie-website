@@ -9,6 +9,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
     pathMatch: 'full',
+    canLoad: [UserGuard]
   },
   {
     path: 'auth',

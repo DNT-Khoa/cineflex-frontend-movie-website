@@ -12,8 +12,33 @@
     <div class="rounded-lg bg-white w-full h-full mt-5 p-6">
         <!-- Search bar -->
         <div class="relative">
-            <input type="text" class="bg-gray-200 p-2 pl-10 rounded-md w-1/2 focus:outline-none font-semibold text-gray-700" placeholder="Search By Name">
-            <i class="fa fa-search absolute left-0 ml-3 mt-3 text-lg cursor-pointer text-gray-800 hover:text-primary duration-200"></i>
+            <!-- Search input -->
+            <div>
+                <input type="text" class="bg-gray-200 p-2 pl-10 rounded-md w-1/2 focus:outline-none font-semibold text-gray-700" placeholder="Search By Name" #searchInput>
+                <i class="fa fa-search absolute left-0 ml-3 mt-3 text-lg cursor-pointer text-gray-800 hover:text-primary duration-200"></i>
+            </div>  
+            <!-- Search results -->
+            <div class="absolute bg-white border rounded-lg left-0 w-1/2 p-4 mt-3" *ngIf="searchInput.value !== ''" [@modalOpenAnimation]>
+                <div class="border-b-2 py-2">Your results for <strong>{{ searchInput.value}}</strong></div>
+
+                <!-- Searching spinner -->
+                <div class="loadingio-spinner-spin-blut0vicmi8" *ngIf="isSearching"><div class="ldio-al5e038e2l">
+                <div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div>
+                </div></div>
+
+                <!-- Found categories -->
+                <div *ngIf="!isSearching" class="mt-5">
+                    <div *ngFor="let result of searchResults">
+                        <span class="font-bold">ID: </span>
+                        <span>{{ result.id }}</span>
+                        <span class="font-bold"> | Name: </span>
+                        <span>{{ result.name }}</span>
+                    </div>
+                </div>
+                
+                <!-- Not found notification -->
+                <div *ngIf="searchResults && searchResults.length === 0 && !isSearching" class="mt-5">No matching results</div>
+            </div>
         </div>
 
         <!-- Category Table -->

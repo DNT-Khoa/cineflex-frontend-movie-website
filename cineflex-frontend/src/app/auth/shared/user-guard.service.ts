@@ -11,7 +11,7 @@ export class UserGuard implements CanLoad {
     }
 
     canLoad(): boolean {
-        if (!this.authService.isUserLoggedIn()) {
+        if (this.authService.isAdminLoggedIn()) {
             this.router.navigateByUrl('/admin');
             return false;
         }
