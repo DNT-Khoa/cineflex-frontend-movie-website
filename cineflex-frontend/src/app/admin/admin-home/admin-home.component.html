@@ -1,6 +1,62 @@
-<section id="admin-panel" class="bg-white h-full flex">
-    <!-- Header top bar -->
-    <div>
-        
+<section id="admin-panel" class="bg-gray-200 h-full flex">
+    <!-- Left sidenav -->
+    <div class="shadow-lg bg-white relative" id="left-sidenav">
+        <!-- Logo -->
+        <div class="py-3 px-5">
+            <img src="../../../assets/img/CineFlex Official Logo.png" alt="" class="w-20 inline-block">
+        </div>
+
+        <!-- Avatar image -->
+        <div class="bg-primary py-5">
+            <img src="../../../assets/img/anonymous-user.jpg" alt="" class="rounded-full w-20 block mx-auto">
+            <!-- First name and last name of admin -->
+            <div class="text-center">
+                <span class="text-white font-bold text-lg">Khoa Doan</span>
+            </div>
+        </div>
+
+        <!-- sidenav links menu -->
+        <div class="py-5 flex flex-col">
+            <!-- Dashboard link -->
+            <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-1" routerLink="dashboard" routerLinkActive="active">
+                <i class="zmdi zmdi-view-dashboard text-xl group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
+                <span class="uppercase font-bold inline-block ml-5 group-hover:text-gray-900 duration-300">Dashboard</span>
+            </a>
+
+            <!-- Categories link -->
+            <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-1" routerLink="categories" routerLinkActive="active">
+                <i class="fa fa-th-large group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
+                <span class="uppercase font-bold inline-block ml-5 group-hover:text-gray-900 duration-300">Categories</span>
+            </a>
+
+            <!-- Movies link -->
+            <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-1" routerLink="movies" routerLinkActive="active">
+                <i class="zmdi zmdi-movie-alt text-xl group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
+                <span class="uppercase font-bold inline-block ml-5 group-hover:text-gray-900 duration-300">Movies</span>
+            </a>
+
+            <!-- News link -->
+            <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-1" routerLink="news" routerLinkActive="active">
+                <i class="fa fa-newspaper text-lg group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
+                <span class="uppercase font-bold inline-block ml-5 group-hover:text-gray-900 duration-300">News</span>
+            </a>
+
+            <!-- Admins link -->
+            <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-1" routerLink="admins" routerLinkActive="active">
+                <i class="fa fa-user-plus text-lg group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
+                <span class="uppercase font-bold inline-block ml-5 group-hover:text-gray-900 duration-300">Admins</span>
+            </a>
+
+            <!-- Logout link -->
+            <a class="cursor-pointer group text-gray-600 block p-5 absolute w-full bottom-0 nav-link" (click)="logout()">
+                <i class="fa fa-sign-out-alt text-lg group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
+                <span class="uppercase font-bold inline-block ml-5 group-hover:text-gray-900 duration-300">Log Out</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Right content div -->
+    <div class="flex-auto overflow-y-scroll">
+        <router-outlet></router-outlet>
     </div>
 </section>

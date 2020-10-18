@@ -7,13 +7,14 @@ import { LoginResponse } from '../login/login-response.payload';
 import { SignupRequestPayload } from '../signup/signup-request.payload';
 import { tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   public loggedInSubject: Subject<any> = new Subject<any>();
-  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService, private toastr: ToastrService) {}
+  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService, private toastr: ToastrService, private router: Router) {}
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
     return this.httpClient.post('http://localhost:8080/api/auth/signup', signupRequestPayload, { responseType: 'text'});
@@ -59,8 +60,10 @@ export class AuthService {
           console.log(data);
           this.toastr.success('Logout Successful!');
           this.loggedInSubject.next(false);
+          this.router.navigateByUrl('/');
         }, error => {
           throwError(error);
+          this.toastr.error('Something wrong happend. Please try again later!');
         }
       );
     this.localStorage.clear('authenticationToken');

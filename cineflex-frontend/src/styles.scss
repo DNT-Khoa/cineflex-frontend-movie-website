@@ -9,3 +9,18 @@ html, body {
     width: 100vw;
     margin: 0;
 }
+
+// Customize scrollbar
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+ 
+::-webkit-scrollbar-track {
+    background: white;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #ff0000; 
+}

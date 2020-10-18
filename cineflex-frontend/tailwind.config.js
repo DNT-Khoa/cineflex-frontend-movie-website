@@ -22,7 +22,7 @@ module.exports = {
   variants: {
     backgroundColor: ['responsive', 'hover', 'focus', 'active'],
     transitionDuration: ['responsive', 'hover', 'focus'],
-    textColor: ['responsive', 'hover', 'focus', 'group-hover']
+    textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus']
   },
   plugins: [],
 }

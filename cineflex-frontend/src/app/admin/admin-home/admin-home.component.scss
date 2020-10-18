@@ -1,0 +1,20 @@
+#left-sidenav {
+    min-width: 270px;
+}
+
+.nav-link {
+    transition: all .3s;
+}
+
+.nav-link:hover {
+    border-right: 5px solid #ff0000;
+}
+
+.active {
+    color: #1a202c;
+    border-right: 5px solid #ff0000;
+
+    i {
+        color: #ff0000;
+    }
+}
