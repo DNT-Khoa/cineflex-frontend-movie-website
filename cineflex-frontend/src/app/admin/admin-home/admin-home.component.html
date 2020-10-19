@@ -30,10 +30,17 @@
             </a>
 
             <!-- Movies link -->
-            <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-1" routerLink="movies" routerLinkActive="active">
+            <a class="cursor-pointer group text-gray-600 block px-5 py-2 mb-1 relative" (click)="isDropdownOpen = !isDropdownOpen">
                 <i class="zmdi zmdi-movie-alt text-xl group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
                 <span class="uppercase font-bold inline-block ml-5 group-hover:text-gray-900 duration-300">Movies</span>
+                <i class="fa fa-chevron-down absolute right-0 mt-1 mr-3 text-gray-600 group-hover:text-primary duration-300" [ngStyle]="{'transform': isDropdownOpen ? 'rotate(180deg)' : 'none'}"></i>
             </a>
+
+            <!-- Movie Type dropdown -->
+            <div id="movieTypeDropdown" class="pl-20 h-16" [@dropdownAnimation] *ngIf="isDropdownOpen">
+                <a class="cursor-pointer uppercase font-bold text-gray-600 hover:text-gray-900 duration-300 block nav-link" routerLink="movies/comingsoon" routerLinkActive="active">Coming soon</a>
+                <a class="cursor-pointer uppercase font-bold text-gray-600 hover:text-gray-900 duration-300 block mt-3 nav-link" routerLink="movies/nowplaying" routerLinkActive="active">Now Playing</a>
+            </div>
 
             <!-- News link -->
             <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-1" routerLink="news" routerLinkActive="active">

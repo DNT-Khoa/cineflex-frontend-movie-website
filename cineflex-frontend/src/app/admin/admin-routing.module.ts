@@ -4,7 +4,9 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminsComponent } from './admins/admins.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ComingSoonComponent } from './movies/coming-soon/coming-soon.component';
 import { MoviesComponent } from './movies/movies.component';
+import { NowPlayingComponent } from './movies/now-playing/now-playing.component';
 import { NewsComponent } from './news/news.component';
 
 const routes: Routes = [
@@ -13,7 +15,12 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent},
       { path: 'categories', component: CategoriesComponent},
-      { path: 'movies', component: MoviesComponent},
+      { path: 'movies', component: MoviesComponent, 
+        children: [
+          { path: 'comingsoon', component: ComingSoonComponent},
+          { path: 'nowplaying', component: NowPlayingComponent}
+        ]
+      },
       { path: 'news', component: NewsComponent},
       { path: 'admins', component: AdminsComponent}
     ],

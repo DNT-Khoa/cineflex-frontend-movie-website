@@ -76,12 +76,12 @@
                 <!-- Category ID -->
                 <div class="mb-8 p-5">
                     <label for="categoryId" class="font-semibold mb-2 block text-center">Category ID</label>
-                    <input type="text" class="p-2 bg-gray-300 block mx-auto rounded-md" formControlName="id" [(ngModel)]="selectedCategory.id">
+                    <input id="categoryId" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md" formControlName="id" [(ngModel)]="selectedCategory.id">
                 </div>
 
                 <div class="mb-12 px-5">
-                    <label for="categoryId" class="font-semibold mb-2 block text-center">Category Name</label>
-                    <input type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="name" [(ngModel)]="selectedCategory.name">  
+                    <label for="categoryName" class="font-semibold mb-2 block text-center">Category Name</label>
+                    <input id="categoryName" type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="name" [(ngModel)]="selectedCategory.name">  
                 </div>
 
                 <div class="bg-gray-200 rounded-b-lg p-3 text-right">
@@ -99,8 +99,8 @@
 
             <form class="mt-10" [formGroup]="addCategoryForm" (ngSubmit)="addCategory()">
                 <div class="mb-12 px-5">
-                    <label for="categoryId" class="font-semibold mb-2 block text-center">Category Name</label>
-                    <input type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="name">
+                    <label for="categoryName" class="font-semibold mb-2 block text-center">Category Name</label>
+                    <input id="categoryName" type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="name">
                 </div>
 
                 <div class="bg-gray-200 rounded-b-lg p-3 text-right">
@@ -121,12 +121,12 @@
                 <!-- Category ID -->
                 <div class="mb-8 p-5">
                     <label for="categoryId" class="font-semibold mb-2 block text-center">Category ID</label>
-                    <input type="text" class="p-2 bg-gray-300 block mx-auto rounded-md" [(ngModel)]="selectedCategory.id" formControlName="id">
+                    <input id="categoryId" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md" [(ngModel)]="selectedCategory.id" formControlName="id">
                 </div>
 
                 <div class="mb-12 px-5">
-                    <label for="categoryId" class="font-semibold mb-2 block text-center">Category Name</label>
-                    <input type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" [(ngModel)]="selectedCategory.name" formControlName="name">
+                    <label for="categoryName" class="font-semibold mb-2 block text-center">Category Name</label>
+                    <input id="categoryName" type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" [(ngModel)]="selectedCategory.name" formControlName="name">
                 </div>
 
                 <div class="bg-gray-200 rounded-b-lg p-3 text-right">

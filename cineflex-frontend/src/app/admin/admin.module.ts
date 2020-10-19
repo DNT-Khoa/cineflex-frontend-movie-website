@@ -9,10 +9,12 @@ import { NewsComponent } from './news/news.component';
 import { MoviesComponent } from './movies/movies.component';
 import { AdminsComponent } from './admins/admins.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComingSoonComponent } from './movies/coming-soon/coming-soon.component';
+import { NowPlayingComponent } from './movies/now-playing/now-playing.component';
 
 
 @NgModule({
-  declarations: [AdminHomeComponent, DashboardComponent, CategoriesComponent, NewsComponent, MoviesComponent, AdminsComponent],
+  declarations: [AdminHomeComponent, DashboardComponent, CategoriesComponent, NewsComponent, MoviesComponent, AdminsComponent, ComingSoonComponent, NowPlayingComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
