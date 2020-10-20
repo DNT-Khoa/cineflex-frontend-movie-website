@@ -11,10 +11,21 @@ import { AdminsComponent } from './admins/admins.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComingSoonComponent } from './movies/coming-soon/coming-soon.component';
 import { NowPlayingComponent } from './movies/now-playing/now-playing.component';
+import { ShortenPipe } from './movies/shared/shorten.pipe';
 
 
 @NgModule({
-  declarations: [AdminHomeComponent, DashboardComponent, CategoriesComponent, NewsComponent, MoviesComponent, AdminsComponent, ComingSoonComponent, NowPlayingComponent],
+  declarations: [
+    AdminHomeComponent, 
+    DashboardComponent, 
+    CategoriesComponent, 
+    NewsComponent, 
+    MoviesComponent, 
+    AdminsComponent, 
+    ComingSoonComponent, 
+    NowPlayingComponent,
+    ShortenPipe
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,

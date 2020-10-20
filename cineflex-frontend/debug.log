@@ -1,1 +1,71 @@
 [1013/130601.500:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1020/155306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.832:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.832:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.832:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.832:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.832:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.832:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.832:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.832:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/155306.833:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:crash_report_database_win.cc(498)] failed to stat report
+[1020/160306.830:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\4e7b82c6-020a-4af0-b847-fcd3c21b09c4.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\11b200e4-8111-4164-8202-c86ed2e6dd8c.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\a0f864ff-b115-4363-a05c-92ae307cfd14.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\a7bdeb79-74ce-471e-b850-56c2f4310c31.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\8f69ebf3-519f-4646-9827-4cfb3dee947d.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\6017d93e-d307-4238-bee0-64a3012af42b.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\8a755a45-e9d6-4528-942a-d6f4ce5ae5ae.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\99c71437-0ed6-4961-98e1-779723a56aea.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\a59990ee-1b57-436e-a4e9-f93dc282ed10.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\ba8217a5-9a00-4a0a-9b27-962abe1ca325.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\b5563eb0-f71b-4722-8df1-11ee66c12df5.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\ffb5819c-c503-4d0e-a1fd-6d67d350d804.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\be69b1ec-f153-472c-ba80-512935a33835.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\2014ab05-9834-4022-8281-43648c59228e.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\039f4b9f-c64b-4086-8b8d-d6ac5ef0822e.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\f2128020-ecc9-4cb9-9212-2aad3f1eb2b2.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\2ff13244-7068-471e-9098-b9e55b63094c.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\2ffe2e8a-9845-4ef5-8532-29c2e4aa8a5f.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\dd02ae04-f701-4ec7-8b67-8c822918de23.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.831:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\2b5d2749-3bc3-4ad9-9606-b6a2e959dd08.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.832:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\14472f52-0e49-44e4-9105-0cac3fb20383.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.832:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\a484b2d1-2eb8-4ece-a1c1-fc0e7ca577af.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.832:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\5a241e9e-206f-469e-87dc-c9458dd9c66f.dmp: The system cannot find the file specified. (0x2)
+[1020/160306.832:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

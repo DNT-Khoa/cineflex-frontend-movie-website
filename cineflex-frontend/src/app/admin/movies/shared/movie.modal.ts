@@ -1,8 +1,8 @@
 import { CategoryModal } from '../../categories/shared/category.modal';
 
 export class MovieModal {
-    id?: bigint;
-    tmdbId: bigint;
+    id?: number;
+    tmdbId: number;
     title: String;
     rating: number;
     posterLink: String;

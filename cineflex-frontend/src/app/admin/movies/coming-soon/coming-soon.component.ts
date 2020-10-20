@@ -1,11 +1,14 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { CategoriesService } from '../../categories/shared/categories.service';
+import { CategoryModal } from '../../categories/shared/category.modal';
 import { MovieModal } from '../shared/movie.modal';
 import { MovieService } from '../shared/movie.service';
+import { TMDBMovieModal } from '../shared/tmdbmovie.modal';
 
 @Component({
   selector: 'app-coming-soon',
@@ -53,18 +56,42 @@ import { MovieService } from '../shared/movie.service';
           ]
         )
       ]
+    ),
+    trigger(
+      'categoryDropdownSelect', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({ opacity: 0, height: 0 }),
+            animate('.3s ease-out', 
+                    style({ opacity: 1, height: 80 }))
+          ]
+        ),
+        transition(
+          ':leave', 
+          [
+            style({ opacity: 1, height: 80}),
+            animate('.2s ease-in', 
+                    style({ opacity: 0, height: 0 }))
+          ]
+        )
+      ]
     )
   ]
 })
-export class ComingSoonComponent implements OnInit {
+export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
   isUpdateModalOpen = false;
   isAddModalOpen = false;
   isDeleteModalOpen = false;
   selectedMovie: MovieModal;
+  
+  isCategoryDropdownOpen = false;
 
-  // @ViewChild('searchInput') searchInput: ElementRef;
-  // searchKeyUpSubscription: Subscription;
-  searchResults: MovieModal[];
+  @ViewChild('tmdbSearchInput') tmdbSearchInput: ElementRef;
+  tmdbSearchInputSubscritpion: Subscription
+
+  tmdbMovieResults: TMDBMovieModal[];
   isSearching = false;
 
   updateMovieForm: FormGroup;
@@ -72,11 +99,13 @@ export class ComingSoonComponent implements OnInit {
   deleteMovieForm: FormGroup;
 
   movies: MovieModal[];
+  categories: CategoryModal[];
 
-  constructor(private movieService: MovieService, private toastr: ToastrService) { }
+  constructor(private movieService: MovieService, private toastr: ToastrService, private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
     this.getAllComingMovies();
+    this.getAllCategories();
     this.initializeAddMovieForm();
     this.initializeUpdateMovieForm();
     this.initializeDeleteMovieForm();
@@ -84,33 +113,36 @@ export class ComingSoonComponent implements OnInit {
 
   // Because we user @Viewchild so we should use ngAfterViewInit
   ngAfterViewInit() {
-    // Listen for user keydown and start searching 
-    // this.keyUpSubscription = fromEvent(this.searchInput.nativeElement, 'keyup')
-    //   .pipe(
-    //     debounceTime(500),
-    //     map((event: Event) => (<HTMLInputElement>event.target).value),
-    //     distinctUntilChanged(),
-    //     tap(() => {
-    //       this.isSearching = true;
-    //     }),
-    //     delay(300),
-    //     switchMap(value => this.categoriesService.searchCategoryByName(value))
-    //   ).subscribe ( data => {
-    //       if (this.searchInput.nativeElement.value === '') {
-    //         this.searchResults = [];
-    //       } else {
-    //         this.searchResults = data;
-    //       }
-    //       this.isSearching = false;
-    //   }, error => {
-    //     console.log(error);
-    //     this.isSearching = false;
-    //   }
-    //   )
+    // Start searching for movies from TMDB on user input event
+    this.tmdbSearchInputSubscritpion = fromEvent(this.tmdbSearchInput.nativeElement, 'keyup')
+      .pipe(
+        debounceTime(500),
+        map((event: Event) => (<HTMLInputElement>event.target).value),
+        distinctUntilChanged(),
+        tap(() => {
+          this.isSearching = true;
+        }),
+        delay(200),
+        switchMap(value => {
+          if (value !== '') {
+            return this.movieService.searchMovieByTitle(value)
+          }
+
+          return [];
+        })
+      ).subscribe( value => {
+        this.tmdbMovieResults = value.results;
+        this.isSearching = false;
+      }, error => {
+        console.log(error);
+        this.toastr.error('Something wrong with the server. Please try again later');
+        this.isSearching = false;
+      }
+      )
   }
 
   ngOnDestroy() {
-    // this.searchKeyUpSubscription.unsubscribe();
+    this.tmdbSearchInputSubscritpion.unsubscribe();
   }
 
   getAllComingMovies() {
@@ -122,6 +154,18 @@ export class ComingSoonComponent implements OnInit {
       (error) => {
         console.log(error);
         this.toastr.error('Something wrong happen with the server. Please try again later.');
+      }
+    )
+  }
+
+  getAllCategories() {
+    this.categoriesService.getAllCategories().subscribe(
+      (data) => {
+        this.categories = data;
+        console.log(this.categories);
+      }, (error) => {
+        console.log(error);
+        this.toastr.error('Something wrong happened with the server. Please try again later');
       }
     )
   }
@@ -165,19 +209,7 @@ export class ComingSoonComponent implements OnInit {
   }
 
   addMovie() {
-    const movieRequestPayload = new MovieModal();
-
-    movieRequestPayload.tmdbId = this.addMovieForm.get('tmdId').value,
-    movieRequestPayload.title = this.addMovieForm.get('title').value,
-    movieRequestPayload.rating = this.addMovieForm.get('rating').value,
-    movieRequestPayload.posterLink = this.addMovieForm.get('posterLink').value,
-    movieRequestPayload.backdropLink = this.addMovieForm.get('backdropLink').value,
-    movieRequestPayload.movieType =  this.addMovieForm.get('movieType').value,
-    movieRequestPayload.movieType = null;
-    // Remember to also include list of categories
-      
-
-    this.movieService.addNewMovie(movieRequestPayload).subscribe(
+    this.movieService.addNewMovie(this.selectedMovie).subscribe(
       (data) => {
         this.toastr.success('Successfully created the movie');
         this.getAllComingMovies();
@@ -220,5 +252,54 @@ export class ComingSoonComponent implements OnInit {
       }
     );
   }
+
+  updateCategory(category: CategoryModal) {
+    for (let c of this.selectedMovie.categories) {
+      if (c.name === category.name) {
+        return;
+      }
+    }
+
+    this.selectedMovie.categories.push(category);
+  }
+
+  removeCategory(category: CategoryModal) {
+    for (let i = 0; i < this.selectedMovie.categories.length; i++) {
+      if (this.selectedMovie.categories[i].name === category.name) {
+        this.selectedMovie.categories.splice(i, 1);
+        return;
+      }
+    }
+  }
+
+  resetMovieObject() {
+    this.selectedMovie = {
+      id: null,
+      tmdbId: null,
+      title: '',
+      rating: null,
+      posterLink: '',
+      backdropLink: '',
+      movieType: '',
+      filmLink: '',
+      categories: []
+    }
+  }
+
+  convertMovieResultToMovieModal(movieResult: TMDBMovieModal) {
+    this.selectedMovie = {
+      tmdbId: movieResult.id,
+      title: movieResult.title,
+      rating: movieResult.vote_average,
+      posterLink: 'https://image.tmdb.org/t/p/w342' + movieResult.poster_path,
+      backdropLink: 'https://image.tmdb.org/t/p/w1280' + movieResult.backdrop_path,
+      movieType: 'Coming Soon',
+      filmLink: '',
+      categories: []
+    }
+
+    this.isAddModalOpen = true;
+  }
+
 
 }
