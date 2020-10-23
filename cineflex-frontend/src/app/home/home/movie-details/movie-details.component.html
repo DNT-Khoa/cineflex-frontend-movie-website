@@ -1,4 +1,4 @@
-<section id="movieDetailsSection">
+<section id="movieDetailsSection" class="relative">
     <!-- Main Movie Backround Image-->
     <div class="relative" id="mainMovieBackground">
         <img src="{{ movie && movie.backdropLink }}" alt="" class="w-full h-full object-cover object-center" id="mainMovieBackground">
@@ -93,17 +93,25 @@
                     
                     <div class="flex flex-col">
                         <!-- First video -->
-                        <div class="w-full mb-5 mt-8">
-                            <iframe class="w-full rounded-lg shadow-xl" style="min-height: 400px;"
+                        <div class="w-full mb-5 mt-8 relative">
+                            <!-- <iframe class="w-full rounded-lg shadow-xl" style="min-height: 400px;"
                             [src]="youtubeUrl(tmdbMovieDetails.videos.results[0].key)" allowfullscreen>
-                            </iframe>
+                            </iframe> -->
+                            <img [src]="getYoutubeThumbnail(tmdbMovieDetails.videos.results[0].key)" alt="" class="w-full rounded-lg shadow-xl" style="min-height: 370px;">
+                            <button class="absolute inset-0 w-full h-full group" (click)="isVideoOpen = true; youtubeUrl(tmdbMovieDetails.videos.results[0].key)">
+                                <i class="fa fa-play-circle text-6xl text-primary rounded-full group-hover:text-white duration-200"></i>
+                            </button>
                         </div>
                         <!-- Remaining videos -->
                         <div class="flex flex-1">
-                            <div class="flex-1 md:mr-5 mr-1" *ngFor="let video of tmdbMovieDetails.videos.results | videoSlicePipe">
-                                <iframe class="w-full rounded-lg shadow-xl"
+                            <div class="flex-1 md:mr-5 mr-1 relative" *ngFor="let video of tmdbMovieDetails.videos.results | videoSlicePipe">
+                                <!-- <iframe class="w-full rounded-lg shadow-xl"
                                     [src]="youtubeUrl(video.key)" allowfullscreen>
-                                </iframe>
+                                </iframe> -->
+                                <img [src]="getYoutubeThumbnail(video.key)" alt="" class="w-full rounded-lg shadow-xl">
+                                <button class="absolute inset-0 w-full h-full group" (click)="isVideoOpen = true; youtubeUrl(video.key)">
+                                    <i class="fa fa-play-circle md:text-5xl text-2xl text-primary rounded-full group-hover:text-white duration-200"></i>
+                                </button>
                             </div>
                             
                         </div>
@@ -124,6 +132,20 @@
                 </div>
             </div>
         </div>
-        
+    </div>
+
+    <!-- Background overlay -->
+    <div class="absolute inset-0 w-full h-full bg-black z-20 opacity-25" *ngIf="isVideoOpen" [@backgroundOverlayAnimation]>
+    </div>
+
+    <!-- Video player modal -->
+    <div class="fixed mx-auto top-0 md:p-20 md:pt-0 bg-black z-30 mt-32 rounded-lg" *ngIf="isVideoOpen" id="videoPlayer" [@popupAnimation]>
+        <div class="text-right">
+            <i class="fa fa-times-circle text-primary md:mt-3 text-5xl mt-0 md:-mb-0 md:-mb-24 hover:text-white duration-200 cursor-pointer" (click)="isVideoOpen = false" id="videoExitIcon"></i>
+        </div>
+        <iframe class="w-full rounded-lg shadow-xl h-64 md:h-full"
+        [src]="selectedVideo" allow='autoplay' allowfullscreen>
+            
+        </iframe>
     </div>
 </section>

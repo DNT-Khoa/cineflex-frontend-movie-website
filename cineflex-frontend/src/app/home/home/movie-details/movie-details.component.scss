@@ -19,4 +19,32 @@
             height: 330px;
         }
     }
+
+    #videoPlayer {
+        right: 50%;
+        width: 1200px;
+        height: 700px;
+        margin-right: -600px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #videoPlayer {
+        width: 100%!important;
+        height: 100vh!important;
+        margin: 0!important;
+        padding: 0!important;
+        right: 0%!important;
+
+        iframe {
+            margin-top: 200px!important;
+            height: 350px;
+            width: 100vw;
+        }
+
+        #videoExitIcon {
+            position: relative;
+            top: 200px;
+        }
+    }
 }

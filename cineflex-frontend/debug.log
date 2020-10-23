@@ -69,3 +69,4 @@
 [1020/160306.832:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\a484b2d1-2eb8-4ece-a1c1-fc0e7ca577af.dmp: The system cannot find the file specified. (0x2)
 [1020/160306.832:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\doann\AppData\Local\Google\Chrome\User Data\Crashpad\reports\5a241e9e-206f-469e-87dc-c9458dd9c66f.dmp: The system cannot find the file specified. (0x2)
 [1020/160306.832:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1023/131144.496:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

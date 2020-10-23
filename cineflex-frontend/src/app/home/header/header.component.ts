@@ -80,7 +80,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @HostListener("document:scroll")
   scrollFunction() {
     if (document.body.scrollTop > 90 || document.documentElement.scrollTop > 90) {
-      console.log("yes");
       this.isHeaderMoving = true;
     } else {
       this.isHeaderMoving = false;
