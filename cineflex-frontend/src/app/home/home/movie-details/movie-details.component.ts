@@ -58,10 +58,12 @@ import { TMDBMovieDetailsModal } from '../../shared/tmdbMovieDetails.modal';
 })
 export class MovieDetailsComponent implements OnInit {
   isVideoOpen = false;
+  isImageOpen = false;
   movie: MovieModal;
   tmdbMovieDetails: TMDBMovieDetailsModal;
   tmdbId: number;
   selectedVideo: any;
+  selectedImage: any;
 
   constructor(private movieService: MovieService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private sanitizer: DomSanitizer) { }
 
@@ -91,6 +93,10 @@ export class MovieDetailsComponent implements OnInit {
 
   youtubeUrl(key: string) {
     this.selectedVideo = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube-nocookie.com/embed/' + key + '?autoplay=1');
+  }
+
+  imageUrl(filePath: string) {
+    this.selectedImage = 'https://image.tmdb.org/t/p/original' + filePath;
   }
 
   getYoutubeThumbnail(key: string) {

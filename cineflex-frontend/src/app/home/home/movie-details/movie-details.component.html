@@ -127,7 +127,7 @@
                 <!-- Photo Gallery -->
                 <div id="photoGalleryContainer" class="flex w-full flex-wrap justify-center md:justify-start">
                     <div class="p-1" *ngFor="let image of tmdbMovieDetails.images.posters.slice(0, 4)">
-                        <img [src]="'https://image.tmdb.org/t/p/original' + image.file_path" alt="" class="w-24 h-32 rounded-lg shadow-xl">
+                        <img [src]="'https://image.tmdb.org/t/p/original' + image.file_path" alt="" class="w-24 h-32 rounded-lg shadow-xl cursor-pointer hover:opacity-75 duration-200" (click)="isImageOpen = true; imageUrl(image.file_path)">
                     </div>
                 </div>
             </div>
@@ -135,17 +135,26 @@
     </div>
 
     <!-- Background overlay -->
-    <div class="absolute inset-0 w-full h-full bg-black z-20 opacity-25" *ngIf="isVideoOpen" [@backgroundOverlayAnimation]>
+    <div class="absolute inset-0 w-full h-full bg-black z-20 opacity-25" *ngIf="isVideoOpen || isImageOpen" [@backgroundOverlayAnimation]>
     </div>
 
     <!-- Video player modal -->
     <div class="fixed mx-auto top-0 md:p-20 md:pt-0 bg-black z-30 mt-32 rounded-lg" *ngIf="isVideoOpen" id="videoPlayer" [@popupAnimation]>
         <div class="text-right">
-            <i class="fa fa-times-circle text-primary md:mt-3 text-5xl mt-0 md:-mb-0 md:-mb-24 hover:text-white duration-200 cursor-pointer" (click)="isVideoOpen = false" id="videoExitIcon"></i>
+            <i class="fa fa-times-circle text-primary md:mt-3 text-5xl mt-0 md:-mb-0 -mb-24 hover:text-white duration-200 cursor-pointer" (click)="isVideoOpen = false" id="videoExitIcon"></i>
         </div>
         <iframe class="w-full rounded-lg shadow-xl h-64 md:h-full"
         [src]="selectedVideo" allow='autoplay' allowfullscreen>
             
         </iframe>
     </div>
+
+    <!-- Image modal -->
+    <div class="fixed top-0 md:p-20 md:pt-0 bg-black z-30 mt-32 rounded-lg" *ngIf="isImageOpen" id="imagePopup" [@popupAnimation]>
+        <div class="text-right">
+            <i class="fa fa-times-circle text-primary md:mt-3 text-5xl mt-0 md:-mb-0 -mb-24 hover:text-white duration-200 cursor-pointer" (click)="isImageOpen = false;"></i>
+        </div>
+        <img [src]="selectedImage" class="h-full mx-auto">
+    </div>
+
 </section>
