@@ -1,4 +1,4 @@
-<section id="admin-panel" class="bg-gray-200 h-full flex">
+<section id="admin-panel" class="bg-gray-200 h-full flex lg:flex-row flex-col ">
     <!-- Left sidenav -->
     <div class="shadow-lg bg-white relative" id="left-sidenav">
         <!-- Logo -->
@@ -7,16 +7,19 @@
         </div>
 
         <!-- Avatar image -->
-        <div class="bg-primary py-5">
-            <img src="../../../assets/img/anonymous-user.jpg" alt="" class="rounded-full w-20 block mx-auto">
+        <div class="bg-primary py-1 lg:py-5 relative">
+            <img src="../../../assets/img/anonymous-user.jpg" alt="" class="rounded-full lg:w-20 block mx-auto w-10">
             <!-- First name and last name of admin -->
             <div class="text-center">
-                <span class="text-white font-bold text-lg">Khoa Doan</span>
+                <span class="text-white font-bold lg:text-lg text-sm">Khoa Doan</span>
             </div>
+
+            <!-- Hamburger menu -->
+            <i class="fa fa-bars text-3xl absolute right-0 top-0 text-white inline-block mr-3 mt-5" *ngIf="!isLargeBreakpoint"  (click)="this.isHeaderMenuOpen = !this.isHeaderMenuOpen"></i>
         </div>
 
         <!-- sidenav links menu -->
-        <div class="py-5 flex flex-col">
+        <div class="py-5 flex flex-col" *ngIf="isHeaderMenuOpen" [@headerDropdownAnimation]>
             <!-- Dashboard link -->
             <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-1" routerLink="dashboard" routerLinkActive="active">
                 <i class="zmdi zmdi-view-dashboard text-xl group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
@@ -49,13 +52,13 @@
             </a>
 
             <!-- Admins link -->
-            <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-1" routerLink="admins" routerLinkActive="active">
+            <a class="cursor-pointer group text-gray-600 block px-5 py-2 nav-link mb-8" routerLink="admins" routerLinkActive="active">
                 <i class="fa fa-user-plus text-lg group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
                 <span class="uppercase font-bold inline-block ml-5 group-hover:text-gray-900 duration-300">Admins</span>
             </a>
 
             <!-- Logout link -->
-            <a class="cursor-pointer group text-gray-600 block p-5 absolute w-full bottom-0 nav-link" (click)="logout()">
+            <a class="cursor-pointer group text-gray-600 block p-5 absolute w-full bottom-0 nav-link mt-10" (click)="logout()">
                 <i class="fa fa-sign-out-alt text-lg group-hover:text-primary duration-300 group-focus:text-primary inline-block w-4"></i>
                 <span class="uppercase font-bold inline-block ml-5 group-hover:text-gray-900 duration-300">Log Out</span>
             </a>

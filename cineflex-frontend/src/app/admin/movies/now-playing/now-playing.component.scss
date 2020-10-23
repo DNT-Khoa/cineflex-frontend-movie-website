@@ -1,0 +1,16 @@
+#updateMovieModal, #addMovieModal, #deleteMovieModal, #convertMovieModal {
+    // center the update category modal
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#mainSectionContent {
+    min-width: 800px;
+}
+
+#searchResultContainer {
+    max-height: 550px;
+    overflow-y: scroll;
+}
+

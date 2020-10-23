@@ -9,7 +9,7 @@
     </div>
 
     <!-- Main section content -->
-    <div class="rounded-lg bg-white w-full h-full mt-8 p-6">
+    <div class="rounded-lg bg-white w-full h-full mt-8 p-6" id="mainSectionContent">
         <!-- TMDB Search bar -->
         <div class="relative">
             <!-- Search input -->
@@ -18,17 +18,23 @@
                 <i class="fa fa-search absolute left-0 ml-3 mt-3 text-lg cursor-pointer text-gray-800 hover:text-primary duration-200"></i>
             </div>  
             <!-- Search results -->
-            <div class="absolute bg-white border rounded-lg left-0 w-1/2 p-4 mt-3" *ngIf="tmdbSearchInput.value !== ''" [@modalOpenAnimation] id="searchResultContainer">
+            <div class="absolute bg-white border rounded-lg left-0 w-1/2 p-4 mt-3 shadow-lg" *ngIf="tmdbSearchInput.value !== ''" [@modalOpenAnimation] id="searchResultContainer">
                 <div class="border-b-2 py-2">Your search results for <strong>{{ tmdbSearchInput.value}}</strong></div>
 
-                <!-- Searching spinner -->
-                <div class="loadingio-spinner-spin-blut0vicmi8" *ngIf="isSearching"><div class="ldio-al5e038e2l">
-                <div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div>
-                </div></div>
+                <!-- Skeleton Loading Spinner-->
+                <div class="mt-5" *ngIf="isSearching">
+                    <div class="flex py-2 shadow-md rounded-md border-gray-300 my-2 px-3 animate-pulse" *ngFor="let i of [1, 2]">
+                        <div class="h-24 w-20 bg-gray-400"></div>
+                        <div class="ml-8 flex-1">
+                            <div class="h-4 w-2/5 bg-gray-400 rounded-md"></div>
+                            <div class="h-16 w-4/5 bg-gray-400 rounded-md mt-3"></div>
+                        </div>  
+                    </div>
+                </div>
 
                 <!-- Found Movies -->
                 <div *ngIf="!isSearching" class="mt-5">
-                    <div class="flex hover:bg-gray-200 duration-200 cursor-pointer py-2" *ngFor="let movie of tmdbMovieResults" (click)="convertMovieResultToMovieModal(movie)">
+                    <div class="flex hover:bg-gray-200 duration-200 cursor-pointer py-2 px-3 my-2 shadow-md" *ngFor="let movie of tmdbMovieResults" (click)="convertMovieResultToMovieModal(movie)">
                         <img src="{{ 'https://image.tmdb.org/t/p/w342' + movie.poster_path}}" class="h-24 w-20" alt="">
                         <div class="ml-8 flex flex-col" (click)="isAddModalOpen = !isAddModalOpen">
                             <h2 class="font-bold text-lg text-primary">{{ movie.title }}</h2>
@@ -37,7 +43,6 @@
                     </div>
                 </div>
 
-                
                 <!-- Not found notification -->
                 <div *ngIf="tmdbMovieResults && tmdbMovieResults.length === 0 && !isSearching" class="mt-5">No matching results</div>
             </div>
@@ -45,15 +50,15 @@
 
         <!-- Category Table -->
         <div class="mt-8">
-            <table class="table-fixed w-full">
+            <table class="table-auto w-full">
                 <thead class="border-b-2">
                     <tr>
                         <th class="text-primary py-2 w-1/12">ID</th>
-                        <th class="text-primary">TMDB ID</th>
+                        <th class="text-primary w-1/12">TMDB ID</th>
                         <th class="text-primary">Title</th>
                         <th class="text-primary">Poster Link</th>
                         <th class="text-primary">Backdrop Link</th>
-                        <th class="text-primary">Movie Type</th>
+                        <th class="text-primary w-2/12">Movie Type</th>
                         <th class="text-primary">Action</th>
                     </tr>
                 </thead>
@@ -66,7 +71,8 @@
                         <th class="text-gray-800 py-4 font-semibold"><img class="h-24 mx-auto" src="{{movie.backdropLink}}" alt=""></th>
                         <th class="text-gray-800 py-4 font-semibold">{{ movie.movieType }}</th>
                         <th class="text-gray-800 py-4">
-                            <i (click)="this.isUpdateModalOpen = !isUpdateModalOpen; selectedMovie = movies[i];" class="fa fa-pencil-alt bg-green-200 rounded-md text-green-500 text-lg p-3 inline-block mr-5 cursor-pointer hover:text-green-200 hover:bg-green-500 duration-200"></i>
+                            <i (click)="this.isConvertModalOpen = !isConvertModalOpen; selectedMovie = movies[i]" class="fa fa-angle-double-down bg-blue-200 rounded-md text-blue-500 text-lg py-3 px-4 cursor-pointer hover:text-blue-200 hover:bg-blue-500 duration-200 mr-3"></i>
+                            <i (click)="this.isUpdateModalOpen = !isUpdateModalOpen; selectedMovie = movies[i];" class="fa fa-pencil-alt bg-green-200 rounded-md text-green-500 text-lg p-3 inline-block mr-3 cursor-pointer hover:text-green-200 hover:bg-green-500 duration-200"></i>
                             <i (click)="this.isDeleteModalOpen = !isDeleteModalOpen; selectedMovie = movies[i]" class="fa fa-trash-alt bg-red-200 rounded-md text-red-500 text-lg p-3 cursor-pointer hover:text-red-200 hover:bg-red-500 duration-200"></i>
                         </th>
                     </tr>
@@ -75,7 +81,7 @@
         </div>
 
         <!-- Gray backdrop for modal -->
-        <div class="fixed inset-0 w-screen h-screen bg-gray-500 opacity-50 z-10" *ngIf="isUpdateModalOpen || isAddModalOpen || isDeleteModalOpen" [@backdropOpenAnimation]>
+        <div class="fixed inset-0 w-screen h-screen bg-gray-500 opacity-50 z-10" *ngIf="isUpdateModalOpen || isAddModalOpen || isDeleteModalOpen || isConvertModalOpen" [@backdropOpenAnimation]>
         </div>
 
         <!-- Update Movie modal content -->
@@ -147,7 +153,7 @@
                 </div>
 
                 <!-- Category dropdown select -->
-                <div *ngIf="isCategoryDropdownOpen" class="px-2 mt-2 w-1/2 mx-auto h-20 mb-2" [@categoryDropdownSelect]>
+                <div *ngIf="isCategoryDropdownOpen" class="px-2 mt-2 w-1/2 mx-auto h-20 mb-2 overflow-y-scroll" [@categoryDropdownSelect]>
                     <ul class="w-full bg-gray-300 rounded-md h-full py-2 text-center">
                         <li *ngFor="let category of categories" class="font-semibold py-1 hover:bg-primary hover:text-white duration-300 cursor-pointer" (click)="updateCategory(category)">
                             {{ category.name }}
@@ -172,31 +178,31 @@
                 <div class="mb-8 p-5 h-24">
                     <label for="tmdbId" class="font-semibold mb-2 block text-center">TMDB ID</label>
                     <input id="tmdbId" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="tmdbId" [(ngModel)]="selectedMovie.tmdbId">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('tmdbId').valid && updateMovieForm.get('tmdbId').touched">*TMDB ID is required</span>
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!addMovieForm.get('tmdbId').valid && addMovieForm.get('tmdbId').touched">*TMDB ID is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
                     <label for="movieTitle" class="font-semibold mb-2 block text-center">Title</label>
                     <input id="movieTitle" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="title" [(ngModel)]="selectedMovie.title">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('title').valid && updateMovieForm.get('title').touched">*Title is required</span>
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!addMovieForm.get('title').valid && addMovieForm.get('title').touched">*Title is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
                     <label for="movieRating" class="font-semibold mb-2 block text-center">Rating</label>
                     <input id="movieRating" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="rating" [(ngModel)]="selectedMovie.rating">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('rating').valid && updateMovieForm.get('rating').touched">*Rating is required</span>
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!addMovieForm.get('rating').valid && addMovieForm.get('rating').touched">*Rating is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
                     <label for="posterLink" class="font-semibold mb-2 block text-center">Poster Link</label>
                     <input id="posterLink" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="posterLink" [(ngModel)]="selectedMovie.posterLink">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('posterLink').valid && updateMovieForm.get('posterLink').touched">*Poster Link is required</span>
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!addMovieForm.get('posterLink').valid && addMovieForm.get('posterLink').touched">*Poster Link is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
                     <label for="backdropLink" class="font-semibold mb-2 block text-center">Backdrop Link</label>
                     <input id="backdropLink" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="backdropLink" [(ngModel)]="selectedMovie.backdropLink">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('backdropLink').valid && updateMovieForm.get('backdropLink').touched">*Backdrop Link is required</span>
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!addMovieForm.get('backdropLink').valid && addMovieForm.get('backdropLink').touched">*Backdrop Link is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
@@ -228,7 +234,7 @@
                 </div>
 
                 <!-- Category dropdown select -->
-                <div *ngIf="isCategoryDropdownOpen" class="px-2 mt-2 w-1/2 mx-auto h-20 mb-2" [@categoryDropdownSelect]>
+                <div *ngIf="isCategoryDropdownOpen" class="px-2 mt-2 w-1/2 mx-auto h-20 mb-2 overflow-y-scroll" [@categoryDropdownSelect]>
                     <ul class="w-full bg-gray-300 rounded-md h-full py-2 text-center">
                         <li *ngFor="let category of categories" class="font-semibold py-1 hover:bg-primary hover:text-white duration-300 cursor-pointer" (click)="updateCategory(category)">
                             {{ category.name }}
@@ -246,7 +252,7 @@
             
         </div>
 
-        <!-- Delete Category modal content -->
+        <!-- Delete Movie modal content -->
         <div class="w-full max-w-3xl bg-white rounded-lg z-20 top-0 mt-24" id="deleteMovieModal" *ngIf="isDeleteModalOpen" [@modalOpenAnimation]>
             <h3 class="font-bold text-primary text-xl text-center mt-3">Delete Your Movie</h3>
             <p class="p-5 font-semibold text-primary text-center">Are you sure you want to delete the movie with information below ?</p>
@@ -260,31 +266,26 @@
                 <div class="mb-8 p-5 h-24">
                     <label for="tmdbId" class="font-semibold mb-2 block text-center">TMDB ID</label>
                     <input id="tmdbId" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="tmdbId" [(ngModel)]="selectedMovie.tmdbId">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('tmdbId').valid && updateMovieForm.get('tmdbId').touched">*TMDB ID is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
                     <label for="movieTitle" class="font-semibold mb-2 block text-center">Title</label>
                     <input id="movieTitle" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="title" [(ngModel)]="selectedMovie.title">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('title').valid && updateMovieForm.get('title').touched">*Title is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
                     <label for="movieRating" class="font-semibold mb-2 block text-center">Rating</label>
                     <input id="movieRating" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="rating" [(ngModel)]="selectedMovie.rating">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('rating').valid && updateMovieForm.get('rating').touched">*Rating is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
                     <label for="posterLink" class="font-semibold mb-2 block text-center">Poster Link</label>
                     <input id="posterLink" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="posterLink" [(ngModel)]="selectedMovie.posterLink">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('posterLink').valid && updateMovieForm.get('posterLink').touched">*Poster Link is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
                     <label for="backdropLink" class="font-semibold mb-2 block text-center">Backdrop Link</label>
                     <input id="backdropLink" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="backdropLink" [(ngModel)]="selectedMovie.backdropLink">
-                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateMovieForm.get('backdropLink').valid && updateMovieForm.get('backdropLink').touched">*Backdrop Link is required</span>
                 </div>
 
                 <div class="mb-8 p-5 h-24">
@@ -319,6 +320,46 @@
                     <a (click)="isDeleteModalOpen = !isDeleteModalOpen; getAllComingMovies(); resetMovieObject()" class="inline-block px-3 py-2 mr-2 font-semibold text-white bg-red-500 rounded-lg cursor-pointer border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200">Cancel</a>
                     <button type="submit">
                         <a class="inline-block px-3 py-2 font-semibold text-white bg-green-500 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200">Yes, I Confirm</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Covert Coming Soon Movie to Now Playing Movie modal content -->
+        <div class="w-full max-w-3xl bg-white rounded-lg z-20 top-0 mt-24" id="convertMovieModal" *ngIf="isConvertModalOpen" [@modalOpenAnimation]>
+            <h3 class="font-bold text-primary text-xl text-center mt-3">Convert Coming Soon to Now Playing</h3>
+
+            <form class="mt-10 flex flex-wrap justify-center" [formGroup]="convertMovieForm" (ngSubmit)="convertMovieToNowPlaying()">
+                <div class="mb-8 p-5 h-24">
+                    <label for="movieId" class="font-semibold mb-2 block text-center">ID</label>
+                    <input id="movieId" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="id" [(ngModel)]="selectedMovie.id">
+                </div>
+
+                <div class="mb-8 p-5 h-24">
+                    <label for="tmdbId" class="font-semibold mb-2 block text-center">TMDB ID</label>
+                    <input id="tmdbId" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="tmdbId" [(ngModel)]="selectedMovie.tmdbId">
+                </div>
+
+                <div class="mb-8 p-5 h-24">
+                    <label for="movieTitle" class="font-semibold mb-2 block text-center">Title</label>
+                    <input id="movieTitle" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="title" [(ngModel)]="selectedMovie.title">
+                </div>
+
+                <div class="mb-8 p-5 h-24">
+                    <label for="movieType" class="font-semibold mb-2 block text-center">Movie Type</label>
+                    <input id="movieType" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="movieType">
+                </div>
+
+                <div class="mb-8 p-5 h-24">
+                    <label for="filmLink" class="font-semibold mb-2 block text-center">Film Link</label>
+                    <input id="filmLink" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md focus:outline-none focus:shadow-outline" formControlName="filmLink" [(ngModel)]="selectedMovie.filmLink">
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!convertMovieForm.get('filmLink').valid && convertMovieForm.get('filmLink').touched">*Film Link is required</span>
+                </div>
+
+                <div class="bg-gray-200 rounded-b-lg p-3 text-right flex-auto min-w-full mt-6">
+                    <a (click)="isConvertModalOpen = !isConvertModalOpen; getAllComingMovies(); resetMovieObject()" class="inline-block px-3 py-2 mr-2 font-semibold text-white bg-red-500 rounded-lg cursor-pointer border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200">Cancel</a>
+                    <button type="submit">
+                        <a class="inline-block px-3 py-2 font-semibold text-white bg-green-500 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200">Start Converting</a>
                     </button>
                 </div>
             </form>

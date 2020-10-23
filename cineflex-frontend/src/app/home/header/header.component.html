@@ -1,7 +1,7 @@
-<header>
-    <div class="container mx-auto ">
+<header class="fixed w-screen z-50 duration-300" [ngClass]="{'bg-black py-5': isHeaderMoving}">
+    <div class="container mx-auto relative">
         <div class="flex justify-between px-3 md:px-2 relative">
-            <div class="md:hidden self-center" (click)="isDropdownOpen = !isDropdownOpen">
+            <div class="md:hidden self-center z-20" (click)="isDropdownOpen = !isDropdownOpen">
                 <i class="fa fa-bars" style="color: white; font-size: 30px;" *ngIf="!isDropdownOpen"></i>
                 <i class="fa fa-times" style="color: white; font-size: 30px" *ngIf="isDropdownOpen"></i>
             </div>
@@ -11,10 +11,10 @@
                     <img class="w-24 "src="../../assets/img/CineFlex Official Logo.png" alt="CineFlex Logo">
                 </div>
                 <div class="items-end hidden md:flex">
-                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 pl-6 cursor-pointer hover:text-primary duration-200">Home</a>
-                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200">Category</a>
-                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200">Recommended</a>
-                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200">News</a>
+                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 pl-6 cursor-pointer hover:text-primary duration-200" routerLink="/">Home</a>
+                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200" routerLink="/categories">Categories</a>
+                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200" routerLink="/recommended">Recommended</a>
+                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200" routerLink="/news">News</a>
                     <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200">Newsletter</a>
                 </div>
             </div>
@@ -32,12 +32,16 @@
             </div>
         </div>
         <!-- Dropdown menu -->
-        <div class=" px-5 mt-20 md:hidden dropdown-menu absolute w-full" *ngIf="isDropdownOpen" [@hamburgerDropdownAnimation]>
-            <a class="block font-semibold text-white my-5 text-center text-lg duration-200 hover:text-primary">Movies</a>
-            <a class="block font-semibold text-white my-5 text-center text-lg duration-200 hover:text-primary">Category</a>
-            <a class="block font-semibold text-white my-5 text-center text-lg duration-200 hover:text-primary">Recommended</a>
-            <a class="block font-semibold text-white my-5 text-center text-lg duration-200 hover:text-primary">News</a>
-            <a class="block font-semibold text-white my-5 text-center text-lg duration-200 hover:text-primary">Newsletter</a>
+        <div class=" px-5 mt-24 md:hidden dropdown-menu absolute w-full z-20" *ngIf="isDropdownOpen" [@hamburgerDropdownAnimation]>
+            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">Movies</a>
+            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">Category</a>
+            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">Recommended</a>
+            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">News</a>
+            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">Newsletter</a>
         </div>
+
+        <!-- Overlay for mobile version dropdown menu -->
+        <div class="absolute inset-0 bg-black opacity-75 w-screen h-screen" *ngIf="isDropdownOpen" [@darkOverlayAnimation]></div>
+
     </div>
 </header>

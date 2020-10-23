@@ -14,7 +14,11 @@ export class MovieService {
     }
 
     getAllComingMovies() {
-        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + '/admin/movies/comingsoon');
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + '/api/movies/comingsoon');
+    }
+
+    getAllNowPlayingMovies() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + '/api/movies/nowplaying');
     }
 
     addNewMovie(movieModal: MovieModal) {

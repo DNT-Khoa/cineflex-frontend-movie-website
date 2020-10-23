@@ -1,0 +1,21 @@
+#movieShowcase {
+    #mainMovie {
+        height: 77vh;
+    
+        #mainMovieBackgroundOverlay {
+            opacity: 0.14;
+        }
+    
+        #mainMovieTitle {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 700;
+        }
+    }
+
+    #movieCard {
+        min-width: 110px;
+        min-height: 100px;
+        max-height: 200px;
+        max-width: 320px;
+    }
+}

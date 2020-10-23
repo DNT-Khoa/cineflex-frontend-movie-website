@@ -84,6 +84,7 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
   isUpdateModalOpen = false;
   isAddModalOpen = false;
   isDeleteModalOpen = false;
+  isConvertModalOpen = false;
   selectedMovie: MovieModal;
   
   isCategoryDropdownOpen = false;
@@ -97,6 +98,7 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
   updateMovieForm: FormGroup;
   addMovieForm: FormGroup;
   deleteMovieForm: FormGroup;
+  convertMovieForm: FormGroup;
 
   movies: MovieModal[];
   categories: CategoryModal[];
@@ -109,6 +111,7 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initializeAddMovieForm();
     this.initializeUpdateMovieForm();
     this.initializeDeleteMovieForm();
+    this.initializeConvertMovieForm();
   }
 
   // Because we user @Viewchild so we should use ngAfterViewInit
@@ -116,13 +119,13 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
     // Start searching for movies from TMDB on user input event
     this.tmdbSearchInputSubscritpion = fromEvent(this.tmdbSearchInput.nativeElement, 'keyup')
       .pipe(
-        debounceTime(500),
+        debounceTime(300),
         map((event: Event) => (<HTMLInputElement>event.target).value),
         distinctUntilChanged(),
         tap(() => {
           this.isSearching = true;
         }),
-        delay(200),
+        delay(500),
         switchMap(value => {
           if (value !== '') {
             return this.movieService.searchMovieByTitle(value)
@@ -190,7 +193,7 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
       rating: new FormControl('', Validators.required),
       posterLink: new FormControl('', Validators.required),
       backdropLink: new FormControl('', Validators.required),
-      movieType: new FormControl('', Validators.required),
+      movieType: new FormControl({ value: '', disabled: true}, Validators.required),
       filmLink: new FormControl({value: '', disabled: true})
     })
   }
@@ -205,6 +208,16 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
       backdropLink: new FormControl({ value: '', disabled: true}, Validators.required),
       movieType: new FormControl({ value: '', disabled: true}, Validators.required),
       filmLink: new FormControl({ value: '', disabled: true}),
+    })
+  }
+
+  initializeConvertMovieForm() {
+    this.convertMovieForm = new FormGroup({
+      id: new FormControl({value: '', disabled: true}, Validators.required),
+      tmdbId: new FormControl({value: '', disabled: true}, Validators.required),
+      title: new FormControl({value: '', disabled: true}, Validators.required),
+      movieType: new FormControl({ value: 'Now Playing', disabled: true}, Validators.required),
+      filmLink: new FormControl('', Validators.required)
     })
   }
 
@@ -253,6 +266,23 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  convertMovieToNowPlaying() {
+    if (!this.convertMovieForm.valid) {
+      this.toastr.error('Please make sure to fill in all the required fields before submitting the form');
+      return;
+    }
+
+    this.selectedMovie.movieType = 'Now Playing';
+    this.movieService.updateMovieById(this.selectedMovie.id, this.selectedMovie)
+      .subscribe((data) => {
+        this.toastr.success("Successfully converted the movie to Now Playing");
+        this.getAllComingMovies();
+      }, (error) => {
+        console.log(error);
+        this.toastr.error("Something wrong happened. Please try again later");
+      })
+  }
+
   updateCategory(category: CategoryModal) {
     for (let c of this.selectedMovie.categories) {
       if (c.name === category.name) {
@@ -291,8 +321,8 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
       tmdbId: movieResult.id,
       title: movieResult.title,
       rating: movieResult.vote_average,
-      posterLink: 'https://image.tmdb.org/t/p/w342' + movieResult.poster_path,
-      backdropLink: 'https://image.tmdb.org/t/p/w1280' + movieResult.backdrop_path,
+      posterLink: 'https://image.tmdb.org/t/p/original' + movieResult.poster_path,
+      backdropLink: 'https://image.tmdb.org/t/p/original' + movieResult.backdrop_path,
       movieType: 'Coming Soon',
       filmLink: '',
       categories: []

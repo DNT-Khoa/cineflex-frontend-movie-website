@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { AuthService } from 'src/app/auth/shared/auth.service';
 import { Subscription } from 'rxjs';
@@ -47,6 +47,25 @@ import { Subscription } from 'rxjs';
           ]
         )
       ]
+    ),
+    trigger(
+      'darkOverlayAnimation',
+      [
+        transition(
+          ':enter',
+          [
+            style({opacity: 0}),
+            animate('.5s ease-out', style({ opacity: 0.75}))
+          ]
+        ),
+        transition(
+          ':leave',
+          [
+            style({ opacity: 0.75}),
+            animate('.5s ease-out', style({opacity: 0}))
+          ]
+        )
+      ]
     )
   ]
 })
@@ -55,6 +74,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isUserDropdownOpen = false;
   isUserLoggedIn: boolean;
   subscription: Subscription;
+  isHeaderMoving = false;
+
+  // Using Hostlistener to change header background after the header get away from its original size a specific height
+  @HostListener("document:scroll")
+  scrollFunction() {
+    if (document.body.scrollTop > 90 || document.documentElement.scrollTop > 90) {
+      console.log("yes");
+      this.isHeaderMoving = true;
+    } else {
+      this.isHeaderMoving = false;
+    }
+  }
 
   constructor(private authService: AuthService) { }
 

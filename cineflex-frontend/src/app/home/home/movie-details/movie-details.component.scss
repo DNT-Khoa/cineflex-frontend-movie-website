@@ -1,0 +1,22 @@
+#movieDetailsSection {
+    background-color: white;
+
+    #mainMovieBackground {
+        height: 77vh;
+    
+        #mainMovieBackgroundOverlay {
+            opacity: 0.14;
+        }
+    
+        #mainMovieTitle {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 700;
+        }
+    }
+
+    #leftDetailsContent {
+        #moviePosterImage {
+            height: 330px;
+        }
+    }
+}
