@@ -89,7 +89,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     // Get Movie Details from tmdbID
     this.movieService.getMovieDetailsByTmbdId(this.tmdbId).subscribe(
       (data) => {
-        console.log(data);
         this.tmdbMovieDetails = data;
       }
     )
