@@ -16,9 +16,16 @@
                         <i class="fa fa-play-circle inline-block ml-3 text-lg text-white group-hover:text-primary duration-200"></i>
                     </a>
 
-                    <a class="inline-block ml-3 px-5 py-2 bg-white mt-12 rounded-full border-2 border-primary hover:bg-primary cursor-pointer duration-200 group">
+                    <!-- Like Button -->
+                    <a class="inline-block ml-3 px-5 py-2 bg-white mt-12 rounded-full border-2 border-primary hover:bg-primary cursor-pointer duration-200 group" *ngIf="isUserLoggedIn && !haveUserLikedMovie" (click)="likeMovie()">
                         <span class="text-primary font-semibold text-sm group-hover:text-white duration-200">Like</span>
-                        <i class="fa fa-heart inline-block ml-3 text-lg text-primary group-hover:text-white duration-200"></i>
+                        <i class="fa fa-heart inline-block ml-2 text-lg text-primary group-hover:text-white duration-200 animate-bounce"></i>
+                    </a>
+
+                    <!-- Unlike Button -->
+                    <a class="inline-block ml-3 px-5 py-2 bg-green-600 mt-12 rounded-full border-2 border-green-400 hover:bg-white cursor-pointer duration-200 group" *ngIf="isUserLoggedIn && haveUserLikedMovie" (click)="unlikeMovie()">
+                        <span class="text-white font-semibold text-sm group-hover:text-green-500 duration-200">Liked !</span>
+                        <i class="fa fa-fire inline-block ml-2 text-lg text-primary group-hover:text-primary duration-200 animate-bounce"></i>
                     </a>
                 </div>
             </div>

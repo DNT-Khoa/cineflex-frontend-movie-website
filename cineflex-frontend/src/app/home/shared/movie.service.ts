@@ -27,4 +27,16 @@ export class MovieService {
             }
         });
     }
+
+    checkIfUserHasLikedMovie(movieId: number, email: string) {
+        return this.httpClient.post<boolean>(this.httpConfigService.getBaseUrl() + '/user/check/like', {movieId, email});
+    }
+
+    likeMovie(movieId: number, email: string) {
+        return this.httpClient.post<any>(this.httpConfigService.getBaseUrl() + '/user/like', { movieId, email });
+    }
+
+    unlikeMovie(movieId: number, email: string) {
+        return this.httpClient.post<null>(this.httpConfigService.getBaseUrl() + '/user/unlike', { movieId, email });
+    }
 }

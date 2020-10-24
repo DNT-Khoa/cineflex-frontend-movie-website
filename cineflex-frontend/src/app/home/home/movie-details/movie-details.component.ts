@@ -1,9 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Component, OnDestroy, OnInit, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { MovieModal } from 'src/app/admin/movies/shared/movie.modal';
+import { AuthService } from 'src/app/auth/shared/auth.service';
 import { MovieService } from '../../shared/movie.service';
 import { TMDBMovieDetailsModal } from '../../shared/tmdbMovieDetails.modal';
 
@@ -56,7 +58,9 @@ import { TMDBMovieDetailsModal } from '../../shared/tmdbMovieDetails.modal';
     ),
   ]
 })
-export class MovieDetailsComponent implements OnInit {
+export class MovieDetailsComponent implements OnInit, OnDestroy {
+  isUserLoggedIn = false;
+  haveUserLikedMovie = false;
   isVideoOpen = false;
   isImageOpen = false;
   movie: MovieModal;
@@ -64,13 +68,23 @@ export class MovieDetailsComponent implements OnInit {
   tmdbId: number;
   selectedVideo: any;
   selectedImage: any;
+  userLoggedInSubscription: Subscription;
 
-  constructor(private movieService: MovieService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private sanitizer: DomSanitizer) { }
+  constructor(private movieService: MovieService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private sanitizer: DomSanitizer, private authService: AuthService) { }
 
   ngOnInit(): void {
+    // Check first to see if the user has logged in
+    this.isUserLoggedIn = this.authService.isUserLoggedIn();
+
+    // Subscribe to be notified in case user logs out in the future
+    this.userLoggedInSubscription = this.authService.loggedInSubject.subscribe(
+      (result) => {
+        this.isUserLoggedIn = result;
+      }
+    )
+
     // Subscription to get the tmdbId from the URL
     this.tmdbId = this.activedRoute.snapshot.params['tmdbId'];
-    console.log(this.tmdbId);
 
     // Get Movie Details from tmdbID
     this.movieService.getMovieDetailsByTmbdId(this.tmdbId).subscribe(
@@ -79,16 +93,46 @@ export class MovieDetailsComponent implements OnInit {
       }
     )
 
-    // Get movie from the server from TMDB ID
     this.movieService.getMovieByTmdbId(this.tmdbId).subscribe(
-      (data) => {
+      data => {
         this.movie = data;
-      },
-      (error) => {
+        if (this.authService.isUserLoggedIn()) {
+          this.movieService.checkIfUserHasLikedMovie(data.id, this.authService.getEmail()).subscribe(
+            result => {
+              this.haveUserLikedMovie = result;
+            }, error => {
+              console.log(error);
+              this.toastr.error('Something wrong happened with the server. Please try again');
+            }
+          );
+        }
+      }, error => {
         console.log(error);
-        this.toastr.error('Something wrong happened with the API. Please try again');
+        this.toastr.error('Something wrong happened with the server. Please try again');
       }
-    )
+     )
+    
+  }
+
+  likeMovie() {
+    this.movieService.likeMovie(this.movie.id, this.authService.getEmail())
+    .subscribe( data => {
+      this.toastr.success("Successfully stored your liked movie!");
+      this.haveUserLikedMovie = true;
+    }, error => {
+      console.log(error);
+      this.toastr.error('Something wrong happened with the server. Please try again later');
+    })
+  }
+
+  unlikeMovie() {
+    this.movieService.unlikeMovie(this.movie.id, this.authService.getEmail()).subscribe( data => {
+      this.toastr.success("Successfully unliked the movie");
+      this.haveUserLikedMovie = false;
+    }, error => {
+      console.log(error);
+      this.toastr.error('Something wrong happened with the server. Please try again later');
+    })
   }
 
   youtubeUrl(key: string) {
@@ -101,6 +145,10 @@ export class MovieDetailsComponent implements OnInit {
 
   getYoutubeThumbnail(key: string) {
     return 'http://img.youtube.com/vi/' + key + '/hqdefault.jpg';
+  }
+
+  ngOnDestroy() {
+    this.userLoggedInSubscription.unsubscribe();
   }
 
 }
