@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'directorCommaSeparatorPipe'
 })
 export class DirectorCommaSeparatorPipe implements PipeTransform {
-  transform(value: any)  {
+  transform(value: any[]): string  {
         let directors = [];
         for (let crew of value) {
             if (crew.job === 'Director') {

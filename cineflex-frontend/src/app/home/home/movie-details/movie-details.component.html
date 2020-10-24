@@ -106,7 +106,7 @@
                             </iframe> -->
                             <img [src]="getYoutubeThumbnail(tmdbMovieDetails.videos.results[0].key)" alt="" class="w-full rounded-lg shadow-xl" style="min-height: 370px;">
                             <button class="absolute inset-0 w-full h-full group" (click)="isVideoOpen = true; youtubeUrl(tmdbMovieDetails.videos.results[0].key)">
-                                <i class="fa fa-play-circle text-6xl text-primary rounded-full group-hover:text-white duration-200"></i>
+                                <i class="fa fa-play-circle text-6xl text-white rounded-full group-hover:text-primary duration-200"></i>
                             </button>
                         </div>
                         <!-- Remaining videos -->
@@ -117,7 +117,7 @@
                                 </iframe> -->
                                 <img [src]="getYoutubeThumbnail(video.key)" alt="" class="w-full rounded-lg shadow-xl">
                                 <button class="absolute inset-0 w-full h-full group" (click)="isVideoOpen = true; youtubeUrl(video.key)">
-                                    <i class="fa fa-play-circle md:text-5xl text-2xl text-primary rounded-full group-hover:text-white duration-200"></i>
+                                    <i class="fa fa-play-circle md:text-5xl text-2xl text-white rounded-full group-hover:text-primary duration-200"></i>
                                 </button>
                             </div>
                             

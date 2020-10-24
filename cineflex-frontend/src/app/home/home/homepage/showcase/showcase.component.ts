@@ -9,7 +9,7 @@ import { MovieService } from '../../../shared/movie.service';
   styleUrls: ['./showcase.component.scss']
 })
 export class ShowcaseComponent implements OnInit {
-  movies: MovieModal[];
+  movies: MovieModal[] = [];
 
   constructor(private movieService: MovieService, private toastr: ToastrService) { }
 
