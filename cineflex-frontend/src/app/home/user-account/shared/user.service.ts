@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { MovieModal } from 'src/app/admin/movies/shared/movie.modal';
 import { AuthService } from 'src/app/auth/shared/auth.service';
 import { HttpConfigService } from 'src/app/shared/http-config.service';
 import { UserDetailsModal } from './user-details.modal';
@@ -17,6 +18,14 @@ export class UserService {
                 email: this.authService.getEmail()
             }
         });
+    }
+
+    getLikedMovies() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/user/likedMovies", {
+            params: {
+                email: this.authService.getEmail()
+            }
+        })
     }
 
     editUserDetails(user: {

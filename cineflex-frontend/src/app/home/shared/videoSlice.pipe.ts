@@ -5,7 +5,7 @@ import { CategoryModal } from 'src/app/admin/categories/shared/category.modal';
 })
 export class VideoSlicePipe implements PipeTransform {
   transform(value: any) {
-    if (value.length > 5) {
+    if (value && value.length > 5) {
       return value.slice(1, 5);
     }
 

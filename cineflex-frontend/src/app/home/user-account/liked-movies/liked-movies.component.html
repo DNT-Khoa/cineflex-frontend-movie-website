@@ -1,1 +1,32 @@
-<p>liked-movies works!</p>
+<div class="md:p-8 p-1 pt-2 bg-white shadow-xl">
+    <table class="w-full table-auto">
+        <thead class="bg-black text-white">
+            <tr>
+                <th class="w-1/12 py-2">
+                    <!-- Poster image -->
+                </th>
+                <th class="w-1/12 py-2">ID</th>
+                <th class="text-left py-2">Title</th>
+                <th class="text-left py-2">Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="hover:bg-gray-300 duration-200 cursor-pointer" *ngFor="let movie of movies" (click)="goToMoviePage(movie.tmdbId)">
+                <td class="py-2">
+                    <img src="{{ movie && movie.posterLink }}" class="w-20">
+                </td>
+                <td class="text-center py-2">
+                    <span>{{ movie && movie.id }}</span>
+                </td>
+                <td class="text-left py-2">
+                    <span>{{ movie && movie.title }}</span>
+                </td>
+                <td class="text-left py-2">
+                    <span>{{ movie.categories | categoryCommaSeparatorPipe }}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <span *ngIf="movies && movies.length === 0" class="mt-3 block">You haven't liked any movie yet</span>
+
+</div>

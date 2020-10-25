@@ -144,7 +144,9 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   getYoutubeThumbnail(key: string) {
-    return 'http://img.youtube.com/vi/' + key + '/hqdefault.jpg';
+    if (key) {
+      return 'http://img.youtube.com/vi/' + key + '/hqdefault.jpg';
+    }
   }
 
   ngOnDestroy() {

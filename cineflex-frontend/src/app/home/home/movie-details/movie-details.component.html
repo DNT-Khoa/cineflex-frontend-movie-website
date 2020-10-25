@@ -53,7 +53,7 @@
                             <div>
                                 <span class="text-sm font-semibold">Categories: </span>
                                 <span class="text-sm text-gray-800">
-                                    {{ movie && movie.categories | categoryCommaSeparatorPipe}}
+                                    {{ movie && (movie.categories | categoryCommaSeparatorPipe)}}
                                 </span>
                             </div>
 
@@ -61,28 +61,28 @@
                             <div>
                                 <span class="text-sm font-semibold">Director: </span>
                                 <span class="text-sm text-gray-800">
-                                    {{ tmdbMovieDetails && tmdbMovieDetails.credits.crew | directorCommaSeparatorPipe}}
+                                    {{ tmdbMovieDetails && (tmdbMovieDetails.credits.crew | directorCommaSeparatorPipe)}}
                                 </span>
                             </div>
 
                             <!-- Actors -->
                             <div>
                                 <span class="text-sm font-semibold">Actors: </span>
-                                <span class="text-sm text-gray-800">{{ tmdbMovieDetails && tmdbMovieDetails.credits.cast | actorCommaSeparatorPipe}}</span>
+                                <span class="text-sm text-gray-800">{{ tmdbMovieDetails && (tmdbMovieDetails.credits.cast | actorCommaSeparatorPipe)}}</span>
                             </div>
 
                             <!-- Country -->
                             <div>
                                 <span class="text-sm font-semibold">Country: </span>
                                 <span class="text-sm text-gray-800">
-                                    {{ tmdbMovieDetails && tmdbMovieDetails.production_countries | countryCommaSeparatorPipe}}
+                                    {{ tmdbMovieDetails && (tmdbMovieDetails.production_countries | countryCommaSeparatorPipe)}}
                                 </span>
                             </div>
 
                             <!-- Language -->
                             <div>
                                 <span class="text-sm font-semibold">Languages: </span>
-                                <span class="text-sm text-gray-800">{{ tmdbMovieDetails && tmdbMovieDetails.spoken_languages | languageCommaSeparatorPipe}}</span>
+                                <span class="text-sm text-gray-800">{{ tmdbMovieDetails && (tmdbMovieDetails.spoken_languages | languageCommaSeparatorPipe)}}</span>
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                 <!-- Plot Summary Container -->
                 <div id="plotSummaryContainer" class="mt-20">
                     <h1 class="font-bold text-xl tracking-wide text-center md:text-left mt-8" id="plotSummaryHeader">Plot Summary</h1>
-                    <p class="text-sm text-gray-800 mt-8">{{ tmdbMovieDetails.overview }}</p>
+                    <p class="text-sm text-gray-800 mt-8">{{ tmdbMovieDetails && tmdbMovieDetails.overview }}</p>
                 </div>
 
                 <!-- Trailers and Videos Container-->
@@ -104,14 +104,14 @@
                             <!-- <iframe class="w-full rounded-lg shadow-xl" style="min-height: 400px;"
                             [src]="youtubeUrl(tmdbMovieDetails.videos.results[0].key)" allowfullscreen>
                             </iframe> -->
-                            <img [src]="getYoutubeThumbnail(tmdbMovieDetails.videos.results[0].key)" alt="" class="w-full rounded-lg shadow-xl" style="min-height: 370px;">
+                            <img [src]="getYoutubeThumbnail(tmdbMovieDetails && tmdbMovieDetails?.videos.results[0].key)" alt="" class="w-full rounded-lg shadow-xl" style="min-height: 370px;">
                             <button class="absolute inset-0 w-full h-full group" (click)="isVideoOpen = true; youtubeUrl(tmdbMovieDetails.videos.results[0].key)">
                                 <i class="fa fa-play-circle text-6xl text-white rounded-full group-hover:text-primary duration-200"></i>
                             </button>
                         </div>
                         <!-- Remaining videos -->
                         <div class="flex flex-1">
-                            <div class="flex-1 md:mr-5 mr-1 relative" *ngFor="let video of tmdbMovieDetails.videos.results | videoSlicePipe">
+                            <div class="flex-1 md:mr-5 mr-1 relative" *ngFor="let video of (tmdbMovieDetails?.videos.results | videoSlicePipe)">
                                 <!-- <iframe class="w-full rounded-lg shadow-xl"
                                     [src]="youtubeUrl(video.key)" allowfullscreen>
                                 </iframe> -->
@@ -133,7 +133,7 @@
                 <h1 class="font-bold text-primary text-xl tracking-wide text-center md:text-left mb-8" id="plotSummaryHeader">Photo Gallery</h1>
                 <!-- Photo Gallery -->
                 <div id="photoGalleryContainer" class="flex w-full flex-wrap justify-center md:justify-start">
-                    <div class="p-1" *ngFor="let image of tmdbMovieDetails.images.posters.slice(0, 4)">
+                    <div class="p-1" *ngFor="let image of (tmdbMovieDetails?.images.posters.slice(0, 4))">
                         <img [src]="'https://image.tmdb.org/t/p/original' + image.file_path" alt="" class="w-24 h-32 rounded-lg shadow-xl cursor-pointer hover:opacity-75 duration-200" (click)="isImageOpen = true; imageUrl(image.file_path)">
                     </div>
                 </div>
