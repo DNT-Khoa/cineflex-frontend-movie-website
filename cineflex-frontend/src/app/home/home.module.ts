@@ -13,6 +13,10 @@ import { CountryCommaSeparatorPipe } from './shared/countryCommaSeparator.pipe';
 import { ActorCommaSeparatorPipe } from './shared/actorCommaSeparator.pipe';
 import { LanguageCommaSeparatorPipe } from './shared/languageCommaSeparator.pipe';
 import { VideoSlicePipe } from './shared/videoSlice.pipe';
+import { UserAccountComponent } from './user-account/user-account.component';
+import { ProfileDetailsComponent } from './user-account/profile-details/profile-details.component';
+import { LikedMoviesComponent } from './user-account/liked-movies/liked-movies.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -28,11 +32,15 @@ import { VideoSlicePipe } from './shared/videoSlice.pipe';
     CountryCommaSeparatorPipe,
     ActorCommaSeparatorPipe,
     LanguageCommaSeparatorPipe,
-    VideoSlicePipe
+    VideoSlicePipe,
+    UserAccountComponent,
+    ProfileDetailsComponent,
+    LikedMoviesComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class HomeModule { }

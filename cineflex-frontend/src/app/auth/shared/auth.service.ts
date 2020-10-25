@@ -66,11 +66,8 @@ export class AuthService {
           this.toastr.error('Something wrong happend. Please try again later!');
         }
       );
-    this.localStorage.clear('authenticationToken');
-    this.localStorage.clear('email');
-    this.localStorage.clear('refreshToken');
-    this.localStorage.clear('role');
-    this.localStorage.clear('expiresAt');
+    
+    this.clearDataStorage();
   }
 
   updateRefreshTokenPayload() {
@@ -105,5 +102,17 @@ export class AuthService {
 
   isAdminLoggedIn(): boolean {
     return this.getJwtToken() !== null && this.getRole() === 'Admin';
+  }
+
+  notifyUserLoggedOut() {
+    this.loggedInSubject.next(false);
+  }
+
+  clearDataStorage() {
+    this.localStorage.clear('authenticationToken');
+    this.localStorage.clear('email');
+    this.localStorage.clear('refreshToken');
+    this.localStorage.clear('role');
+    this.localStorage.clear('expiresAt');
   }
 }

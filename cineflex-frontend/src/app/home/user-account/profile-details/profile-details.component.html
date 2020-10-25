@@ -1,0 +1,146 @@
+<div class="p-8 pt-2 bg-white">
+    <!-- Personal Information -->
+    <div>
+        <h2 class="text-gray-900 font-bold text-xl uppercase">Personal Information</h2>
+        <div class="mt-3 flex flex-wrap p-4 bg-gray-300 rounded-lg">
+            <!-- First Name -->
+            <div class="md:w-1/2 w-full mb-5">
+                <span class="font-semibold text-gray-900 inline-block w-32">First Name</span>
+                <span class="">{{ user && user.firstName }}</span>
+            </div>
+
+            <!-- Last Name -->
+            <div class="md:w-1/2 w-full mb-5">
+                <span class="font-semibold text-gray-900 inline-block w-32">Last Name</span>
+                <span class="">{{ user && user.lastName }}</span>
+            </div>
+
+            <!-- Email -->
+            <div class="md:w-1/2 w-full mb-5">
+                <span class="font-semibold text-gray-900 inline-block w-32">Email Address</span>
+                <span class="">{{ user && user.email }}</span>
+            </div>
+
+            <!-- Joined Date -->
+            <div class="md:w-1/2 w-full mb-5">
+                <span class="font-semibold text-gray-900 inline-block w-32">Joined Date</span>
+                <span class="">{{ user && (user.created * 1000 | date) }}</span>
+            </div>
+
+            <button class="inline-block rounded-lg bg-primary text-white px-20 py-1 mx-auto mt-3 shadow-lg transform hover:-translate-y-1 duration-200 focus:outline-none" (click)="isEditProfileFormOpen = true">
+                <span class="uppercase text-md font-semibold">Edit Profile</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Change password -->
+    <div class="mt-20">
+        <h2 class="text-gray-900 font-bold text-xl uppercase">Change Password</h2>
+        <p class="mt-3 text-gray-700">Enter your old password and your new password if you wish to change your password. Be wise when choosing your password!</p>
+        <div class="text-center">
+            <button class="inline-block rounded-lg bg-primary text-white px-20 py-1 mx-auto mt-3 shadow-lg transform hover:-translate-y-1 duration-200 focus:outline-none" (click)="isChangePasswordFormOpen = true">
+                <span class="uppercase text-md font-semibold">Change Password</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Remove Account -->
+    <div class="mt-20">
+        <h2 class="text-gray-900 font-bold text-xl uppercase">Remove Account</h2>
+        <p class="mt-3 text-gray-700">It would be great if you share with us why you want to delete your account. Anyway, we hope you have a great experience with CineFlex!</p>
+        <div class="text-center">
+            <button class="inline-block rounded-lg bg-primary text-white px-20 py-1 mx-auto mt-3 shadow-lg transform hover:-translate-y-1 duration-200 focus:outline-none" (click)="isDeleteAccountFormOpen = true">
+                <span class="uppercase text-md font-semibold">Remove Account</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Dark Background Overlay -->
+<div class="fixed inset-0 w-full h-full bg-black opacity-25" *ngIf="isEditProfileFormOpen || isChangePasswordFormOpen || isDeleteAccountFormOpen" [@backgroundOverlayAnimation]></div>
+
+<!-- Edit Profile Form -->
+<div id="editProfileForm" class="fixed inset-0 bg-white mt-40 rounded-lg shadow-xl" *ngIf="isEditProfileFormOpen" [@popupAnimation]>
+    <h2 class="text-primary font-bold text-xl text-center mt-10">Edit Your Profile Details</h2>
+
+    <form class="mt-10 w-full" [formGroup]="editProfileForm" (ngSubmit)="editUserDetails()">
+        <div class="mb-3 px-10 h-24">
+            <label for="firstname" class="font-semibold block mb-3">First Name</label>
+            <input formControlName="firstName" id="firstname" type="text" class="w-full bg-gray-300 rounded-lg focus:outline-none focus:shadow-outline shadow-inner p-2" [(ngModel)]="user.firstName">
+            <span class="text-red-600 text-sm font-semibold block" *ngIf="!editProfileForm.get('firstName').valid && editProfileForm.get('firstName').touched">*First Name should not be blank</span>
+        </div>
+
+        <div class="mb-3 px-10 h-24">
+            <label for="lastname" class="font-semibold block mb-3">Last Name</label>
+            <input formControlName="lastName" id="lastname" type="text" class="w-full bg-gray-300 rounded-lg focus:outline-none focus:shadow-outline shadow-inner p-2" [(ngModel)]="user.lastName">
+            <span class="text-red-600 text-sm font-semibold block" *ngIf="!editProfileForm.get('lastName').valid && editProfileForm.get('lastName').touched">*Last Name should not be blank</span>
+        </div>
+
+        <div class="px-10 h-24">
+            <label for="email" class="font-semibold block mb-3">Email Address</label>
+            <input formControlName="email" id="email" type="text" class="w-full bg-gray-300 rounded-lg focus:outline-none focus:shadow-outline shadow-inner p-2" [(ngModel)]="user.email">
+            <span class="text-red-600 text-sm font-semibold block" *ngIf="!editProfileForm.get('email').valid && editProfileForm.get('email').touched">*Email should not be blank</span>
+        </div>
+
+        <div class="absolute bottom-0 p-3 bg-gray-300 w-full rounded-b-lg text-right">
+            <a class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200 focus:outline-none cursor-pointer" (click)="isEditProfileFormOpen = false; getUser()">Cancel</a>
+            <button type="submit" class="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg ml-2 border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200 focus:outline-none">Update</button>
+        </div>
+    </form>
+</div>
+
+<!-- Change Password Form -->
+<div id="changePasswordForm" class="fixed inset-0 bg-white mt-40 rounded-lg shadow-xl" *ngIf="isChangePasswordFormOpen" [@popupAnimation]>
+    <h2 class="text-primary font-bold text-xl text-center mt-10">Change your password</h2>
+
+    <form class="mt-10 w-full" [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+        <div class="mb-3 px-10 h-24">
+            <label for="oldPassword" class="font-semibold block mb-3">Your Old Password</label>
+            <input formControlName="oldPassword" id="oldPassword" [type]="isOldPasswordVisible ? 'text' : 'password'" class="w-full bg-gray-300 rounded-lg focus:outline-none focus:shadow-outline shadow-inner p-2" #oldPassword>
+            <span class="text-red-600 text-sm font-semibold block" *ngIf="!changePasswordForm.get('oldPassword').valid && changePasswordForm.get('oldPassword').touched">*Your old password is required</span>
+            <span class="absolute right-0 inline-block mr-12 mt-2 cursor-pointer">
+                <i class="fa fa-eye text-xl" *ngIf="oldPassword.value && !isOldPasswordVisible" (click)="isOldPasswordVisible = true"></i>
+                <i class="fa fa-eye-slash text-xl" *ngIf="oldPassword.value && isOldPasswordVisible" (click)="isOldPasswordVisible = false"></i>
+            </span>
+        </div>
+
+        <div class="mb-3 px-10 h-24">
+            <label for="newPassword" class="font-semibold block mb-3">Your New Password</label>
+            <input formControlName="newPassword" id="newPassword" [type]="isNewPasswordVisible ? 'text' : 'password'" class="w-full bg-gray-300 rounded-lg focus:outline-none focus:shadow-outline shadow-inner p-2" #newPassword>
+            <span class="text-red-600 text-sm font-semibold block" *ngIf="!changePasswordForm.get('newPassword').valid && changePasswordForm.get('newPassword').touched">*New password should not be blank</span>
+            <span class="absolute right-0 inline-block mr-12 mt-2 cursor-pointer">
+                <i class="fa fa-eye text-xl" *ngIf="newPassword.value && !isNewPasswordVisible" (click)="isNewPasswordVisible = true"></i>
+                <i class="fa fa-eye-slash text-xl" *ngIf="newPassword.value && isNewPasswordVisible" (click)="isNewPasswordVisible = false"></i>
+            </span>
+        </div>
+
+        <div class="absolute bottom-0 p-3 bg-gray-300 w-full rounded-b-lg text-right">
+            <a class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200 focus:outline-none cursor-pointer" (click)="isChangePasswordFormOpen = false; changePasswordForm.reset(); resetPasswordVisibility()">Cancel</a>
+            <button type="submit" class="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg ml-2 border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200 focus:outline-none">Change password</button>
+        </div>
+    </form>
+</div>
+
+<!-- delete Account Popup -->
+<div id="deleteAccountForm" class="fixed inset-0 bg-white mt-40 rounded-lg shadow-xl" *ngIf="isDeleteAccountFormOpen" [@popupAnimation]>
+    <h2 class="text-primary font-bold text-xl text-center mt-10 px-2">Are you sure you want to delete your account ?</h2>
+
+    <form class="mt-10 w-full" [formGroup]="deleteAccountForm" (ngSubmit)="deleteAccount()">
+        <div class="mb-3 px-10 h-24">
+            <label for="password" class="font-semibold block mb-3">Enter your password to confirm</label>
+            <input formControlName="password" id="password" [type]="isDeletePasswordVisible ? 'text': 'password'" class="w-full bg-gray-300 rounded-lg focus:outline-none focus:shadow-outline shadow-inner p-2" #deletePassword>
+            <span class="text-red-600 text-sm font-semibold block" *ngIf="!deleteAccountForm.get('password').valid && deleteAccountForm.get('password').touched">*Your password is required</span>
+            <span class="absolute right-0 inline-block mr-12 mt-2 cursor-pointer">
+                <i class="fa fa-eye text-xl" *ngIf="deletePassword.value && !isDeletePasswordVisible" (click)="isDeletePasswordVisible = true"></i>
+                <i class="fa fa-eye-slash text-xl" *ngIf="deletePassword.value && isDeletePasswordVisible" (click)="isDeletePasswordVisible = false"></i>
+            </span>
+        </div>
+
+        <div class="absolute bottom-0 p-3 bg-gray-300 w-full rounded-b-lg text-right">
+            <a class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200 focus:outline-none cursor-pointer" (click)="isDeleteAccountFormOpen = false; deleteAccountForm.reset(); resetPasswordVisibility()">Cancel</a>
+            <button class="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg ml-2 border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200 focus:outline-none">Yes, I Confirm</button>
+        </div>
+    </form>
+
+    
+</div>

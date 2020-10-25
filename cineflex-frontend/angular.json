@@ -73,7 +73,8 @@
             "browserTarget": "cineflex-frontend:build",
             "customWebpackConfig": {
               "path": "./webpack.config.js"
-            }
+            },
+            "port": 4500
           },
           "configurations": {
             "production": {

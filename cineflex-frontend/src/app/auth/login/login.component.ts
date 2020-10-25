@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           if (data) {
             if (data.role === 'User') {
               this.router.navigateByUrl('/');
-              this.toastr.success('Login Successful');
+              this.toastr.success('Login Successfully');
             } else if (data.role === 'Admin') {
               this.router.navigateByUrl('/admin');
               this.toastr.success('Welcome Admin');
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
           } else if (error.error.message === 'EMAIL_NOT_EXISTS') {
             this.toastr.error('Email does not exits! Please sign up first');
           } else {
-            this.toastr.error('Something wrong happend. Please try again later');
+            this.toastr.error('Something wrong happened. Please try again later');
           }
         }
       );

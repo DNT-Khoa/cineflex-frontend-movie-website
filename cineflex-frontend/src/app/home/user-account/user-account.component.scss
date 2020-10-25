@@ -1,0 +1,18 @@
+#userAccountSection {
+    #userBackground {
+        height: 450px;
+        background: linear-gradient(to right, #00dbde, #fc00ff);
+    }
+}
+
+.active {
+    background-color: #ff0000;
+
+    span {
+        color: white;
+    }
+
+    i {
+        color: white;
+    }
+}
