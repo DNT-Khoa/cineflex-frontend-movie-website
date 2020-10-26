@@ -1,0 +1,50 @@
+<section id="movieTypeNavigator" class="md:mt-48 mt-40 bg-white overflow-y-visible">
+    <div class="container mx-auto relative">
+        <!-- Navigator -->
+        <div id="navigator" class="w-full text-center mx-auto md:mb-10 mb-5">
+            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">All</a>
+            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="/movies/type/nowplaying" routerLinkActive="active">Now Playing</a>
+            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="/movies/type/comingsoon" routerLinkActive="active">Coming Soon</a>
+            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="/movies/type/toprated" routerLinkActive="active">Top Rated</a>
+        </div>
+
+        <!-- Search bar here -->
+        <div id="movieTypeSearch" class="md:w-5/12 w-5/6 text-center mx-auto relative mb-10">
+            <input type="text" class="px-5 py-3 bg-white text-primary shadow-xl mb-10 max-w-xl w-full rounded-full focus:outline-none font-semibold" placeholder="Search..." #apiSearchInput>
+            <i class="fa fa-times absolute top-0 right-0 mr-8 mt-3 text-lg text-primary cursor-pointer hover:opacity-75 duration-200 transform hover:-translate-y-1 hover:scale-125" *ngIf="apiSearchInput.value" (click)="apiSearchInput.value = ''"></i>
+            <i class="fa fa-search absolute top-0 right-0 mr-8 mt-3 text-lg text-primary cursor-pointer hover:opacity-75 duration-200 transform hover:-translate-y-1" *ngIf="!apiSearchInput.value"></i>
+
+            <!-- Search results -->
+            <div class="absolute bg-white w-full top-0 z-10 mt-16 rounded-lg shadow-xl overflow-y-scroll" *ngIf="apiSearchInput.value" [@modalOpenAnimation] id="searchResults">
+
+                <!-- Skeleton loading  -->
+                <div *ngIf="isSearching">
+                    <div class="flex hover:bg-gray-200 duration-200 cursor-pointer py-2 px-3 my-2 shadow-md animate-pulse" *ngFor="let i of [1, 2]">
+                        <div class="h-24 w-20 bg-gray-500"></div>
+                        <div class="ml-8 flex flex-col mt-5">
+                            <div class="bg-gray-500 w-32 h-3 mt-5"></div>
+                            <div class="bg-gray-500 w-48 h-3 mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Found movies -->
+                <div class="text-left" *ngIf="!isSearching && moviesResult.length !== 0">
+                    <div class="flex hover:bg-gray-200 duration-200 cursor-pointer py-2 px-3 my-2 shadow-md focus:outline-none" *ngFor="let movie of moviesResult" [routerLink]="['movies/', movie.tmdbId]">
+                        <img src="{{ movie.posterLink }}" alt="" class="h-24 w-20">
+                        <div class="ml-8 flex flex-col mt-5">
+                            <h2 class="font-bold md:text-lg text-primary text-sm">{{ movie.title }}</h2>
+                            <p class="font-semibold md:text-sm text-gray-500 text-xs">{{ movie.categories | categoryCommaSeparatorPipe}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No movies found notification -->
+                <h2 class="font-semibold" *ngIf="!isSearching && moviesResult.length === 0">No matching result !</h2>
+            </div>
+        </div>
+
+        <!-- Movie Type Dynamic Content -->
+        <router-outlet></router-outlet>
+    </div>
+</section>

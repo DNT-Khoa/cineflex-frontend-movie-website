@@ -17,6 +17,11 @@ import { UserAccountComponent } from './user-account/user-account.component';
 import { ProfileDetailsComponent } from './user-account/profile-details/profile-details.component';
 import { LikedMoviesComponent } from './user-account/liked-movies/liked-movies.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MovieTypeNavigatorComponent } from './home/homepage/movie-type-navigator/movie-type-navigator.component';
+import { TypeAllComponent } from './home/homepage/movie-type-navigator/type-all/type-all.component';
+import { TypeComingSoonComponent } from './home/homepage/movie-type-navigator/type-coming-soon/type-coming-soon.component';
+import { TopRatedComponent } from './home/homepage/movie-type-navigator/top-rated/top-rated.component';
+import { TypeNowplayingComponent } from './home/homepage/movie-type-navigator/type-nowplaying/type-nowplaying.component';
 
 
 
@@ -36,6 +41,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserAccountComponent,
     ProfileDetailsComponent,
     LikedMoviesComponent,
+    MovieTypeNavigatorComponent,
+    TypeAllComponent,
+    TypeComingSoonComponent,
+    TopRatedComponent,
+    TypeNowplayingComponent,
   ],
   imports: [
     CommonModule,

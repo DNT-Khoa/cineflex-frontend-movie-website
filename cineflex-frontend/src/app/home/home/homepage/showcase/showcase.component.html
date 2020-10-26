@@ -21,7 +21,7 @@
         
     </div>
     <!-- Last Three Latest Movie -->
-    <div id="threeRemainedMovies" class="-mt-32">
+    <div id="threeRemainedMovies" class="md:-mt-32 -mt-16">
         <div class="container mx-auto flex justify-center">
             <div class="md:mx-5 mx-1 z-20 relative cursor-pointer overflow-hidden shadow-2xl transform hover:scale-105 hover:-translate-y-2 duration-300 border-none focus:outline-none" id="movieCard" *ngFor="let i of [1, 2, 3]" [routerLink]="['movies', movies[i]?.tmdbId]">
                 <img src="{{ movies && movies[i]?.backdropLink }}" alt="" class="w-full h-full object-cover object-center rounded-lg focus:outline-none">

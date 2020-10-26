@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { HomepageComponent } from './home/homepage/homepage.component';
+import { TopRatedComponent } from './home/homepage/movie-type-navigator/top-rated/top-rated.component';
+import { TypeAllComponent } from './home/homepage/movie-type-navigator/type-all/type-all.component';
+import { TypeComingSoonComponent } from './home/homepage/movie-type-navigator/type-coming-soon/type-coming-soon.component';
+import { TypeNowplayingComponent } from './home/homepage/movie-type-navigator/type-nowplaying/type-nowplaying.component';
 import { MovieDetailsComponent } from './home/movie-details/movie-details.component';
 import { LikedMoviesComponent } from './user-account/liked-movies/liked-movies.component';
 import { ProfileDetailsComponent } from './user-account/profile-details/profile-details.component';
@@ -11,7 +15,12 @@ import { UserAccountComponent } from './user-account/user-account.component';
 const routes: Routes = [
   { path: '', component: HomeComponent, 
     children: [
-      { path: '', component: HomepageComponent, pathMatch: 'full'},
+      { path: '', component: HomepageComponent, children: [
+        { path: '', component: TypeAllComponent, pathMatch: 'full'},
+        { path: 'movies/type/nowplaying', component: TypeNowplayingComponent},
+        { path: 'movies/type/comingsoon', component: TypeComingSoonComponent},
+        { path: 'movies/type/toprated', component: TopRatedComponent}
+      ]},
       { path: 'movies/:tmdbId', component: MovieDetailsComponent},
       { path: 'user/account', component: UserAccountComponent, canActivate: [UserAccountGuard], children: [
         { path: '', redirectTo: 'profile-details'},

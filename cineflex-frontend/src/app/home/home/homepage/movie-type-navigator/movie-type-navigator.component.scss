@@ -1,0 +1,22 @@
+#movieTypeNavigator {
+    .container {
+        top: -93px;
+        #movieTypeSearch {
+            input {
+                &::placeholder {
+                    color: #ff0000;
+                    font-weight: 600;
+                }
+            }
+
+            #searchResults {
+                max-height: 256px;
+            }
+        }
+    }
+    
+}
+
+.active {
+    color: #ff0000;
+}

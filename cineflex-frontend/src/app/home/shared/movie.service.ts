@@ -10,8 +10,32 @@ import { TMDBMovieDetailsModal } from './tmdbMovieDetails.modal';
 export class MovieService {
     constructor(private httpClient: HttpClient, private httpConfigService: HttpConfigService){}
 
+    searchMovieByQueryKey(key: string) {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + '/api/movies/search', {
+            params: {
+                key: key
+            }
+        });
+    }
+
     getFourLatestNowPlayingMovies() {
-        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + '/api/movies/latest/4');
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + '/api/movies/nowplaying/4');
+    }
+
+    getFourLatestComingSoonMovies() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/comingsoon/4");
+    }
+
+    getTopRatedMovies() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/toprated");
+    }
+
+    getFourTopRatedMovies() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/toprated/4");
+    }
+
+    getAllMoviesLimit4() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/all/4");
     }
 
     getMovieByTmdbId(tmbdId: number) {
