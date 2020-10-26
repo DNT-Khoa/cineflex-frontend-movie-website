@@ -1,7 +1,7 @@
 <div id="typeComingSoon">
     <!-- Movie Cards Container -->
     <div class="flex justify-center overflow-x-scroll py-5" id="typeContainer">
-        <div *ngFor="let movie of movies" class="sm:px-3 px-1 w-56">
+        <div *ngFor="let movie of movies" class="sm:px-5 px-1 w-56">
             <div [routerLink]="['/movies/', movie.tmdbId]" class="relative transform hover:-translate-y-3 duration-200 hover:scale-105 focus:outline-none">
                 <img src="{{ movie.posterLink }}" alt="" class="lg:w-56 rounded-lg shadow-xl cursor-pointer block mx-auto ">
                 <i class="border ml-1 mb-2 fa fa-play-circle bottom-0 text-2xl text-white text-opacity-50 hover:text-white bg-transparent duration-200 absolute hover:bg-primary rounded-full" id="playButton"></i>
