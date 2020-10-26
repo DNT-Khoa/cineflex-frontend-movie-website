@@ -45,6 +45,8 @@
         </div>
 
         <!-- Movie Type Dynamic Content -->
-        <router-outlet></router-outlet>
+        <div [@routeAnimations]="prepareRoute(outlet)" id="routerWrapper">
+            <router-outlet #outlet="outlet"></router-outlet>
+        </div>
     </div>
 </section>

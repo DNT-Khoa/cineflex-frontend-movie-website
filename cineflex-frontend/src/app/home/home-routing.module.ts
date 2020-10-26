@@ -13,15 +13,15 @@ import { UserAccountGuard } from './user-account/shared/user-account-guard.servi
 import { UserAccountComponent } from './user-account/user-account.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, 
+  { path: '', component: HomeComponent,
     children: [
-      { path: '', component: HomepageComponent, children: [
-        { path: '', component: TypeAllComponent, pathMatch: 'full'},
-        { path: 'movies/type/nowplaying', component: TypeNowplayingComponent},
-        { path: 'movies/type/comingsoon', component: TypeComingSoonComponent},
-        { path: 'movies/type/toprated', component: TopRatedComponent}
+      { path: '', component: HomepageComponent, data: { animation: 'Homepage' } , children: [
+        { path: '', component: TypeAllComponent, pathMatch: 'full', data: { animation: 'TypeAll'} },
+        { path: 'movies/type/nowplaying', component: TypeNowplayingComponent, data: { animation: 'TypeNowPlaying'} },
+        { path: 'movies/type/comingsoon', component: TypeComingSoonComponent, data: { animation: 'TypeComingSoon'} },
+        { path: 'movies/type/toprated', component: TopRatedComponent, data: { animation: 'TypeTopRated' } }
       ]},
-      { path: 'movies/:tmdbId', component: MovieDetailsComponent},
+      { path: 'movies/:tmdbId', component: MovieDetailsComponent, data: { animation: 'MovieDetails'}},
       { path: 'user/account', component: UserAccountComponent, canActivate: [UserAccountGuard], children: [
         { path: '', redirectTo: 'profile-details'},
         { path: 'profile-details', component: ProfileDetailsComponent},
@@ -33,7 +33,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   exports: [RouterModule]
 })

@@ -1,9 +1,11 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, animateChild, query, style, transition, trigger, group } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { MovieModal } from 'src/app/admin/movies/shared/movie.modal';
+import { slideAnimation } from 'src/app/home/shared/animations';
 import { MovieService } from 'src/app/home/shared/movie.service';
 
 @Component({
@@ -32,6 +34,7 @@ import { MovieService } from 'src/app/home/shared/movie.service';
         )
       ]
     ),
+    slideAnimation
   ]
 })
 export class MovieTypeNavigatorComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -79,4 +82,7 @@ export class MovieTypeNavigatorComponent implements OnInit, OnDestroy, AfterView
     this.apiSearchInputSubscription.unsubscribe();
   }
 
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+  }
 }

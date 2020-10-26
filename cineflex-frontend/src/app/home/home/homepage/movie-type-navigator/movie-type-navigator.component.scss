@@ -1,6 +1,7 @@
 #movieTypeNavigator {
     .container {
         top: -93px;
+
         #movieTypeSearch {
             input {
                 &::placeholder {
@@ -12,6 +13,10 @@
             #searchResults {
                 max-height: 256px;
             }
+        };
+
+        #routerWrapper {
+            height: 500px;
         }
     }
     
