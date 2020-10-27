@@ -60,7 +60,6 @@ export class AppModule {
     
     scrollEvents.pipe(withLatestFrom(originUrl)).subscribe(
       ([scrollEvent, urlPairs]) => {
-        console.log(urlPairs);
         if (scrollEvent.position) {
           // backward navigation
           viewportScroller.scrollToPosition(scrollEvent.position);
