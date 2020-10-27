@@ -74,7 +74,7 @@
             "customWebpackConfig": {
               "path": "./webpack.config.js"
             },
-            "port": 4500
+            "port": 4502
           },
           "configurations": {
             "production": {

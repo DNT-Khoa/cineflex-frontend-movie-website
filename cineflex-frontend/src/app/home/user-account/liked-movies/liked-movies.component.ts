@@ -32,7 +32,7 @@ export class LikedMoviesComponent implements OnInit {
   }
 
   goToMoviePage(tmdbId: number) {
-    this.router.navigateByUrl("/movies/" + tmdbId);
+    this.router.navigateByUrl("/home/movies/" + tmdbId);
   }
 
 }

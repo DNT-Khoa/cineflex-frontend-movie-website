@@ -26,7 +26,7 @@
                 </button>
                 <!-- Dropdown user -->
                 <div class="absolute bg-white right-0 p-1 w-40 mt-2 shadow-md rounded-md" *ngIf="isUserDropdownOpen && isUserLoggedIn" [@userDropdownAnimation]>
-                    <a class="block px-4 py-2 text-md cursor-pointer text-gray-700 hover:bg-gray-300 duration-200 font-semibold" routerLink="/user/account" (click)="isUserDropdownOpen = false;">My Profile</a>
+                    <a class="block px-4 py-2 text-md cursor-pointer text-gray-700 hover:bg-gray-300 duration-200 font-semibold" routerLink="user/account" (click)="isUserDropdownOpen = false;">My Profile</a>
                     <a class="block px-4 py-2 text-md cursor-pointer text-gray-700 hover:bg-gray-300 duration-200 font-semibold" (click)="logOut()">Log Out</a>
                 </div>
             </div>

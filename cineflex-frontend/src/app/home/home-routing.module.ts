@@ -16,10 +16,10 @@ const routes: Routes = [
   { path: '', component: HomeComponent,
     children: [
       { path: '', component: HomepageComponent, data: { animation: 'Homepage' } , children: [
-        { path: '', component: TypeAllComponent, pathMatch: 'full', data: { animation: 'TypeAll'} },
-        { path: 'movies/type/nowplaying', component: TypeNowplayingComponent, data: { animation: 'TypeNowPlaying'} },
-        { path: 'movies/type/comingsoon', component: TypeComingSoonComponent, data: { animation: 'TypeComingSoon'} },
-        { path: 'movies/type/toprated', component: TopRatedComponent, data: { animation: 'TypeTopRated' } }
+        { path: '', component: TypeAllComponent, data: { animation: 'TypeAll'} },
+        { path: 'type/nowplaying', component: TypeNowplayingComponent, data: { animation: 'TypeNowPlaying'} },
+        { path: 'type/comingsoon', component: TypeComingSoonComponent, data: { animation: 'TypeComingSoon'} },
+        { path: 'type/toprated', component: TopRatedComponent, data: { animation: 'TypeTopRated' } }
       ]},
       { path: 'movies/:tmdbId', component: MovieDetailsComponent, data: { animation: 'MovieDetails'}},
       { path: 'user/account', component: UserAccountComponent, canActivate: [UserAccountGuard], children: [

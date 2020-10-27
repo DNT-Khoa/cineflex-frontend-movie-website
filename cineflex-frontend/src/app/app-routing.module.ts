@@ -6,24 +6,29 @@ import { UserGuard } from './auth/shared/user-guard.service';
 // Using lazy loading to improve performances of the website 
 const routes: Routes = [
   {
-    path: '',
+    path: '', redirectTo: 'home', pathMatch: 'full'
+  },
+  {
+    path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
-    // pathMatch: 'full',
-    canLoad: [UserGuard]
+    canLoad: [UserGuard],
+    data: { animation: 'Home'}
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+    data: { animation: 'Auth'}
   },
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-    canLoad: [AdminGuard]
+    canLoad: [AdminGuard],
+    data: { animation: 'Admin'}
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled'})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

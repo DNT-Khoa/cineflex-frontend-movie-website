@@ -2,10 +2,10 @@
     <div class="container mx-auto relative">
         <!-- Navigator -->
         <div id="navigator" class="w-full text-center mx-auto md:mb-10 mb-5">
-            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">All</a>
-            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="/movies/type/nowplaying" routerLinkActive="active">Now Playing</a>
-            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="/movies/type/comingsoon" routerLinkActive="active">Coming Soon</a>
-            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="/movies/type/toprated" routerLinkActive="active">Top Rated</a>
+            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">All</a>
+            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="type/nowplaying" routerLinkActive="active">Now Playing</a>
+            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="type/comingsoon" routerLinkActive="active">Coming Soon</a>
+            <a class="inline-block font-semibold md:mx-5 mx-3 cursor-pointer hover:text-primary duration-200 md:text-base text-sm" routerLink="type/toprated" routerLinkActive="active">Top Rated</a>
         </div>
 
         <!-- Search bar here -->
@@ -45,7 +45,7 @@
         </div>
 
         <!-- Movie Type Dynamic Content -->
-        <div [@routeAnimations]="prepareRoute(outlet)" id="routerWrapper">
+        <div [@routeAnimations]="getAnimationData(outlet)" id="routerWrapper">
             <router-outlet #outlet="outlet"></router-outlet>
         </div>
     </div>
