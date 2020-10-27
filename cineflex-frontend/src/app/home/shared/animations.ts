@@ -2,8 +2,8 @@ import { animate, animateChild, query, style, transition, trigger, group } from 
 
 export const animations = 
     trigger('routeAnimations', [
-        transition('TypeAll => TypeNowPlaying, TypeNowPlaying => TypeComingSoon, TypeComingSoon => TypeTopRated, TypeAll => TypeComingSoon, TypeAll => TypeTopRated, TypeNowPlaying => TypeTopRated', slideTo('right')),
-        transition('TypeNowPlaying => TypeAll, TypeComingSoon => TypeNowPlaying, TypeComingSoon => TypeAll, TypeTopRated => TypeComingSoon, TypeTopRated => TypeNowPlaying, TypeTopRated => TypeAll', slideTo('left')),
+        transition('TypeAll => TypeNowPlaying, TypeNowPlaying => TypeComingSoon, TypeComingSoon => TypeTopRated, TypeAll => TypeComingSoon, TypeAll => TypeTopRated, TypeNowPlaying => TypeTopRated, Login => Signup', slideTo('right')),
+        transition('TypeNowPlaying => TypeAll, TypeComingSoon => TypeNowPlaying, TypeComingSoon => TypeAll, TypeTopRated => TypeComingSoon, TypeTopRated => TypeNowPlaying, TypeTopRated => TypeAll, Signup => Login', slideTo('left')),
         transition('Homepage <=> *, * <=> MovieDetails, Home <=> *, Admin <=> *, Auth <=> *', fadeEffect()),
     ]);
 
