@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MovieModal } from 'src/app/admin/movies/shared/movie.modal';
 import { HttpConfigService } from 'src/app/shared/http-config.service';
@@ -63,4 +63,36 @@ export class MovieService {
     unlikeMovie(movieId: number, email: string) {
         return this.httpClient.post<null>(this.httpConfigService.getBaseUrl() + '/user/unlike', { movieId, email });
     }
+
+    rateMovie(userEmail: string, movieId: number, rating: number) {
+        return this.httpClient.post<any>(this.httpConfigService.getBaseUrl() + '/user/rateMovie', {userEmail, movieId, rating});
+    }
+
+    checkIfUserHasRatedMovie(userEmail: string, movieId: number) {
+        return this.httpClient.get<boolean>(this.httpConfigService.getBaseUrl() + '/user/check/rateMovie', {
+            params: new HttpParams()
+                .set('email', userEmail)
+                .set('movieId', movieId.toString())
+        }
+        )
+    }
+
+    getMovieRating(userEmail: string, movieId: number) {
+        return this.httpClient.get<number>(this.httpConfigService.getBaseUrl() + '/user/value/rateMovie', {
+            params: new HttpParams()
+                .set('email', userEmail)
+                .set('movieId', movieId.toString())
+        }
+        );
+    }
+
+    deleteMovieRating(userEmail: string, movieId: number) {
+        return this.httpClient.delete<null>(this.httpConfigService.getBaseUrl() + '/user/deleteMovieRating', {
+            params: new HttpParams()
+                .set('email', userEmail)
+                .set('movieId', movieId.toString())
+        }
+        );
+    }
+
 }

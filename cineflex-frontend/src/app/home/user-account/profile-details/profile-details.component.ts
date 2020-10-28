@@ -179,7 +179,8 @@ export class ProfileDetailsComponent implements OnInit {
         this.router.navigateByUrl("/");
       }, 
       (error) => {
-        if (error.status === 500) {
+        console.log("error");
+        if (error.error === 'INVALID_CREDENTIALS') {
           this.toastr.error("Incorrect password! Please try again");
         } else {
           console.log(error);

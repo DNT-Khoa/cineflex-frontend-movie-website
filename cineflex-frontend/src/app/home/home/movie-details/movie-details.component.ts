@@ -59,6 +59,11 @@ import { TMDBMovieDetailsModal } from '../../shared/tmdbMovieDetails.modal';
   ]
 })
 export class MovieDetailsComponent implements OnInit, OnDestroy {
+  currentStarValue = 0;
+  haveUserRatedMovie = false;
+  ratedValue = 0;
+
+  isTooltipOpen = false;
   isUserLoggedIn = false;
   haveUserLikedMovie = false;
   isVideoOpen = false;
@@ -70,7 +75,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   selectedImage: any;
   userLoggedInSubscription: Subscription;
 
-  constructor(private movieService: MovieService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private sanitizer: DomSanitizer, private authService: AuthService) { }
+  constructor(private movieService: MovieService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private sanitizer: DomSanitizer, private authService: AuthService) { 
+  }
 
   ngOnInit(): void {
     // Check first to see if the user has logged in
@@ -97,6 +103,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
       data => {
         this.movie = data;
         if (this.authService.isUserLoggedIn()) {
+          // Check if user has liked the movie
           this.movieService.checkIfUserHasLikedMovie(data.id, this.authService.getEmail()).subscribe(
             result => {
               this.haveUserLikedMovie = result;
@@ -105,12 +112,36 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
               this.toastr.error('Something wrong happened with the server. Please try again');
             }
           );
+
+          // Check if user has rated the movie
+          this.movieService.checkIfUserHasRatedMovie(this.authService.getEmail(), data.id).subscribe(
+            result => {
+              this.haveUserRatedMovie = result;
+              // If user has rated then get the rating of the movie
+              if (result) {
+                this.movieService.getMovieRating(this.authService.getEmail(), data.id).subscribe(
+                  value => {
+                    this.ratedValue = value;
+                    this.currentStarValue = this.ratedValue;
+                  },
+                  error => {
+                    console.log(error);
+                    this.toastr.error("Something wrong happned with the server. Please try again");
+                  }
+                )
+              }
+            }, error => {
+              console.log(error);
+              this.toastr.error("Something wrong happned with the server. Please try again");
+            }
+          )
         }
       }, error => {
         console.log(error);
         this.toastr.error('Something wrong happened with the server. Please try again');
       }
      )
+
     
   }
 
@@ -149,8 +180,34 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  rateMovie(value: number) {
+    this.movieService.rateMovie(this.authService.getEmail(), this.movie.id, value).subscribe(
+      (data) => {
+        console.log(data);
+        this.toastr.success("Successfully rated the movie");
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error("Something wrong happened with the server.");
+      }
+    )
+  }
+
+  deleteMovieRating() {
+    this.movieService.deleteMovieRating(this.authService.getEmail(), this.movie.id).subscribe(
+      (data) => {
+        this.toastr.success("Successfully unrated the movie");
+        this.ratedValue = 0;
+        this.currentStarValue = this.ratedValue;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error("Something wrong happended with the server. Please try again later");
+      }
+    )
+  }
+
   ngOnDestroy() {
     this.userLoggedInSubscription.unsubscribe();
   }
-
 }

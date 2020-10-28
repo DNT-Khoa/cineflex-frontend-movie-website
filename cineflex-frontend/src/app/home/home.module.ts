@@ -22,7 +22,8 @@ import { TypeAllComponent } from './home/homepage/movie-type-navigator/type-all/
 import { TypeComingSoonComponent } from './home/homepage/movie-type-navigator/type-coming-soon/type-coming-soon.component';
 import { TopRatedComponent } from './home/homepage/movie-type-navigator/top-rated/top-rated.component';
 import { TypeNowplayingComponent } from './home/homepage/movie-type-navigator/type-nowplaying/type-nowplaying.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TooltipModule } from '../tooltip-pro-ng7';
+
 
 
 
@@ -52,6 +53,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
+    TooltipModule
   ]
 })
 export class HomeModule { }

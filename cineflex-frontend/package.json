@@ -51,6 +51,7 @@
     "tslint": "~6.1.0",
     "typescript": "~4.0.2",
     "ngx-webstorage": "5.0.0",
-    "ngx-toastr": "13.1.0"
+    "ngx-toastr": "13.1.0",
+    "ng2-tooltip-directive": "2.9.22"
   }
 }

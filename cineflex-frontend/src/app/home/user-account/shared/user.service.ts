@@ -45,7 +45,8 @@ export class UserService {
         return this.httpClient.delete(this.httpConfigService.getBaseUrl() + "/user/deleteAccount", {
             params: {
                 email: this.authService.getEmail(),
-                password: password
+                password: password,
+                refreshToken: this.authService.getRefreshToken()
             }
         })
     }
