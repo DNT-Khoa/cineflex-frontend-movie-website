@@ -5,7 +5,10 @@ export interface TMDBMovieDetailsModal {
     backdrop_path: string,
     belongs_to_collection: [],
     budget: number,
-    genres: [],
+    genres: {
+        id: number,
+        name: string
+    }[],
     homepage: string,
     id: number,
     imdb_id: string,
@@ -13,7 +16,7 @@ export interface TMDBMovieDetailsModal {
     original_title: string,
     overview: string,
     popularity: number,
-    posterPath: string,
+    poster_path: string,
     production_companies: [],
     production_countries: [],
     release_date: string,

@@ -1,9 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { pipe, Subscription } from 'rxjs';
+import { filter, last, shareReplay, take, takeLast } from 'rxjs/operators';
 import { MovieModal } from 'src/app/admin/movies/shared/movie.modal';
 import { AuthService } from 'src/app/auth/shared/auth.service';
 import { MovieService } from '../../shared/movie.service';
@@ -63,6 +64,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   haveUserRatedMovie = false;
   ratedValue = 0;
 
+  isMovieAvailable = true;
+
   isTooltipOpen = false;
   isUserLoggedIn = false;
   haveUserLikedMovie = false;
@@ -75,7 +78,15 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   selectedImage: any;
   userLoggedInSubscription: Subscription;
 
-  constructor(private movieService: MovieService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private sanitizer: DomSanitizer, private authService: AuthService) { 
+  constructor(private movieService: MovieService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private sanitizer: DomSanitizer, private authService: AuthService, private router: Router) { 
+    // In case user navigates back or forth a navigation link on the same route, we want to reload component on that case
+    router.events.pipe(
+      filter((e): e is NavigationStart => e instanceof NavigationStart && e.navigationTrigger === 'popstate'),
+      take(1)
+    ).subscribe((event) => {
+        this.router.navigateByUrl('/auth', {skipLocationChange: true}).then(()=>
+          this.router.navigateByUrl(event.url));
+      });
   }
 
   ngOnInit(): void {
@@ -89,16 +100,51 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
       }
     )
 
-    // Subscription to get the tmdbId from the URL
-    this.tmdbId = this.activedRoute.snapshot.params['tmdbId'];
+    
+
+    // Get TMDB ID from the url route
+    this.tmdbId = +this.activedRoute.snapshot.params['tmdbId'];
+
+    
+
+    // Check if movie exits in database
+    this.movieService.checkIfMovieIsInDatabse(this.tmdbId).subscribe(result => {
+      this.isMovieAvailable = result;
+
+      // Only get movie from database when it exits
+      if (this.isMovieAvailable) {
+        this.getMovieFromDatabase();
+      }
+    }, error => {
+      console.log(error);
+      this.toastr.error("Something wrong happened with the server. Please try again later");
+    });
 
     // Get Movie Details from tmdbID
+    this.getMovieDetailsFromTMDB();
+
+    
+  }
+
+  // Reference: https://stackoverflow.com/questions/40983055/how-to-reload-the-current-route-with-the-angular-2-router
+  navigateToUrl(event) {
+    // This will help reload the movie details page on navigating to the same page
+    this.router.navigateByUrl('/auth', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['/home/movies/', event.id]));
+  }
+
+  getMovieDetailsFromTMDB() {
     this.movieService.getMovieDetailsByTmbdId(this.tmdbId).subscribe(
       (data) => {
         this.tmdbMovieDetails = data;
+      }, error => {
+        console.log(error);
+        this.toastr.error("Something wrong happened with the server. Please try again later");
       }
     )
+  }
 
+  getMovieFromDatabase() {
     this.movieService.getMovieByTmdbId(this.tmdbId).subscribe(
       data => {
         this.movie = data;
@@ -141,8 +187,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
         this.toastr.error('Something wrong happened with the server. Please try again');
       }
      )
-
-    
   }
 
   likeMovie() {
@@ -205,6 +249,10 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
         this.toastr.error("Something wrong happended with the server. Please try again later");
       }
     )
+  }
+
+  generateImageLink(imageLink: string) {
+    return "https://image.tmdb.org/t/p/original" + imageLink;
   }
 
   ngOnDestroy() {

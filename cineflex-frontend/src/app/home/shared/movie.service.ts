@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MovieModal } from 'src/app/admin/movies/shared/movie.modal';
 import { HttpConfigService } from 'src/app/shared/http-config.service';
 import { TMDBMovieDetailsModal } from './tmdbMovieDetails.modal';
+import { TMDBRecommendationsModal } from './tmdbRecommendations.modal';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,10 @@ export class MovieService {
                 key: key
             }
         });
+    }
+
+    checkIfMovieIsInDatabse(tmdbId: number) {
+        return this.httpClient.get<boolean>(this.httpConfigService.getBaseUrl() + "/api/movies/checkExists/" + tmdbId);
     }
 
     getFourLatestNowPlayingMovies() {
@@ -48,6 +53,14 @@ export class MovieService {
                 api_key: this.httpConfigService.getTmdbApiKey(),
                 append_to_response: 'videos,images,credits',
                 include_image_language: 'en'
+            }
+        });
+    }
+
+    getMovieRecommendationsByTmdbId(tmdbId: number) {
+        return this.httpClient.get<TMDBRecommendationsModal>('https://api.themoviedb.org/3/movie/' + tmdbId + '/recommendations', {
+            params: {
+                api_key: this.httpConfigService.getTmdbApiKey()
             }
         });
     }

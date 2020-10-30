@@ -23,8 +23,9 @@ import { TypeComingSoonComponent } from './home/homepage/movie-type-navigator/ty
 import { TopRatedComponent } from './home/homepage/movie-type-navigator/top-rated/top-rated.component';
 import { TypeNowplayingComponent } from './home/homepage/movie-type-navigator/type-nowplaying/type-nowplaying.component';
 import { TooltipModule } from '../tooltip-pro-ng7';
-
-
+import { RecommendationsComponent } from './home/recommendations/recommendations.component';
+import { IvyCarouselModule } from '../ivyсarousel_pro/carousel.module';
+import { CategoryCommaSeparatorTMDBMoviePipe } from './shared/categoryCommaSeparatorTMDBMovie.pipe';
 
 
 @NgModule({
@@ -48,12 +49,15 @@ import { TooltipModule } from '../tooltip-pro-ng7';
     TypeComingSoonComponent,
     TopRatedComponent,
     TypeNowplayingComponent,
+    RecommendationsComponent,
+    CategoryCommaSeparatorTMDBMoviePipe
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
-    TooltipModule
+    TooltipModule,
+    IvyCarouselModule
   ]
 })
 export class HomeModule { }

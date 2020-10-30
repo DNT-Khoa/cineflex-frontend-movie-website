@@ -8,10 +8,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { ToastrModule} from 'ngx-toastr';
 import { TokenInterceptor } from './auth/token-interceptor';
-import { NavigationEnd, Router, Scroll } from '@angular/router';
+import { NavigationEnd, Router, RouteReuseStrategy, Scroll } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { filter, map, pairwise, tap, withLatestFrom } from 'rxjs/operators';
-
 
 
 @NgModule({
@@ -31,7 +30,7 @@ import { filter, map, pairwise, tap, withLatestFrom } from 'rxjs/operators';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

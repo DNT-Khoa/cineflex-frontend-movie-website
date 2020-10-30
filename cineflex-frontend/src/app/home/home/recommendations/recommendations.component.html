@@ -1,0 +1,26 @@
+<section id="recommendationSection" class="bg-white pb-20 z-0" (window:resize)="onResize($event)">
+    <div class="container mx-auto md:mb-20 mb-0 flex justify-between">
+        <h2 class="font-bold text-primary text-xl">Recommended</h2>
+        <!-- Carousel navigator -->
+        <span class="rounded-full inline-block">
+            <i class="inline-block fa fa-chevron-left text-gray-600 px-3 py-1 rounded-l-full mx-1 shadow-xl cursor-pointer hover:opacity-75 duration-200 text-lg" (click)="prev()"></i>
+            <i class="inline-block fa fa-chevron-right text-gray-600 px-3 py-1 rounded-r-full shadow-xl cursor-pointer hover:opacity-75 duration-200 text-lg" (click)="next()"></i>
+        </span>
+    </div>
+
+    <!-- Carousel Here -->
+    <carousel #myCarousel="carousel" class="mx-auto" [height]="430" [cellsToShow]="slidesToShow" [autoplay]="true" [autoplayInterval]="3000" [pauseOnHover]="true" [transitionDuration]="700" [transitionTimingFunction]="'ease-out'" [borderRadius]="10" [arrows]="false" [overflowCellsLimit]="2" [loop]="false">
+        <div class="carousel-cell cursor-pointer py-5 relative" *ngFor="let movie of recommendations" id="posterContainer" (click)="navigateToMovieDetailsPage(movie)">
+            <div class="relative px-10 transform hover:scale-105 hover:-translate-y-2 cursor-pointer duration-200">
+                <img src="{{ generateImagePath(movie.poster_path) }}" id="posterImage" class="h-full w-full inline-block absolute inset-0 rounded-lg">
+                <div class="absolute w-full bottom-0 left-0 md:px-16 md:py-5 px-12 py-2 items-end">
+                    <div class="flex justify-between mb-1">
+                        <i class="border fa fa-play-circle text-2xl text-white text-opacity-50 hover:text-white bg-transparent duration-200 hover:bg-primary rounded-full p-0" id="playButton"></i>
+                        <span class="inline-block right-0 bg-white rounded-full text-xs px-3 font-bold mr-1 mt-2">{{ movie.vote_average }}</span>
+                    </div>   
+                    <h2 class="font-bold md:text-base text-xs text-white">{{ movie.title }}</h2>
+                    <p class="md:text-sm text-xs font-bold text-white" [ngClass]="{'text-green-600': movie.availability, 'text-red-600': !movie.availability}">{{ movie.availability ? 'Available' : 'Not Available'}}</p>
+                </div> 
+            </div>
+        </div>
+    </carousel>

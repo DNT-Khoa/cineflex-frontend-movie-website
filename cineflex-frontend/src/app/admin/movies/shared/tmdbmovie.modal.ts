@@ -12,5 +12,6 @@ export interface TMDBMovieModal {
     title: string,
     vote_average: number,
     overview: string,
-    release_date: string
+    release_date: string,
+    availability?: boolean
 }

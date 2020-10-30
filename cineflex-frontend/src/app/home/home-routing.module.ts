@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'movies/:tmdbId', component: MovieDetailsComponent, data: { animation: 'MovieDetails'}},
       { path: 'user/account', component: UserAccountComponent, canActivate: [UserAccountGuard], children: [
         { path: '', redirectTo: 'profile-details'},
-        { path: 'profile-details', component: ProfileDetailsComponent},
+        { path: 'profile-details', component: ProfileDetailsComponent, data: { animation: 'ProfileDetails'}},
         { path: 'liked-movies', component: LikedMoviesComponent}
       ]}
     ],

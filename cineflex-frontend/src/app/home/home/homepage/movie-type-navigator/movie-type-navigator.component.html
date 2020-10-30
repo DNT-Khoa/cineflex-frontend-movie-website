@@ -48,5 +48,12 @@
         <div [@routeAnimations]="getAnimationData(outlet)" id="routerWrapper">
             <router-outlet #outlet="outlet"></router-outlet>
         </div>
+
+        <!-- Read More Button -->
+        <div class="text-center md:mt-0 -mt-32">
+            <span class="inline-block p-2 shadow-lg rounded-full text-center cursor-pointer transform hover:-translate-y-1 duration-200 hover:scale-105">
+                <i class="fa fa-ellipsis-h text-2xl text-primary"></i>
+            </span>
+        </div>
     </div>
 </section>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MovieModal } from 'src/app/admin/movies/shared/movie.modal';
 import { MovieService } from 'src/app/home/shared/movie.service';
@@ -11,7 +12,9 @@ import { MovieService } from 'src/app/home/shared/movie.service';
 export class TypeAllComponent implements OnInit {
   movies: MovieModal[];
 
-  constructor(private movieService: MovieService, private toastr: ToastrService) { }
+  constructor(private movieService: MovieService, private toastr: ToastrService, private router: Router) {
+    
+  }
 
   ngOnInit(): void {
     this.getMovies();
