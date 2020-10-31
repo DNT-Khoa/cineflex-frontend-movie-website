@@ -57,7 +57,6 @@ export class AuthService {
     this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload, { responseType: 'text'})
       .subscribe(
         data => {
-          console.log(data);
           this.toastr.success('Logout Successful!');
           this.loggedInSubject.next(false);
           this.router.navigateByUrl('/');

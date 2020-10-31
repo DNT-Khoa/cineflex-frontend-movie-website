@@ -21,7 +21,6 @@ export class RecommendationsComponent implements OnInit {
   movieStatus: string[] = [];
 
   constructor(private movieService: MovieService, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService) {
-    
   }
 
   ngOnInit(): void {
@@ -42,8 +41,11 @@ export class RecommendationsComponent implements OnInit {
       )
     }
 
-    // Because the carousel only show value of ngFor on window resizing event (this can be considered as a bug) so
-    // I dispatch a resize event to hack around this
+    // This will come in handy when on different viewport 
+    this.resizeWindow();
+  }
+
+  resizeWindow() {
     window.dispatchEvent(new Event('resize'));
   }
 

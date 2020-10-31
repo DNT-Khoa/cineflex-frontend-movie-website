@@ -23,13 +23,13 @@ import { TMDBMovieDetailsModal } from '../../shared/tmdbMovieDetails.modal';
           [
             style({ opacity: 0 }),
             animate('.5s ease-out', 
-                    style({ opacity: 0.25 }))
+                    style({ opacity: 0.5 }))
           ]
         ),
         transition(
           ':leave', 
           [
-            style({ opacity: 0.25 }),
+            style({ opacity: 0.5 }),
             animate('.5s ease-out', 
                     style({ opacity: 0 }))
           ]

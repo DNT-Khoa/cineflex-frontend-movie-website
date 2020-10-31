@@ -29,7 +29,7 @@
                 </div>
 
                 <!-- Found movies -->
-                <div class="text-left" *ngIf="!isSearching && moviesResult.length !== 0">
+                <div class="text-left" *ngIf="!isSearching && moviesResult?.length !== 0">
                     <div class="flex hover:bg-gray-200 duration-200 cursor-pointer py-2 px-3 my-2 shadow-md focus:outline-none" *ngFor="let movie of moviesResult" [routerLink]="['movies/', movie.tmdbId]">
                         <img src="{{ movie.posterLink }}" alt="" class="h-24 w-20">
                         <div class="ml-8 flex flex-col mt-5">
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- No movies found notification -->
-                <h2 class="font-semibold" *ngIf="!isSearching && moviesResult.length === 0">No matching result !</h2>
+                <h2 class="font-semibold" *ngIf="!isSearching && moviesResult?.length === 0">No matching result !</h2>
             </div>
         </div>
 
