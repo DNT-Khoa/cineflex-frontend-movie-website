@@ -26,6 +26,7 @@ import { TooltipModule } from '../tooltip-pro-ng7';
 import { RecommendationsComponent } from './home/recommendations/recommendations.component';
 import { IvyCarouselModule } from '../ivyсarousel_pro/carousel.module';
 import { CategoryCommaSeparatorTMDBMoviePipe } from './shared/categoryCommaSeparatorTMDBMovie.pipe';
+import { NewsDetailsComponent } from './home/news-details/news-details.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { CategoryCommaSeparatorTMDBMoviePipe } from './shared/categoryCommaSepar
     TopRatedComponent,
     TypeNowplayingComponent,
     RecommendationsComponent,
-    CategoryCommaSeparatorTMDBMoviePipe
+    CategoryCommaSeparatorTMDBMoviePipe,
+    NewsDetailsComponent
   ],
   imports: [
     CommonModule,

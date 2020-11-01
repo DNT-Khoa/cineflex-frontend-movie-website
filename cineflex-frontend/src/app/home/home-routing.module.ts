@@ -7,6 +7,7 @@ import { TypeAllComponent } from './home/homepage/movie-type-navigator/type-all/
 import { TypeComingSoonComponent } from './home/homepage/movie-type-navigator/type-coming-soon/type-coming-soon.component';
 import { TypeNowplayingComponent } from './home/homepage/movie-type-navigator/type-nowplaying/type-nowplaying.component';
 import { MovieDetailsComponent } from './home/movie-details/movie-details.component';
+import { NewsDetailsComponent } from './home/news-details/news-details.component';
 import { LikedMoviesComponent } from './user-account/liked-movies/liked-movies.component';
 import { ProfileDetailsComponent } from './user-account/profile-details/profile-details.component';
 import { UserAccountGuard } from './user-account/shared/user-account-guard.service';
@@ -26,7 +27,8 @@ const routes: Routes = [
         { path: '', redirectTo: 'profile-details'},
         { path: 'profile-details', component: ProfileDetailsComponent, data: { animation: 'ProfileDetails'}},
         { path: 'liked-movies', component: LikedMoviesComponent}
-      ]}
+      ]},
+      { path: 'news/:postId', component: NewsDetailsComponent, data: { animation: 'NewsDetails' }}
     ],
   }
 ];
