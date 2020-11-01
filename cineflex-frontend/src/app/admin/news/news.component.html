@@ -1,1 +1,294 @@
-<p>news works!</p>
+<div class="p-5">
+    <!-- Top utilities bar -->
+    <div class="flex justify-between">
+        <h3 class="text-xl font-bold text-primary">News</h3>
+        <button (click)="isAddModalOpen = !isAddModalOpen; initializeSelectedMovie()" class="block px-3 py-2 bg-primary rounded-md group hover:bg-white duration-200 focus:outline-none border-2 border-solid border-primary">
+            <i class="fa fa-plus text-xs text-white group-hover:text-primary duration-200"></i>
+            <span class="font-bold text-white group-hover:text-primary duration-200"> Add News</span>
+        </button>
+    </div>
+
+    <!-- Main section content -->
+    <div class="rounded-lg bg-white w-full h-full mt-5 p-6">
+        <!-- Search bar -->
+
+        <!-- Category Table -->
+        <div class="mt-8">
+            <table class="table-fixed w-full">
+                <thead class="border-b-2">
+                    <tr>
+                        <th class="text-primary py-2 w-1/12">ID</th>
+                        <th class="text-primary">Title</th>
+                        <th class="text-primary">Content</th>
+                        <th class="text-primary">Publish Date</th>
+                        <th class="text-primary">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b-2" *ngFor="let post of posts; let i = index">
+                        <th class="text-gray-800 py-4 font-semibold">{{ post.id }}</th>
+                        <th class="text-gray-800 py-4 font-semibold">{{ post.title | shorten:15 }}</th>
+                        <th class="text-gray-800 py-4 font-semibold">{{ post.content | shorten:15 }} </th>
+                        <th class="text-gray-800 py-4 font-semibold">{{  (post.createdAt * 1000) | date}}</th>
+                        <th class="text-gray-800 py-4">
+                            <i (click)="this.isUpdateModalOpen = !isUpdateModalOpen; selectedPost = posts[i];" class="fa fa-pencil-alt bg-green-200 rounded-md text-green-500 text-lg p-3 inline-block mr-5 cursor-pointer hover:text-green-200 hover:bg-green-500 duration-200"></i>
+                            <i (click)="this.isDeleteModalOpen = !isDeleteModalOpen; selectedPost = posts[i]" class="fa fa-trash-alt bg-red-200 rounded-md text-red-500 text-lg p-3 cursor-pointer hover:text-red-200 hover:bg-red-500 duration-200"></i>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Gray backdrop for modal -->
+        <div class="fixed inset-0 w-screen h-screen bg-gray-500 opacity-50 z-10" *ngIf="isUpdateModalOpen || isAddModalOpen || isDeleteModalOpen" [@backdropOpenAnimation]>
+        </div>
+
+        <!-- Update News modal content -->
+        <div class="w-full max-w-2xl bg-white rounded-lg z-20 max-h-full" id="updateNewsModal" *ngIf="isUpdateModalOpen" [@modalOpenAnimation]>
+            <h3 class="font-bold text-primary text-xl text-center mt-3">Edit Your Post</h3>
+
+            <form class="mt-10" [formGroup]="updateNewsForm" (ngSubmit)="updatePost()">
+                <div class="mb-8 p-5">
+                    <label for="postId" class="font-semibold mb-2 block text-center">Post ID</label>
+                    <input id="postId" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md" formControlName="id" [(ngModel)]="selectedPost.id">
+                </div>
+
+                <div class="mb-12 px-5 h-24 text-center">
+                    <label for="postTitle" class="font-semibold mb-2 block text-center">Post Title</label>
+                    <input id="postTitle" type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="title" [(ngModel)]="selectedPost.title">  
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateNewsForm.get('title').valid && updateNewsForm.get('title').touched">*Title is required</span>
+                </div>
+
+                <div class="mb-12 px-5 h-24 text-center">
+                    <label for="backdropImage" class="font-semibold mb-2 block text-center">Post Backdrop Image</label>
+                    <input id="backdropImage" type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="backdropImage" [(ngModel)]="selectedPost.backdropImage"> 
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!updateNewsForm.get('backdropImage').valid && updateNewsForm.get('backdropImage').touched">*Backdrop Image is required</span>
+                </div>
+
+                <!-- Multiselect -->
+                <div class="p-5 h-24 flex-auto min-w-full mx-auto">
+                    <label class="font-semibold mb-2 block text-center">Categories</label>
+                    <div class=" bg-gray-300 mx-auto rounded-md w-1/2 flex flex-wrap relative hover:bg-gray-400 duration-200 cursor-pointer h-10" (click)="isCategoryDropdownOpen = !isCategoryDropdownOpen">
+                        <div class="inline-block py-2 px-4 pr-6 rounded-full bg-primary text-xs text-white font-semibold relative m-1" *ngFor="let category of selectedPost?.categories">
+                            <span>{{ category.name }}</span>
+                            <span class="absolute right-0 cursor-pointer text-sm mr-2 hover:text-gray-400 duration-200" (click)="removeCategory(category)">
+                                <i class="fa fa-times"></i>
+                            </span>
+                        </div>
+
+                        <span class="absolute right-0 inline-block mr-2 mt-2">
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- Category dropdown select -->
+                <div *ngIf="isCategoryDropdownOpen" class="px-2 mt-2 w-1/2 mx-auto h-20 mb-2 overflow-y-scroll" [@categoryDropdownSelect]>
+                    <ul class="w-full bg-gray-300 rounded-md h-full py-2 text-center">
+                        <li *ngFor="let category of categories" class="font-semibold py-1 hover:bg-primary hover:text-white duration-300 cursor-pointer" (click)="updateCategory(category)">
+                            {{ category.name }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mb-12 px-5 mt-8">
+                    <label for="postContent" class="font-semibold mb-2 block text-center">Content</label>
+                    <editor 
+                        [(ngModel)]="selectedPost.content"
+                        formControlName="content"
+                        apiKey="u7hpa4kj4uy9ypt4aceols9vn5a05ahbfkn5ftfm7mzwo967"
+                        [init]="{
+                            height: 500,
+                            menubar: false,
+                            plugins: [
+                              'advlist autolink lists link image charmap print preview anchor codesample media',
+                              'searchreplace visualblocks code fullscreen image imagetools',
+                              'insertdatetime media table paste code help wordcount'
+                            ],
+                           codesample_languages: [
+                             { text: 'TypeScript', value: 'typescript' },
+                             { text: 'JavaScript', value: 'javascript' },
+                             { text: 'HTML/XML', value: 'markup' },
+                             { text: 'CSS', value: 'css' }
+                           ],
+                            toolbar:
+                              'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image codesample'
+                          }"
+                    ></editor>
+                </div>
+
+
+                <div class="bg-gray-200 rounded-b-lg p-3 text-right">
+                    <a (click)="isUpdateModalOpen = !isUpdateModalOpen; getAllPosts()" class="inline-block px-3 py-2 mr-2 font-semibold text-white bg-red-500 rounded-lg cursor-pointer border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200">Cancel</a>
+                    <button type="submit">
+                        <a class="inline-block px-3 py-2 font-semibold text-white bg-green-500 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200">Update</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Add Post modal content -->
+        <div class="w-full max-w-2xl bg-white rounded-lg z-20 max-h-full" id="addNewsModal" *ngIf="isAddModalOpen" [@modalOpenAnimation]>
+            <h3 class="font-bold text-primary text-xl text-center mt-3">Add Your Category</h3>
+
+            <form class="mt-10" [formGroup]="addNewsForm" (ngSubmit)="addPost()">
+                <div class="mb-8 px-5 h-24 text-center">
+                    <label for="postTitle" class="font-semibold mb-2 block text-center">Title</label>
+                    <input id="postTitle" type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="title" [(ngModel)]="selectedPost && selectedPost.title">  
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!addNewsForm.get('title').valid && addNewsForm.get('title').touched">*Title is required</span>
+                </div>
+
+                <div class="mb-8 px-5 h-24 text-center">
+                    <label for="backdropImage" class="font-semibold mb-2 block text-center">Backdrop Image</label>
+                    <input id="backdropImage" type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="backdropImage" [(ngModel)]="selectedPost && selectedPost.backdropImage">  
+                    <span class="text-red-600 text-sm font-semibold block" *ngIf="!addNewsForm.get('backdropImage').valid && addNewsForm.get('backdropImage').touched">*Backdrop Image link is required</span>
+                </div>
+
+                <!-- Multiselect -->
+                <div class="p-5 h-24 flex-auto min-w-full mx-auto">
+                    <label class="font-semibold mb-2 block text-center">Categories</label>
+                    <div class=" bg-gray-300 mx-auto rounded-md w-1/2 flex flex-wrap relative hover:bg-gray-400 duration-200 cursor-pointer h-10" (click)="isCategoryDropdownOpen = !isCategoryDropdownOpen">
+                        <div class="inline-block py-2 px-4 pr-6 rounded-full bg-primary text-xs text-white font-semibold relative m-1" *ngFor="let category of selectedPost?.categories">
+                            <span>{{ category.name }}</span>
+                            <span class="absolute right-0 cursor-pointer text-sm mr-2 hover:text-gray-400 duration-200" (click)="removeCategory(category)">
+                                <i class="fa fa-times"></i>
+                            </span>
+                        </div>
+
+                        <span class="absolute right-0 inline-block mr-2 mt-2">
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- Category dropdown select -->
+                <div *ngIf="isCategoryDropdownOpen" class="px-2 mt-2 w-1/2 mx-auto h-20 mb-2 overflow-y-scroll" [@categoryDropdownSelect]>
+                    <ul class="w-full bg-gray-300 rounded-md h-full py-2 text-center">
+                        <li *ngFor="let category of categories" class="font-semibold py-1 hover:bg-primary hover:text-white duration-300 cursor-pointer" (click)="updateCategory(category)">
+                            {{ category.name }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mb-12 px-5 mt-8">
+                    <label for="postContent" class="font-semibold mb-2 block text-center">Content</label>
+                    <editor 
+                        [(ngModel)]="selectedPost.content"
+                        formControlName="content"
+                        apiKey="u7hpa4kj4uy9ypt4aceols9vn5a05ahbfkn5ftfm7mzwo967"
+                        [init]="{
+                            height: 500,
+                            menubar: false,
+                            plugins: [
+                              'advlist autolink lists link image charmap print preview anchor codesample media',
+                              'searchreplace visualblocks code fullscreen image imagetools',
+                              'insertdatetime media table paste code help wordcount'
+                            ],
+                           codesample_languages: [
+                             { text: 'TypeScript', value: 'typescript' },
+                             { text: 'JavaScript', value: 'javascript' },
+                             { text: 'HTML/XML', value: 'markup' },
+                             { text: 'CSS', value: 'css' }
+                           ],
+                            toolbar:
+                              'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image codesample'
+                          }"
+                    ></editor>
+                </div>
+
+                <div class="bg-gray-200 rounded-b-lg p-3 text-right">
+                    <a (click)="isAddModalOpen = !isAddModalOpen; addNewsForm.reset(); getAllCategories(); isCategoryDropdownOpen = false" class="inline-block px-3 py-2 mr-2 font-semibold text-white bg-red-500 rounded-lg cursor-pointer border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200">Cancel</a>
+                    <button type="submit">
+                        <a class="inline-block px-3 py-2 font-semibold text-white bg-green-500 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200">Add Post</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Delete Post modal content -->
+        <div class="w-full max-w-lg bg-white rounded-lg z-20 -mt-10 h-full" id="deleteNewsModal" *ngIf="isDeleteModalOpen" [@modalOpenAnimation]>
+            <h3 class="font-bold text-primary text-xl text-center mt-3">Delete Your Post</h3>
+            <p class="p-5 font-semibold text-primary text-center">Are you sure you want to delete the post with information below ?</p>
+
+            <form class="mt-10" [formGroup]="deleteNewsForm" (ngSubmit)="deletePost()">
+                <div class="mb-8 p-5">
+                    <label for="postId" class="font-semibold mb-2 block text-center">Post ID</label>
+                    <input id="postId" type="text" class="p-2 bg-gray-300 block mx-auto rounded-md" formControlName="id" [(ngModel)]="selectedPost.id">
+                </div>
+
+                <div class="mb-12 px-5 h-24 text-center">
+                    <label for="postTitle" class="font-semibold mb-2 block text-center">Post Title</label>
+                    <input id="postTitle" type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="title" [(ngModel)]="selectedPost.title">  
+                </div>
+
+                <div class="mb-12 px-5 h-24 text-center">
+                    <label for="backdropImage" class="font-semibold mb-2 block text-center">Post Backdrop Image</label>
+                    <input id="backdropImage" type="text" class="p-2 bg-gray-300 block mx-auto focus:outline-none focus:shadow-outline rounded-md" formControlName="backdropImage" [(ngModel)]="selectedPost.backdropImage"> 
+                </div>
+
+                <!-- Multiselect -->
+                <div class="p-5 h-24 flex-auto min-w-full mx-auto">
+                    <label class="font-semibold mb-2 block text-center">Categories</label>
+                    <div class=" bg-gray-300 mx-auto rounded-md w-1/2 flex flex-wrap relative hover:bg-gray-400 duration-200 cursor-pointer h-10" (click)="isCategoryDropdownOpen = !isCategoryDropdownOpen">
+                        <div class="inline-block py-2 px-4 pr-6 rounded-full bg-primary text-xs text-white font-semibold relative m-1" *ngFor="let category of selectedPost?.categories">
+                            <span>{{ category.name }}</span>
+                            <span class="absolute right-0 cursor-pointer text-sm mr-2 hover:text-gray-400 duration-200" (click)="removeCategory(category)">
+                                <i class="fa fa-times"></i>
+                            </span>
+                        </div>
+
+                        <span class="absolute right-0 inline-block mr-2 mt-2">
+                            <i class="fa fa-chevron-down"></i>
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- Category dropdown select -->
+                <div *ngIf="isCategoryDropdownOpen" class="px-2 mt-2 w-1/2 mx-auto h-20 mb-2 overflow-y-scroll" [@categoryDropdownSelect]>
+                    <ul class="w-full bg-gray-300 rounded-md h-full py-2 text-center">
+                        <li *ngFor="let category of categories" class="font-semibold py-1 hover:bg-primary hover:text-white duration-300 cursor-pointer" (click)="updateCategory(category)">
+                            {{ category.name }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mb-12 px-5 mt-8">
+                    <label for="postContent" class="font-semibold mb-2 block text-center">Content</label>
+                    <editor 
+                        [(ngModel)]="selectedPost.content"
+                        formControlName="content"
+                        apiKey="u7hpa4kj4uy9ypt4aceols9vn5a05ahbfkn5ftfm7mzwo967"
+                        [init]="{
+                            height: 500,
+                            menubar: false,
+                            plugins: [
+                              'advlist autolink lists link image charmap print preview anchor codesample',
+                              'searchreplace visualblocks code fullscreen image imagetools',
+                              'insertdatetime media table paste code help wordcount'
+                            ],
+                           codesample_languages: [
+                             { text: 'TypeScript', value: 'typescript' },
+                             { text: 'JavaScript', value: 'javascript' },
+                             { text: 'HTML/XML', value: 'markup' },
+                             { text: 'CSS', value: 'css' }
+                           ],
+                            toolbar:
+                              'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image codesample'
+                          }"
+                    ></editor>
+                </div>
+
+
+                <div class="bg-gray-200 rounded-b-lg p-3 text-right">
+                    <a (click)="isDeleteModalOpen = !isDeleteModalOpen; getAllPosts()" class="inline-block px-3 py-2 mr-2 font-semibold text-white bg-red-500 rounded-lg cursor-pointer border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200">Cancel</a>
+                    <button type="submit">
+                        <a class="inline-block px-3 py-2 font-semibold text-white bg-green-500 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200">Yes, I Confirm</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

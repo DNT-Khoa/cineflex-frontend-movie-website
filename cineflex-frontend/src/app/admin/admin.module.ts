@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComingSoonComponent } from './movies/coming-soon/coming-soon.component';
 import { NowPlayingComponent } from './movies/now-playing/now-playing.component';
 import { ShortenPipe } from './movies/shared/shorten.pipe';
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 
 
 @NgModule({
@@ -24,13 +26,14 @@ import { ShortenPipe } from './movies/shared/shorten.pipe';
     AdminsComponent, 
     ComingSoonComponent, 
     NowPlayingComponent,
-    ShortenPipe
+    ShortenPipe,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    EditorModule
   ]
 })
 export class AdminModule { }

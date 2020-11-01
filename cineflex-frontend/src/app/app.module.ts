@@ -23,7 +23,7 @@ import { filter, map, pairwise, tap, withLatestFrom } from 'rxjs/operators';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
   providers: [
     {

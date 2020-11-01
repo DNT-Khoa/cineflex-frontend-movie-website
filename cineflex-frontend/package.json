@@ -51,6 +51,7 @@
     "tslint": "~6.1.0",
     "typescript": "~4.0.2",
     "ngx-webstorage": "5.0.0",
-    "ngx-toastr": "13.1.0"
+    "ngx-toastr": "13.1.0",
+    "@tinymce/tinymce-angular": "4.2.0"
   }
 }
