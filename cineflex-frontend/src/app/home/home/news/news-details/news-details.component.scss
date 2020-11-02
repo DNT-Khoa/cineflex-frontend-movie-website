@@ -1,0 +1,42 @@
+#newsDetailsSection {
+    #newsDetailsBanner {
+        height: 320px;
+    }
+
+    #leftDetailsContent {
+
+        #newsBackdropImage {
+            height: 330px;
+        }
+
+        #newsDetailsWrapper {
+            position: relative;
+            margin-top: -40px;
+            #newsMainContent {
+                a {
+                    text-decoration: underline;
+                    color: #1a202c;
+                }
+
+                img {
+                    display: inline-block;
+                    margin: 10px 0;
+                    border-radius: 0.5rem;
+                }
+        
+                p {
+                    margin: 10px 0;
+                    text-align: justify;
+                }
+            
+                h2 {
+                    font-weight: 700;
+                    font-size: 1.125rem;
+                }
+            }
+        }
+    }
+}
+
+
+

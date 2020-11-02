@@ -1,4 +1,5 @@
 export interface CategoryModal {
-    id: bigint,
-    name: string
+    id: number,
+    name: string,
+    numOfPosts?: number 
 }

@@ -16,7 +16,7 @@ import { VideoSlicePipe } from './shared/videoSlice.pipe';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { ProfileDetailsComponent } from './user-account/profile-details/profile-details.component';
 import { LikedMoviesComponent } from './user-account/liked-movies/liked-movies.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MovieTypeNavigatorComponent } from './home/homepage/movie-type-navigator/movie-type-navigator.component';
 import { TypeAllComponent } from './home/homepage/movie-type-navigator/type-all/type-all.component';
 import { TypeComingSoonComponent } from './home/homepage/movie-type-navigator/type-coming-soon/type-coming-soon.component';
@@ -26,7 +26,14 @@ import { TooltipModule } from '../tooltip-pro-ng7';
 import { RecommendationsComponent } from './home/recommendations/recommendations.component';
 import { IvyCarouselModule } from '../ivyсarousel_pro/carousel.module';
 import { CategoryCommaSeparatorTMDBMoviePipe } from './shared/categoryCommaSeparatorTMDBMovie.pipe';
-import { NewsDetailsComponent } from './home/news-details/news-details.component';
+import { NewsDetailsComponent } from './home/news/news-details/news-details.component';
+import { NewsComponent } from './home/news/news.component';
+import { NewsUtilitiesComponent } from './home/news/news-utilities/news-utilities.component';
+import { AllNewsComponent } from './home/news/all-news/all-news.component';
+import { ShortenPipe } from './shared/shorten.pipe';
+import { NewsCategoryComponent } from './home/news/news-category/news-category.component';
+import { CategoryNavigatorComponent } from './home/news/news-utilities/category-navigator/category-navigator.component';
+import { TopNewsComponent } from './home/news/news-utilities/top-news/top-news.component';
 
 
 @NgModule({
@@ -52,14 +59,22 @@ import { NewsDetailsComponent } from './home/news-details/news-details.component
     TypeNowplayingComponent,
     RecommendationsComponent,
     CategoryCommaSeparatorTMDBMoviePipe,
-    NewsDetailsComponent
+    NewsDetailsComponent,
+    NewsComponent,
+    NewsUtilitiesComponent,
+    AllNewsComponent,
+    ShortenPipe,
+    NewsCategoryComponent,
+    CategoryNavigatorComponent,
+    TopNewsComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
     TooltipModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    FormsModule
   ]
 })
 export class HomeModule { }
