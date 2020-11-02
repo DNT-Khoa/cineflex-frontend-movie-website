@@ -11,7 +11,7 @@
     <!-- Carousel Here -->
     <!-- Remember that the carousel will not show anything if there is no data so you need to use *ngIf="recommendation.length !== 0" to check -->
     <!-- Reference: https://github.com/ivylaboratory/angular-carousel/issues/21 -->
-    <carousel *ngIf="recommendations.length !== 0" #myCarousel="carousel" class="mx-auto" [height]="430" [cellsToShow]="slidesToShow" [autoplay]="true" [autoplayInterval]="3000" [pauseOnHover]="true" [transitionDuration]="700" [transitionTimingFunction]="'ease-out'" [borderRadius]="10" [arrows]="false" [overflowCellsLimit]="2" [loop]="true">
+    <carousel *ngIf="recommendations.length !== 0" #myCarousel="carousel" class="mx-auto" [height]="430" [cellsToShow]="slidesToShow" [autoplay]="true" [autoplayInterval]="3000" [pauseOnHover]="true" [transitionDuration]="700" [transitionTimingFunction]="'ease-out'" [borderRadius]="10" [arrows]="false" [overflowCellsLimit]="2">
         <div class="carousel-cell cursor-pointer py-5 relative" *ngFor="let movie of recommendations" id="posterContainer" (click)="navigateToMovieDetailsPage(movie)">
             <div class="relative px-10 transform hover:scale-105 hover:-translate-y-2 cursor-pointer duration-200">
                 <img src="{{ generateImagePath(movie.poster_path) }}" id="posterImage" class="h-full w-full inline-block absolute inset-0 rounded-lg">
