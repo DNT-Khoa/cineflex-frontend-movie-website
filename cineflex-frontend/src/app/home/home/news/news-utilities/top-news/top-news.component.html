@@ -4,6 +4,7 @@
         <button class="absolute right-0 top-0 rounded-full focus:outline-none shadow-lg text-sm text-gray-600 font-semibold duration-200 hover:bg-primary hover:text-white px-3 py-1">See More</button>
 
         <!-- Top News Wrapper -->
+        <!-- ********************* Remember that ngClass not gonna add class that is repeated. That's why we have to make a separate class flex-container-default-styles ************************* -->
         <div class="flex" [ngClass]="{ 'flex-wrap': shouldBreak, 'flex-container-default-styles': !shouldBreak}">
             <!-- Main news -->
             <!-- Left side -->
