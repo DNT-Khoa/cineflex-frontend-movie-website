@@ -11,6 +11,10 @@ export class NewsService {
         
     }
 
+    getFourTopNews() {
+        return this.httpClient.get<PostModal[]>(this.httpConfigService.getBaseUrl() + "/api/posts/top/4");
+    }
+
     getCountPostPerCategory(categoryId: number) {
         return this.httpClient.get<number>(this.httpConfigService.getBaseUrl() + "/api/posts/count", {
             params: {

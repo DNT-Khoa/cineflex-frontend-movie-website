@@ -1,6 +1,6 @@
 <!-- Search Bar -->
 <div id="searchBar" class="relative mb-20">
-    <h2 class="text-primary font-bold text-lg">Search</h2>
+    <h2 class="text-primary font-bold text-xl">Search</h2>
 
     <input type="text" class="w-full rounded-full px-5 py-3 placeholder-gray-500 shadow-lg focus:outline-none mt-8" placeholder="Type here..." id="searchInput" [(ngModel)]="searchValue" #searchInput>
     <i class="fa fa-search absolute right-0 bottom-0 mb-4 mr-5 text-primary cursor-pointer transform hover:scale-105 hover:-translate-y-1 duration-200 p-1" *ngIf="!searchValue"></i>
@@ -36,3 +36,8 @@
 
 <!-- Categories -->
 <app-category-navigator></app-category-navigator>
+
+<!-- Top News -->
+<div class="mt-20">
+    <app-top-news [shouldBreak]="true"></app-top-news>
+</div>

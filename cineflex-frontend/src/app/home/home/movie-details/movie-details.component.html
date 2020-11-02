@@ -168,6 +168,11 @@
                         <img [src]="'https://image.tmdb.org/t/p/original' + image.file_path" alt="" class="w-24 h-32 rounded-lg shadow-xl cursor-pointer hover:opacity-75 duration-200" (click)="isImageOpen = true; imageUrl(image.file_path)">
                     </div>
                 </div>
+
+                <!-- Top News -->
+                <div class="mt-20">
+                    <app-top-news [shouldBreak]="true"></app-top-news>
+                </div>
             </div>
         </div>
     </div>
@@ -199,4 +204,6 @@
     <div class="mt-20">
         <app-recommendations (startNavigating)="navigateToUrl($event)"></app-recommendations>
     </div>
+
+    <!-- Top News -->
 </section>

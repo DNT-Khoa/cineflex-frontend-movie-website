@@ -1,0 +1,37 @@
+.main-content {
+    top: -35px;
+}
+
+
+.flex-container-default-styles {
+    flex-wrap: wrap;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.left-side-default-styles {
+    width: full;
+    padding-right: 0;
+}
+
+.right-side-default-styles {
+    width: full;
+    padding-left: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .flex-container-default-styles {
+        flex-wrap: nowrap;
+        padding: 0;
+    }
+
+    .left-side-default-styles {
+        width: 50%;
+        padding-right: 1.25rem;
+    }
+
+    .right-side-default-styles {
+        width: 50%;
+        padding-left: 1.25rem;
+    }
+}
