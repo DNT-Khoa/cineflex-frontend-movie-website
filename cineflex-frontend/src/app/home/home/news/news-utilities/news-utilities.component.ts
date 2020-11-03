@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
@@ -42,7 +43,7 @@ export class NewsUtilitiesComponent implements OnInit, AfterViewInit, OnDestroy 
 
   @ViewChild("searchInput") postSearchInput: ElementRef;
 
-  constructor(private newsService: NewsService, private toastr: ToastrService) { }
+  constructor(private newsService: NewsService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -66,7 +67,6 @@ export class NewsUtilitiesComponent implements OnInit, AfterViewInit, OnDestroy 
           return [];
         })
       ).subscribe( value => {
-        console.log(value);
         this.searchResults = value;
         this.isSearching = false;
       }, error => {
@@ -79,6 +79,16 @@ export class NewsUtilitiesComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnDestroy() {
     this.postSearchInputSubscription.unsubscribe();
+  }
+
+  navigateToUrl(post: PostModal) {
+    if (this.router.url.indexOf("/details") !== -1) {
+      // This will help reload the movie details page on navigating to the same page
+      this.router.navigateByUrl('/auth', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['/home/news/details/', post.id]));
+    } else {
+      this.router.navigate(['/home/news/details/', post.id]);
+    }
   }
 
 }

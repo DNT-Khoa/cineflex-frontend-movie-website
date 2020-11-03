@@ -22,7 +22,6 @@ export class CategoryNavigatorComponent implements OnInit {
   getAllCategories() {
     return this.categoryService.getAllCategories().subscribe(
       data => {
-        console.log(data);
         this.categories = data;
 
         this.getCountPostPerCategory();

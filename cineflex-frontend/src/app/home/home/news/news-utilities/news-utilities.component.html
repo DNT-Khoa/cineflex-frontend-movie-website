@@ -10,7 +10,7 @@
     <div class="absolute top-0 left-0 w-full bg-white rounded-lg shadow-lg z-20" id="searchResults" *ngIf="searchValue" [@modalOpenAnimation]>
         <!-- Found movies -->
         <div class="text-left" *ngIf="!isSearching && searchResults?.length !== 0">
-            <div class="flex hover:bg-gray-200 duration-200 cursor-pointer py-2 px-3 my-2 shadow-md focus:outline-none" *ngFor="let post of searchResults" [routerLink]="['/home/news/details/', post.id]">
+            <div class="flex hover:bg-gray-200 duration-200 cursor-pointer py-2 px-3 my-2 shadow-md focus:outline-none" *ngFor="let post of searchResults" (click)="navigateToUrl(post)">
                 <img src="{{ post.backdropImage }}" alt="" class="h-24 w-20 object-cover object-center">
                 <div class="ml-8 flex flex-col mt-5">
                     <h2 class="font-bold md:text-lg text-primary text-sm">{{ post.title | shorten:20 }}</h2>
