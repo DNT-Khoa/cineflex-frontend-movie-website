@@ -9,7 +9,7 @@ export class CategoryCommaSeparatorTMDBMoviePipe implements PipeTransform {
     for (const category of value) {
         categories.push(category.name);
     }
-
+    
     return categories.join(', ');
   }
 }

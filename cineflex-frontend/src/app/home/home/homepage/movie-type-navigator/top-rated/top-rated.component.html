@@ -9,7 +9,7 @@
             </div>
             <h2 class="text-xs font-semibold text-blue-500 text-center">{{ movie.movieType }}</h2>
             <h2 class="font-bold mt-5 md:text-base text-xs">{{ movie.title }}</h2>
-            <p class="md:text-sm text-xs font-bold text-gray-500 mt-2">{{ movie.categories | categoryCommaSeparatorPipe }}</p>
+            <p class="md:text-sm text-xs font-bold text-gray-500 mt-2">{{ movie.categories | categoryCommaSeparatorPipe:20 }}</p>
         </div>
     </div>
 </div>
