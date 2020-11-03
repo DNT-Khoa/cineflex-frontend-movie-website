@@ -11,6 +11,14 @@ export class NewsService {
     constructor(private httpClient: HttpClient, private httpConfigService: HttpConfigService){
     }
 
+    searchPostByKey(key: string) {
+        return this.httpClient.get<PostModal[]>(this.httpConfigService.getBaseUrl() + "/api/posts/search", {
+            params: {
+                key: key
+            }
+        });
+    }
+
     getAllPosts() {
         return this.httpClient.get<PostModal[]>(this.httpConfigService.getBaseUrl() + "/api/posts");
     }

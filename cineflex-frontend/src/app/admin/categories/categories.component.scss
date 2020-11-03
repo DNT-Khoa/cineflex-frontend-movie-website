@@ -1,7 +1,9 @@
 #updateCategoryModal, #addCategoryModal, #deleteCategoryModal {
     // center the update category modal
-    position: absolute;
+    position: fixed;
     left: 50%;
+    margin-top: 100px;
+    top: 0;
     transform: translateX(-50%);
 }
 

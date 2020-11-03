@@ -220,6 +220,9 @@ export class NowPlayingComponent implements OnInit, OnDestroy, AfterViewInit {
       (data) => {
         this.toastr.success('Successfully created the movie');
         this.getAllComingMovies();
+        this.addMovieForm.reset();
+        this.isAddModalOpen = false;
+        this.isCategoryDropdownOpen = false;
       },
       (error) => {
         if (error.status === 409) {
@@ -241,6 +244,9 @@ export class NowPlayingComponent implements OnInit, OnDestroy, AfterViewInit {
       (data) => {
         this.toastr.success('Successfully updated the movie');
         this.getAllComingMovies();
+        this.updateMovieForm.reset();
+        this.isUpdateModalOpen = false;
+        this.isCategoryDropdownOpen = false;
       },
       (error) => {
         console.log(error);
@@ -253,6 +259,7 @@ export class NowPlayingComponent implements OnInit, OnDestroy, AfterViewInit {
       (data) => {
         this.toastr.success("Successfully deleted the category");
         this.getAllComingMovies();
+        this.isDeleteModalOpen = false;
       },
       (error) => {
         this.toastr.error('Something wrong happened. Please try again later');

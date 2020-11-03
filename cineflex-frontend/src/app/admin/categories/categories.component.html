@@ -69,7 +69,7 @@
         </div>
 
         <!-- Update Category modal content -->
-        <div class="w-full max-w-lg bg-white rounded-lg z-20 -mt-10" id="updateCategoryModal" *ngIf="isUpdateModalOpen" [@modalOpenAnimation]>
+        <div class="w-full max-w-lg bg-white rounded-lg z-20" id="updateCategoryModal" *ngIf="isUpdateModalOpen" [@modalOpenAnimation]>
             <h3 class="font-bold text-primary text-xl text-center mt-3">Edit Your Category</h3>
 
             <form class="mt-10" [formGroup]="updateCategoryForm" (ngSubmit)="updateCategory()">
@@ -85,16 +85,16 @@
                 </div>
 
                 <div class="bg-gray-200 rounded-b-lg p-3 text-right">
-                    <a (click)="isUpdateModalOpen = !isUpdateModalOpen" class="inline-block px-3 py-2 mr-2 font-semibold text-white bg-red-500 rounded-lg cursor-pointer border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200">Cancel</a>
+                    <a (click)="isUpdateModalOpen = !isUpdateModalOpen; updateCategoryForm.reset(); getAllCategories()" class="inline-block px-3 py-2 mr-2 font-semibold text-white bg-red-500 rounded-lg cursor-pointer border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200 focus:outline-none">Cancel</a>
                     <button type="submit">
-                        <a class="inline-block px-3 py-2 font-semibold text-white bg-green-500 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200">Update</a>
+                        <a class="inline-block px-3 py-2 font-semibold text-white bg-green-500 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200 focus:outline-none">Update</a>
                     </button>
                 </div>
             </form>
         </div>
 
         <!-- Add Category modal content -->
-        <div class="w-full max-w-lg bg-white rounded-lg z-20 -mt-10" id="addCategoryModal" *ngIf="isAddModalOpen" [@modalOpenAnimation]>
+        <div class="w-full max-w-lg bg-white rounded-lg z-20" id="addCategoryModal" *ngIf="isAddModalOpen" [@modalOpenAnimation]>
             <h3 class="font-bold text-primary text-xl text-center mt-3">Add Your Category</h3>
 
             <form class="mt-10" [formGroup]="addCategoryForm" (ngSubmit)="addCategory()">
@@ -104,9 +104,9 @@
                 </div>
 
                 <div class="bg-gray-200 rounded-b-lg p-3 text-right">
-                    <a (click)="isAddModalOpen = !isAddModalOpen" class="inline-block px-3 py-2 mr-2 font-semibold text-white bg-red-500 rounded-lg cursor-pointer border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200">Cancel</a>
-                    <button type="submit">
-                        <a class="inline-block px-3 py-2 font-semibold text-white bg-green-500 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200">Add Category</a>
+                    <a (click)="isAddModalOpen = !isAddModalOpen; addCategoryForm.reset(); getAllCategories()" class="inline-block px-3 py-2 mr-2 font-semibold text-white bg-red-500 rounded-lg cursor-pointer border-2 border-red-500 hover:bg-white hover:text-red-500 duration-200 focus:outline-none">Cancel</a>
+                    <button type="submit" class="focus:outline-none">
+                        <a class="inline-block px-3 py-2 font-semibold text-white bg-green-500 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-white hover:text-green-500 duration-200 focus:outline-none">Add Category</a>
                     </button>
                 </div>
             </form>

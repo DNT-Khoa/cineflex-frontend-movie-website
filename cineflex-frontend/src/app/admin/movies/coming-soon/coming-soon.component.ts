@@ -226,6 +226,9 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
       (data) => {
         this.toastr.success('Successfully created the movie');
         this.getAllComingMovies();
+        this.isCategoryDropdownOpen = false;
+        this.addMovieForm.reset();
+        this.isAddModalOpen = false;
       },
       (error) => {
         if (error.status === 409) {
@@ -247,6 +250,9 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
       (data) => {
         this.toastr.success('Successfully updated the movie');
         this.getAllComingMovies();
+        this.isCategoryDropdownOpen = false;
+        this.updateMovieForm.reset();
+        this.isUpdateModalOpen = false;
       },
       (error) => {
         console.log(error);
@@ -259,6 +265,7 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
       (data) => {
         this.toastr.success("Successfully deleted the category");
         this.getAllComingMovies();
+        this.isDeleteModalOpen = false;
       },
       (error) => {
         this.toastr.error('Something wrong happened. Please try again later');

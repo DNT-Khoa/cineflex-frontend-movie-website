@@ -90,7 +90,6 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('searchInput') searchInput: ElementRef;
   keyUpSubscription: Subscription;
-  searchResults: PostModal[];
   isSearching = false;
   
   updateNewsForm: FormGroup;
@@ -113,32 +112,32 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
   // Because we user @Viewchild so we should use ngAfterViewInit
   ngAfterViewInit() {
     // Listen for user keydown and start searching 
-    // this.keyUpSubscription = fromEvent(this.searchInput.nativeElement, 'keyup')
-    //   .pipe(
-    //     debounceTime(500),
-    //     map((event: Event) => (<HTMLInputElement>event.target).value),
-    //     distinctUntilChanged(),
-    //     tap(() => {
-    //       this.isSearching = true;
-    //     }),
-    //     delay(300),
-    //     switchMap(value => this.newsService.searchCategoryByName(value))
-    //   ).subscribe ( data => {
-    //       if (this.searchInput.nativeElement.value === '') {
-    //         this.searchResults = [];
-    //       } else {
-    //         this.searchResults = data;
-    //       }
-    //       this.isSearching = false;
-    //   }, error => {
-    //     console.log(error);
-    //     this.isSearching = false;
-    //   }
-    //   )
+    this.keyUpSubscription = fromEvent(this.searchInput.nativeElement, 'keyup')
+      .pipe(
+        debounceTime(500),
+        map((event: Event) => (<HTMLInputElement>event.target).value),
+        distinctUntilChanged(),
+        tap(() => {
+          this.isSearching = true;
+        }),
+        delay(600),
+        switchMap(value => this.newsService.searchPostByKey(value))
+      ).subscribe ( data => {
+          if (this.searchInput.nativeElement.value === '') {
+            this.getAllPosts();
+          } else {
+            this.posts = data;
+          }
+          this.isSearching = false;
+      }, error => {
+        console.log(error);
+        this.isSearching = false;
+      }
+      )
   }
 
   ngOnDestroy() {
-    // this.keyUpSubscription.unsubscribe();
+    this.keyUpSubscription.unsubscribe();
   }
 
   getAllCategories() {
@@ -219,6 +218,7 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.toastr.success("Successfully created the post");
         this.getAllPosts();
         this.isAddModalOpen = false;
+        this.isCategoryDropdownOpen = false;
       },
       (error) => {
         console.log(error);
@@ -242,6 +242,7 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.toastr.success("Successfully updated the post");
         this.getAllPosts();
         this.isUpdateModalOpen = false;
+        this.isCategoryDropdownOpen = false;
       },
       (error) => {
         console.log(error);

@@ -1,6 +1,8 @@
 #updateMovieModal, #addMovieModal, #deleteMovieModal, #convertMovieModal {
     // center the update category modal
-    position: absolute;
+    position: fixed;
+    top: 0;
+    margin-top: 100px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -12,5 +14,9 @@
 #searchResultContainer {
     max-height: 550px;
     overflow-y: scroll;
+}
+
+#categoryDropdownSelect {
+    max-height: 5rem;
 }
 

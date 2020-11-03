@@ -155,6 +155,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
       (data) => {
         this.toastr.success('Successfully created the category');
         this.getAllCategories();
+        this.isAddModalOpen = false;
+        this.addCategoryForm.reset();
       },
       (error) => {
         if (error.status === 409) {
@@ -175,7 +177,9 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.categoriesService.updateCategoryById(this.selectedCategory.id, this.selectedCategory).subscribe(
       (data) => {
         this.toastr.success('Successfully updated the category');
-        this.getAllCategories;
+        this.getAllCategories();
+        this.isUpdateModalOpen = false;
+        this.updateCategoryForm.reset()
       },
       (error) => {
         if (error.status === 409) {
