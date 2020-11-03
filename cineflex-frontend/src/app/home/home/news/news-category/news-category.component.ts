@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { CategoriesService } from 'src/app/admin/categories/shared/categories.service';
 import { PostModal } from 'src/app/admin/news/shared/posts.modal';
 import { NewsService } from '../shared/news.service';
@@ -15,13 +16,14 @@ export class NewsCategoryComponent implements OnInit {
   posts: PostModal[];
   categoryId: number;
 
-  constructor(private toastr: ToastrService, private newsService: NewsService, private activedRoute: ActivatedRoute, private categoryService: CategoriesService) { }
+  constructor(private toastr: ToastrService, private newsService: NewsService, private activedRoute: ActivatedRoute, private categoryService: CategoriesService, private router: Router) { }
 
   ngOnInit(): void {
     this.categoryId = this.activedRoute.snapshot.params["categoryId"];
     this.getAllPostsByCategory();
     this.getCategoryById();
   }
+
 
   getAllPostsByCategory() {
     this.newsService.getAllPostsByCategory(this.categoryId).subscribe(

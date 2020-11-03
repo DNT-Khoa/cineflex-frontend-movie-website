@@ -16,7 +16,7 @@
             <div class="my-12" *ngFor="let post of posts">
                 <!-- News Backdrop Image -->
                 <div id="newsBackdropImage">
-                    <img src="https://image.tmdb.org/t/p/original/8PK4X8U3C79ilzIjNTkTgjmc4js.jpg" alt="" class="object-cover object-center w-full h-full rounded-lg">
+                    <img src="{{ post && post.backdropImage }}" alt="" class="object-cover object-center w-full h-full rounded-lg">
                 </div>
 
                 <!-- News Details Wrapper -->

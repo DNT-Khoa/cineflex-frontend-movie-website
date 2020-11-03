@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PostModal } from 'src/app/admin/news/shared/posts.modal';
 import { NewsService } from '../../shared/news.service';
@@ -12,7 +13,7 @@ export class TopNewsComponent implements OnInit {
   posts: PostModal[] = [];
   @Input() shouldBreak: boolean;
 
-  constructor(private toast: ToastrService, private newsService: NewsService) { }
+  constructor(private toast: ToastrService, private newsService: NewsService, private router: Router) { }
 
   ngOnInit(): void {
     this.getFourTopNews();
@@ -35,6 +36,16 @@ export class TopNewsComponent implements OnInit {
       if (text.length > limit) {
         return text.substring(0, limit) + "...";
       }
+    }
+  }
+
+  navigateToUrl(post: PostModal) {
+    if (this.router.url.indexOf("/details") !== -1) {
+      // This will help reload the movie details page on navigating to the same page
+      this.router.navigateByUrl('/auth', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['/home/news/details/', post.id]));
+    } else {
+      this.router.navigate(['/home/news/details/', post.id]);
     }
   }
 }
