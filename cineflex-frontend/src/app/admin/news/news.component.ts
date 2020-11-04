@@ -164,7 +164,7 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
 
-  initializeSelectedMovie() {
+  initializeSelectedPost() {
     this.selectedPost = {
       id: null,
       backdropImage: '',
