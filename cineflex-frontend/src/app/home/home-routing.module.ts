@@ -37,7 +37,7 @@ const routes: Routes = [
         { path: 'details/:postId', component: NewsDetailsComponent, data: { animation: 'NewsDetails' }},
         { path: 'category/:categoryId', component: NewsCategoryComponent, data: { animation: 'NewsCategory'}}
       ]},
-      { path: 'adminCredentials/:adminInvitationToken', component: AdminCredentialsComponent}
+      { path: 'adminCredentials/:adminInvitationToken', component: AdminCredentialsComponent, data: { animation: 'AdminCredentials'}}
     ],
   }
 ];
