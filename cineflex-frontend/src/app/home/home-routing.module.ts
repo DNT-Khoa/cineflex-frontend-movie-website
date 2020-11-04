@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminCredentialsComponent } from './home/admin-credentials/admin-credentials.component';
 import { HomeComponent } from './home/home.component';
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { TopRatedComponent } from './home/homepage/movie-type-navigator/top-rated/top-rated.component';
@@ -35,7 +36,8 @@ const routes: Routes = [
         { path: '', component: AllNewsComponent, data: { animation: 'AllNews' }},
         { path: 'details/:postId', component: NewsDetailsComponent, data: { animation: 'NewsDetails' }},
         { path: 'category/:categoryId', component: NewsCategoryComponent, data: { animation: 'NewsCategory'}}
-      ]}
+      ]},
+      { path: 'adminCredentials/:adminInvitationToken', component: AdminCredentialsComponent}
     ],
   }
 ];

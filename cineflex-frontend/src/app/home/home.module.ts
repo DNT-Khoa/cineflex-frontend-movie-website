@@ -34,6 +34,7 @@ import { ShortenPipe } from './shared/shorten.pipe';
 import { NewsCategoryComponent } from './home/news/news-category/news-category.component';
 import { CategoryNavigatorComponent } from './home/news/news-utilities/category-navigator/category-navigator.component';
 import { TopNewsComponent } from './home/news/news-utilities/top-news/top-news.component';
+import { AdminCredentialsComponent } from './home/admin-credentials/admin-credentials.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { TopNewsComponent } from './home/news/news-utilities/top-news/top-news.c
     ShortenPipe,
     NewsCategoryComponent,
     CategoryNavigatorComponent,
-    TopNewsComponent
+    TopNewsComponent,
+    AdminCredentialsComponent
   ],
   imports: [
     CommonModule,
