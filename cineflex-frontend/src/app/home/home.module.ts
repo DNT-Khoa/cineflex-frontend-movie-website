@@ -35,6 +35,7 @@ import { NewsCategoryComponent } from './home/news/news-category/news-category.c
 import { CategoryNavigatorComponent } from './home/news/news-utilities/category-navigator/category-navigator.component';
 import { TopNewsComponent } from './home/news/news-utilities/top-news/top-news.component';
 import { AdminCredentialsComponent } from './home/admin-credentials/admin-credentials.component';
+import { ResetPasswordComponent } from './home/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { AdminCredentialsComponent } from './home/admin-credentials/admin-creden
     NewsCategoryComponent,
     CategoryNavigatorComponent,
     TopNewsComponent,
-    AdminCredentialsComponent
+    AdminCredentialsComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

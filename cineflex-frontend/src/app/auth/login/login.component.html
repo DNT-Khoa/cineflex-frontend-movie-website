@@ -42,12 +42,40 @@
                         <a [ngClass]="{'bg-red-300': !loginForm.valid || isLoading, 'bg-primary border-primary border-solid border-2 hover:text-primary hover:bg-white': loginForm.valid && !isLoading}" class="text-white font-bold px-12 py-3 rounded-full duration-200 focus:outline-none">Login</a>
                     </button>
                 </div>
-                <div class="text-center mt-5 underline">
+                
+                <div class="text-center underline md:mt-6">
+                    <a class="cursor-pointer text-blue-600" (click)="isForgotPasswordFormOpen = true">
+                        Forgot Your Password ?
+                    </a>
+                </div>
+                <div class="text-center underline">
                     <a class="cursor-pointer text-blue-600" routerLink="/">
                         Back to Home
                     </a>
                 </div>
             </form>
         </div>
+    </div>
+
+    <div id="background-overlay" class="fixed w-full h-full inset-0 bg-black opacity-50" *ngIf="isForgotPasswordFormOpen" [@backgroundOverlayAnimation]>
+    </div>
+
+    <div class="fixed bg-white p-5 rounded-lg mt-48 max-w-md w-full top-0" id="resetPasswordContainer" *ngIf="isForgotPasswordFormOpen" [@popupAnimation]>
+        <h1 class="text-primary font-bold text-2xl tracking-wider mb-10 text-center">Forgot Your Password</h1>
+
+        <p class="text-sm text-center text-gray-500">Please fill in your email below so that we can send you a reset password link</p>
+
+        <form [formGroup]="forgotPasswordForm" (ngSubmit)="forgotPassword()">
+            <div class="my-8 h-24 relative">
+                <label for="email" class="font-semibold">Enter your email</label>
+                <input id="email" type="text" class="w-full p-3 bg-gray-300 shadow-inner focus:outline-none rounded-lg mt-3" formControlName="email">
+                <span class="text-sm text-primary" *ngIf="!forgotPasswordForm.get('email').valid && forgotPasswordForm.get('email').touched">* Invalid email</span>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button class="border-2 border-red-500 text-white px-5 py-2 bg-red-400 rounded-lg mx-3 font-semibold focus:outline-none cursor-pointer hover:text-red-500 hover:bg-white duration-200" (click)="isForgotPasswordFormOpen = false">Cancel</button>
+                <button type="submit" class="border-2 border-green-500 text-white bg-green-400 hover:bg-white duration-200 hover:text-green-500 font-semibold rounded-lg px-5 py-2 focus:outline-none">Send</button>
+            </div>
+        </form>
     </div>
 </section>

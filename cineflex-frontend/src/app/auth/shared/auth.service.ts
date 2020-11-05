@@ -8,16 +8,17 @@ import { SignupRequestPayload } from '../signup/signup-request.payload';
 import { tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { HttpConfigService } from 'src/app/shared/http-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   public loggedInSubject: Subject<any> = new Subject<any>();
-  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService, private toastr: ToastrService, private router: Router) {}
+  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService, private toastr: ToastrService, private router: Router, private httpConfigService: HttpConfigService) {}
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/api/auth/signup', signupRequestPayload, { responseType: 'text'});
+    return this.httpClient.post(this.httpConfigService.getBaseUrl() + '/api/auth/signup', signupRequestPayload, { responseType: 'text'});
   }
 
   refreshTokenPayload = {
@@ -27,7 +28,7 @@ export class AuthService {
   }
 
   login(loginRequestPayload: LoginRequestPayload) {
-    return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/login', loginRequestPayload)
+    return this.httpClient.post<LoginResponse>(this.httpConfigService.getBaseUrl() + '/api/auth/login', loginRequestPayload)
       .pipe(
         tap((data) => {
           // Store important information in the local storage
@@ -40,9 +41,17 @@ export class AuthService {
       );
   }
 
+  forgotPassword(email: string) {
+    return this.httpClient.post<any>(this.httpConfigService.getBaseUrl() + "/api/auth/forgotPassword", null, {
+      params: {
+        email: email
+      }
+    })
+  }
+
   refreshToken() {
     this.updateRefreshTokenPayload();
-    return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/refresh/token', this.refreshTokenPayload)
+    return this.httpClient.post<LoginResponse>(this.httpConfigService.getBaseUrl() + '/api/auth/refresh/token', this.refreshTokenPayload)
       .pipe(
         tap(response => {
           this.localStorage.store('authenticationToken', response.authenticationToken);
@@ -54,7 +63,7 @@ export class AuthService {
   logout() {
     this.updateRefreshTokenPayload();
 
-    this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload, { responseType: 'text'})
+    this.httpClient.post(this.httpConfigService.getBaseUrl() + '/api/auth/logout', this.refreshTokenPayload, { responseType: 'text'})
       .subscribe(
         data => {
           this.toastr.success('Logout Successful!');

@@ -4,11 +4,16 @@
 }
 
 #main-form {
-    height: 500px;
+    height: 520px;
 }
 
 input.ng-invalid.ng-touched {
     border: 1px solid red;
+}
+
+#resetPasswordContainer {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @keyframes ldio-g5juwyp9ree {

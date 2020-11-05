@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,13 +9,59 @@ import { LoginRequestPayload } from './login-request.payload';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [
+    trigger(
+      'backgroundOverlayAnimation', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({ opacity: 0 }),
+            animate('.5s ease-out', 
+                    style({ opacity: 0.5 }))
+          ]
+        ),
+        transition(
+          ':leave', 
+          [
+            style({ opacity: 0.5 }),
+            animate('.5s ease-out', 
+                    style({ opacity: 0 }))
+          ]
+        )
+      ]
+    ),
+    trigger(
+      'popupAnimation', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({ opacity: 0 }),
+            animate('.5s ease-out', 
+                    style({ opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave', 
+          [
+            style({ opacity: 1 }),
+            animate('.5s ease-out', 
+                    style({ opacity: 0 }))
+          ]
+        )
+      ]
+    )
+  ]
 })
 export class LoginComponent implements OnInit {
   isLoading = false;
+  isForgotPasswordFormOpen = false;
   isPasswordVisible = false;
   loginForm: FormGroup;
   loginRequestPayload: LoginRequestPayload;
+  forgotPasswordForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router, private activedRoute: ActivatedRoute, private toastr: ToastrService) { 
     this.loginRequestPayload = {
@@ -28,6 +75,10 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
     });
+
+    this.forgotPasswordForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email])
+    })
 
     this.activedRoute.queryParams
       .subscribe(params => {
@@ -76,6 +127,26 @@ export class LoginComponent implements OnInit {
         }
       );
     }, 500);
+  }
+
+  forgotPassword() {
+    if (!this.forgotPasswordForm.valid) {
+      return;
+    }
+
+    let email = this.forgotPasswordForm.get("email").value;
+
+    this.authService.forgotPassword(email).subscribe(
+      data => {
+        this.toastr.success("Successfully sent the reset password link to email: " + email);
+      }, error => {
+        if (error.error === 'NO_EXIST_EMAIL') {
+          this.toastr.error("Email does not exists. Please try again!");
+        } else {
+          this.toastr.error("Something wrong happened with the server. Please try again later");
+        }
+      }
+    )
   }
 
 }

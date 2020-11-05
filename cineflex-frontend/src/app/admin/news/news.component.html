@@ -73,7 +73,7 @@
         </div>
 
         <!-- No Results situation -->
-        <p class="font-bold text-xl mt-10 text-center" *ngIf="posts.length === 0 && !isSearching">Cannot find any posts!</p>
+        <p class="font-bold text-xl mt-10 text-center" *ngIf="posts?.length === 0 && !isSearching">Cannot find any posts!</p>
 
         <!-- Gray backdrop for modal -->
         <div class="fixed inset-0 w-screen h-screen bg-gray-500 opacity-50 z-10" *ngIf="isUpdateModalOpen || isAddModalOpen || isDeleteModalOpen" [@backdropOpenAnimation]>
@@ -166,7 +166,7 @@
 
         <!-- Add Post modal content -->
         <div class="w-full max-w-2xl bg-white rounded-lg z-20 max-h-full" id="addNewsModal" *ngIf="isAddModalOpen" [@modalOpenAnimation]>
-            <h3 class="font-bold text-primary text-xl text-center mt-3">Add Your Category</h3>
+            <h3 class="font-bold text-primary text-xl text-center mt-3">Add Your News</h3>
 
             <form class="mt-10" [formGroup]="addNewsForm" (ngSubmit)="addPost()">
                 <div class="mb-8 px-5 h-24 text-center">
