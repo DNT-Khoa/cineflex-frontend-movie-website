@@ -13,6 +13,7 @@ import { ComingSoonComponent } from './movies/coming-soon/coming-soon.component'
 import { NowPlayingComponent } from './movies/now-playing/now-playing.component';
 import { ShortenPipe } from './movies/shared/shorten.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 
 
 
@@ -27,6 +28,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ComingSoonComponent, 
     NowPlayingComponent,
     ShortenPipe,
+    AdminProfileComponent,
   ],
   imports: [
     CommonModule,

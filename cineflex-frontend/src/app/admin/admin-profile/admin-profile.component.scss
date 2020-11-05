@@ -1,0 +1,29 @@
+#userAccountSection {
+    min-height: 1000px;
+    #userBackground {
+        height: 300px;
+        background: linear-gradient(to right, #00dbde, #fc00ff);
+    }
+}
+
+#editProfileForm, #changePasswordForm {
+    height: 500px;
+    width: 500px;
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#deleteAccountForm {
+    height: 350px;
+    width: 550px;
+    max-width: 5500px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media screen and (max-width: 768px) {
+    #editProfileForm, #changePasswordForm, #deleteAccountForm {
+        width: 100%;
+    }
+}
