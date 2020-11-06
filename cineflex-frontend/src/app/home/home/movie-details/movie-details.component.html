@@ -19,7 +19,7 @@
                     <h3 class="text-white text-lg font-semibold mt-20 animate-bounce" *ngIf="!isMovieAvailable">This Movie Is Currently Not Available</h3>
 
                     <!-- Coming soon Movie Notification -->
-                    <h3 class="text-white text-lg font-semibold mt-20 animate-bounce" *ngIf="isMovieAvailable && !movie?.filmLink">We will post this movie soon. Stay tuned!</h3>
+                    <h3 class="text-white text-lg font-semibold mt-10 animate-bounce" *ngIf="isMovieAvailable && !movie?.filmLink">We will post this movie soon. Stay tuned!</h3>
 
                     <!-- Watch Me Button -->
                     <a class="inline-block px-5 py-2 bg-primary mt-12 rounded-full border-2 border-primary hover:bg-white cursor-pointer duration-200 group" *ngIf="isMovieAvailable && movie?.filmLink">
