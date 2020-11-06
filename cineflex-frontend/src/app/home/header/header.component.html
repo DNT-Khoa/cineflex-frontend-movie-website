@@ -22,7 +22,8 @@
             <div class="md:self-end self-center relative">
                 <a routerLink="/auth/login" class="md:inline-block text-white bg-primary font-semibold px-6 py-2 cursor-pointer duration-200 border-primary border-2 border-solid rounded-full hover:bg-white hover:text-primary" *ngIf="!isUserLoggedIn">Login</a>
                 <button class="cursor-pointer focus:outline-none active:outline-none" (click)="isUserDropdownOpen = !isUserDropdownOpen" *ngIf="isUserLoggedIn">
-                    <img src="../../../assets/img/anonymous-user.jpg" class="w-12 rounded-full">
+                    <img src="../../../assets/img/anonymous-user.png" class="w-12 h-12 rounded-full object-cover" *ngIf="!avatarImage">
+                    <img [src]="avatarImage && avatarImage" class="w-12 h-12 rounded-full object-cover" *ngIf="avatarImage">
                 </button>
                 <!-- Dropdown user -->
                 <div class="absolute bg-white right-0 p-1 w-40 mt-2 shadow-md rounded-md" *ngIf="isUserDropdownOpen && isUserLoggedIn" [@userDropdownAnimation]>

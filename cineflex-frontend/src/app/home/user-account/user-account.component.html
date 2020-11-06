@@ -5,8 +5,10 @@
             <img src="../../../assets/img/user-background-1.jpg" alt="" class="w-full h-full object-cover object-center">
         </div>
         <div id="innerUserIntroduction" class="absolute bottom-0 mx-auto w-full">
-            <img src="../../../assets/img/anonymous-user.jpg" alt="" class="w-48 block rounded-full mb-5 mx-auto">
+            <img src="../../../assets/img/anonymous-user.png" alt="" class="w-48 block rounded-full mb-5 mx-auto h-48 object-cover object-center" *ngIf="!retrievedImage">
+            <img [src]="sanitizeUrl(retrievedImage)" alt="" class="w-48 block rounded-full mb-5 mx-auto h-48 object-cover object-center" *ngIf="retrievedImage">
             <h2 class="text-xl text-white font-bold tracking-wide mb-5">Khoa Doan</h2>
+            <a class="text-blue-400 text-sm inline-block mb-3 cursor-pointer focus:outline-none hover:text-white duration-200" (click)="isUploadModalOpen = true">Upload Image</a>
         </div>
     </div>
 
@@ -28,6 +30,29 @@
             <div id="rightUserContent" class=" md:w-3/4 w-full mt-10 md:mt-0">
                 <router-outlet></router-outlet>
             </div>
+        </div>
+    </div>
+
+    <div id="backgroundOverlay" class="fixed w-full h-full inset-0 bg-black opacity-50" *ngIf="isUploadModalOpen" [@backgroundOverlayAnimation]>
+    </div>
+
+    <div id="uploadImageModal" class="p-5 rounded-lg bg-white fixed top-0 mt-32 w-full max-w-md pb-16" *ngIf="isUploadModalOpen" [@popupAnimation]>
+        <h2 class="text-primary text-xl font-bold text-center">Upload Your Avatar</h2>
+
+        <!-- Image container -->
+        <div class="text-center mt-5 mb-5 h-40">
+            <img *ngIf="selectedFile" src="{{ imageUrl && imageUrl }}" alt="" class="w-40 h-full block mx-auto">
+        </div>
+
+        <div class="mb-10">
+            <button class="px-5 py-1 bg-primary text-white rounded-lg cursor-pointer focus:outline-none mx-auto block relative">Upload
+                <input type="file" class="absolute left-0 cursor-pointer top-0 opacity-0" (change)="onFileChanged($event)">
+            </button>
+        </div>
+
+        <div class="absolute left-0 bottom-0 w-full h-16 bg-gray-300 rounded-b-lg text-right">
+            <button class="px-5 py-2 bg-red-500 border-2 border-red-600 rounded-lg text-white focus:outline-none duration-200 hover:bg-white hover:text-red-600 mr-2 mt-2" (click)="isUploadModalOpen = false; selectedFile = null">Cancel</button>
+            <button class="px-5 py-2 bg-green-500 border-2 border-green-600 rounded-lg text-white focus:outline-none duration-200 hover:bg-white hover:text-green-600 mr-2" (click)="onUpload()">Update Image</button>
         </div>
     </div>
 </section>

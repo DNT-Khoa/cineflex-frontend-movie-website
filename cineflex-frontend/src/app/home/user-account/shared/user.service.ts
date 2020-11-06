@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { MovieModal } from 'src/app/admin/movies/shared/movie.modal';
 import { AuthService } from 'src/app/auth/shared/auth.service';
 import { HttpConfigService } from 'src/app/shared/http-config.service';
@@ -49,5 +50,13 @@ export class UserService {
                 refreshToken: this.authService.getRefreshToken()
             }
         })
+    }
+
+    uploadImage(uploadImageData: any) {
+        return this.httpClient.post<any>(this.httpConfigService.getBaseUrl() + "/user/changeAvatar", uploadImageData, {
+            params: {
+                email: this.authService.getEmail()
+            }
+        });
     }
 }

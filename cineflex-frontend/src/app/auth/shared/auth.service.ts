@@ -15,6 +15,7 @@ import { HttpConfigService } from 'src/app/shared/http-config.service';
 })
 export class AuthService {
   public loggedInSubject: Subject<any> = new Subject<any>();
+  public avatarChangeSubject: Subject<any> = new Subject<any>();
   constructor(private httpClient: HttpClient, private localStorage: LocalStorageService, private toastr: ToastrService, private router: Router, private httpConfigService: HttpConfigService) {}
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
@@ -37,9 +38,27 @@ export class AuthService {
           this.localStorage.store('email', data.email);
           this.localStorage.store('expiresAt', data.expiresAt);
           this.localStorage.store('role', data.role);
+          
+          this.getAvatarByEmail();
         })
       );
   }
+
+
+  public getAvatarByEmail() {
+    this.httpClient.get<any>(this.httpConfigService.getBaseUrl() + "/user/getAvatar", {
+        params: {
+            email: this.getEmail()
+        }
+    }).subscribe(
+      data => {
+        let base64Data = data.picByte;
+        let avatarImage = "data:image/png;base64," + base64Data;
+        this.localStorage.store('avatarImage', avatarImage);
+        this.avatarChangeSubject.next(this.getAvatarImageFromLocalHost());
+    }
+    )
+}
 
   forgotPassword(email: string) {
     return this.httpClient.post<any>(this.httpConfigService.getBaseUrl() + "/api/auth/forgotPassword", null, {
@@ -104,6 +123,10 @@ export class AuthService {
     return this.localStorage.retrieve('role');
   }
 
+  getAvatarImageFromLocalHost() {
+    return this.localStorage.retrieve('avatarImage');
+  }
+
   isUserLoggedIn(): boolean {
     return this.getJwtToken() !== null && this.getRole() === 'User';
   }
@@ -111,6 +134,7 @@ export class AuthService {
   isAdminLoggedIn(): boolean {
     return this.getJwtToken() !== null && this.getRole() === 'Admin';
   }
+
 
   notifyUserLoggedOut() {
     this.loggedInSubject.next(false);
@@ -122,5 +146,6 @@ export class AuthService {
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('role');
     this.localStorage.clear('expiresAt');
+    this.localStorage.clear('avatarImage');
   }
 }

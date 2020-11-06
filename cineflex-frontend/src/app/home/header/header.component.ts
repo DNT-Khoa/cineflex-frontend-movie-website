@@ -73,8 +73,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isDropdownOpen = false;
   isUserDropdownOpen = false;
   isUserLoggedIn: boolean;
-  subscription: Subscription;
+  userLoggedInSubscription: Subscription;
   isHeaderMoving = false;
+  avatarImage: any;
+  avatarChangeSubscription: Subscription;
 
   // Using Hostlistener to change header background after the header get away from its original size a specific height
   @HostListener("document:scroll")
@@ -90,9 +92,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isUserLoggedIn = this.authService.isUserLoggedIn();
-    this.subscription = this.authService.loggedInSubject.subscribe(
+
+    this.userLoggedInSubscription = this.authService.loggedInSubject.subscribe(
       (loggedInStatus: boolean) => {
         this.isUserLoggedIn = loggedInStatus;
+      }
+    );
+
+    this.avatarImage = this.authService.getAvatarImageFromLocalHost();
+
+    this.avatarChangeSubscription = this.authService.avatarChangeSubject.subscribe(
+      (result: any) => {
+        this.avatarImage = result;
       }
     )
   }
@@ -102,6 +113,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.userLoggedInSubscription.unsubscribe();
+    this.avatarChangeSubscription.unsubscribe();
   }
 }
