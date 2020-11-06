@@ -7,7 +7,10 @@
         <div id="innerUserIntroduction" class="absolute bottom-0 mx-auto w-full">
             <img src="../../../assets/img/anonymous-user.png" alt="" class="w-48 block rounded-full mb-5 mx-auto h-48 object-cover object-center" *ngIf="!retrievedImage">
             <img [src]="sanitizeUrl(retrievedImage)" alt="" class="w-48 block rounded-full mb-5 mx-auto h-48 object-cover object-center" *ngIf="retrievedImage">
-            <h2 class="text-xl text-white font-bold tracking-wide mb-5">Khoa Doan</h2>
+            <h2 class="text-xl text-white font-bold tracking-wide mb-5">
+                <span>{{ user && user.firstName + ' ' }}</span>
+                <span>{{ user && user.lastName }}</span>
+            </h2>
             <a class="text-blue-400 text-sm inline-block mb-3 cursor-pointer focus:outline-none hover:text-white duration-200" (click)="isUploadModalOpen = true">Upload Image</a>
         </div>
     </div>

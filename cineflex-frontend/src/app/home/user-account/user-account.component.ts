@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/shared/auth.service';
+import { UserDetailsModal } from './shared/user-details.modal';
 import { UserService } from './shared/user.service';
 
 @Component({
@@ -61,6 +62,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
   imageUrl: any;
   retrievedImage: any;
   avatarChangedSubscription: Subscription;
+  user: UserDetailsModal;
 
   constructor(private userService: UserService, private toastr: ToastrService, private sanitizer: DomSanitizer, private authService: AuthService) { }
 
@@ -72,7 +74,14 @@ export class UserAccountComponent implements OnInit, OnDestroy {
         this.retrievedImage = data;
       }
     )
+
+    this.userService.getUserDetails().subscribe(
+      data => {
+        this.user = data;
+      }
+    );
   }
+
 
   onFileChanged(event) {
     if (event.target.files && event.target.files[0]) {
