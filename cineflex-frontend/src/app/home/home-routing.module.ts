@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AboutComponent } from './home/about/about.component';
 import { AdminCredentialsComponent } from './home/admin-credentials/admin-credentials.component';
 import { HomeComponent } from './home/home.component';
 import { HomepageComponent } from './home/homepage/homepage.component';
@@ -47,7 +48,8 @@ const routes: Routes = [
         { path: 'category/:categoryId', component: NewsCategoryComponent, data: { animation: 'NewsCategory'}}
       ]},
       { path: 'adminCredentials/:adminInvitationToken', component: AdminCredentialsComponent, data: { animation: 'AdminCredentials'}},
-      { path: 'resetPassword/:resetPasswordToken', component: ResetPasswordComponent, data: { animation: 'ResetPassword'}}
+      { path: 'resetPassword/:resetPasswordToken', component: ResetPasswordComponent, data: { animation: 'ResetPassword'}},
+      { path: 'about', component: AboutComponent, data: { animation: 'About'}}
     ],
   }
 ];

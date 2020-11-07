@@ -15,7 +15,6 @@ export class MovieCategoryNavigatorComponent implements OnInit {
   categoryLimit = 5;
   isMoreButtonVisible = true;
 
-
   constructor(private toast: ToastrService, private categoryService: CategoriesService, private movieService: MovieService, private router: Router) { }
 
   ngOnInit(): void {
