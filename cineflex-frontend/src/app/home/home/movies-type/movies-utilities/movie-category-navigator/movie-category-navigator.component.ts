@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { CategoriesService } from 'src/app/admin/categories/shared/categories.service';
 import { CategoryModal } from 'src/app/admin/categories/shared/category.modal';
 import { MovieService } from 'src/app/home/shared/movie.service';
-import { NewsService } from '../../../news/shared/news.service';
 
 @Component({
   selector: 'app-movie-category-navigator',
@@ -13,6 +12,9 @@ import { NewsService } from '../../../news/shared/news.service';
 })
 export class MovieCategoryNavigatorComponent implements OnInit {
   categories: CategoryModal[];
+  categoryLimit = 5;
+  isMoreButtonVisible = true;
+
 
   constructor(private toast: ToastrService, private categoryService: CategoriesService, private movieService: MovieService, private router: Router) { }
 

@@ -40,6 +40,7 @@ import { MoviesTypeComponent } from './home/movies-type/movies-type.component';
 import { MoviesUtilitiesComponent } from './home/movies-type/movies-utilities/movies-utilities.component';
 import { MovieCategoryNavigatorComponent } from './home/movies-type/movies-utilities/movie-category-navigator/movie-category-navigator.component';
 import { MoviesCategoryComponent } from './home/movies-category/movies-category.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { MoviesCategoryComponent } from './home/movies-category/movies-category.
     MoviesUtilitiesComponent,
     MovieCategoryNavigatorComponent,
     MoviesCategoryComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -86,7 +88,7 @@ import { MoviesCategoryComponent } from './home/movies-category/movies-category.
     ReactiveFormsModule,
     TooltipModule,
     IvyCarouselModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class HomeModule { }

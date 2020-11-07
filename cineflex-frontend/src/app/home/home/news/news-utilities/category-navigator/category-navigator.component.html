@@ -2,11 +2,16 @@
     <h2 class="text-primary font-bold text-xl">Categories</h2>
 
     <!-- Category list -->
-    <div class="mt-8">
-        <div class="flex justify-between my-4" *ngFor="let category of categories">
-            <span class="text-sm font-bold duration-200 hover:text-primary cursor-pointer focus:outline-none" (click)="navigateToUrl(category)">{{ category.name }}</span>
-            <span class="flex-1 bg-gray-200 line self-center mx-3"></span>
-            <span class="text-sm text-primary font-bold">{{ category.numOfPosts }}</span>
+    <div class="mt-8 relative">
+        <div *ngFor="let category of categories; let i = index">
+            <div class="flex justify-between my-4" *ngIf="i < categoryLimit">
+                <span class="text-sm font-bold duration-200 hover:text-primary cursor-pointer focus:outline-none" (click)="navigateToUrl(category)">{{ category.name }}</span>
+                <span class="flex-1 bg-gray-200 line self-center mx-3"></span>
+                <span class="text-sm text-primary font-bold">{{ category.numOfPosts }}</span>
+            </div>
+        </div>    
+        <div class="h-24 absolute bottom-0 left-0 w-full opacity-75 fade-out-truncation" *ngIf="isMoreButtonVisible">
+            <i class="fa fa-angle-double-down absolute bottom-0 text-primary text-lg cursor-pointer" id="moreButton" (click)="categoryLimit = categories.length; isMoreButtonVisible = false"></i>
         </div>
     </div>
 </div>

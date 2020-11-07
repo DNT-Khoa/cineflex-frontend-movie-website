@@ -12,6 +12,8 @@ import { NewsService } from '../../shared/news.service';
 })
 export class CategoryNavigatorComponent implements OnInit {
   categories: CategoryModal[];
+  categoryLimit = 5;
+  isMoreButtonVisible = true;
 
   constructor(private toast: ToastrService, private categoryService: CategoriesService, private newsService: NewsService, private router: Router) { }
 
