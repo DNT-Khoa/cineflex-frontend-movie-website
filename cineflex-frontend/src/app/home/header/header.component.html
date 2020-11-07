@@ -12,10 +12,9 @@
                 </div>
                 <div class="items-end hidden md:flex">
                     <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 pl-6 cursor-pointer hover:text-primary duration-200" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true}">Home</a>
-                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200" routerLink="/categories">Categories</a>
-                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200" routerLink="/recommended">Recommended</a>
+                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200" routerLink="/home/movies/type/all">Movies</a>
                     <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200" routerLink="/home/news" routerLinkActive="active">News</a>
-                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200">Newsletter</a>
+                    <a class="block uppercase text-sm md:text-md text-white font-semibold px-4 cursor-pointer hover:text-primary duration-200">About</a>
                 </div>
             </div>
             <!-- right side -->
@@ -35,11 +34,10 @@
         <!-- Dropdown menu -->
         <div class=" px-5 mt-24 md:hidden dropdown-menu absolute w-full z-20" *ngIf="isDropdownOpen" [@hamburgerDropdownAnimation]>
             <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary" routerLink="/home" (click)="isDropdownOpen = false" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true}">Home</a>
-            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">Movies</a>
-            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">Category</a>
-            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">Recommended</a>
+            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary" routerLink="/home/movies/type/all" routerLinkActive="active" (click)="isDropdownOpen = false">Movies</a>
             <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary" routerLink="/home/news" routerLinkActive="active" (click)="isDropdownOpen = false">News</a>
-            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">Newsletter</a>
+            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary" routerLink="/home/news" routerLinkActive="active" (click)="isDropdownOpen = false">News</a>
+            <a class="block font-semibold text-white my-8 text-center text-xl duration-200 hover:text-primary">About</a>
         </div>
 
         <!-- Overlay for mobile version dropdown menu -->

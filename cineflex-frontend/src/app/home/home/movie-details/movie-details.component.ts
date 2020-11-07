@@ -71,11 +71,13 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   haveUserLikedMovie = false;
   isVideoOpen = false;
   isImageOpen = false;
+  isMoviePlayerOpen = false;
   movie: MovieModal;
   tmdbMovieDetails: TMDBMovieDetailsModal;
   tmdbId: number;
   selectedVideo: any;
   selectedImage: any;
+  movieLink: any;
   userLoggedInSubscription: Subscription;
 
   constructor(private movieService: MovieService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private sanitizer: DomSanitizer, private authService: AuthService, private router: Router) { 
@@ -148,6 +150,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.movieService.getMovieByTmdbId(this.tmdbId).subscribe(
       data => {
         this.movie = data;
+        this.updateMovieLink(data.filmLink);
         if (this.authService.isUserLoggedIn()) {
           // Check if user has liked the movie
           this.movieService.checkIfUserHasLikedMovie(data.id, this.authService.getEmail()).subscribe(
@@ -212,6 +215,10 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   youtubeUrl(key: string) {
     this.selectedVideo = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube-nocookie.com/embed/' + key + '?autoplay=1');
+  }
+
+  updateMovieLink(key: string) {
+    this.movieLink = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube-nocookie.com/embed/' + key + '?autoplay=1');
   }
 
   imageUrl(filePath: string) {

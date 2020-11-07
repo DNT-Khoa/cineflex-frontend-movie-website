@@ -3,11 +3,11 @@ import { CategoryModal } from '../../categories/shared/category.modal';
 export class MovieModal {
     id?: number;
     tmdbId: number;
-    title: String;
+    title: string;
     rating: number;
-    posterLink: String;
-    backdropLink: String;
-    movieType: String;
-    filmLink: String;
+    posterLink: string;
+    backdropLink: string;
+    movieType: string;
+    filmLink: string;
     categories: CategoryModal[]
 }
