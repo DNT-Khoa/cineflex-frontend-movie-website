@@ -8,6 +8,8 @@ import { TypeAllComponent } from './home/homepage/movie-type-navigator/type-all/
 import { TypeComingSoonComponent } from './home/homepage/movie-type-navigator/type-coming-soon/type-coming-soon.component';
 import { TypeNowplayingComponent } from './home/homepage/movie-type-navigator/type-nowplaying/type-nowplaying.component';
 import { MovieDetailsComponent } from './home/movie-details/movie-details.component';
+import { MoviesCategoryComponent } from './home/movies-category/movies-category.component';
+import { MoviesTypeComponent } from './home/movies-type/movies-type.component';
 import { AllNewsComponent } from './home/news/all-news/all-news.component';
 import { NewsCategoryComponent } from './home/news/news-category/news-category.component';
 import { NewsDetailsComponent } from './home/news/news-details/news-details.component';
@@ -27,6 +29,12 @@ const routes: Routes = [
         { path: 'type/comingsoon', component: TypeComingSoonComponent, data: { animation: 'TypeComingSoon'} },
         { path: 'type/toprated', component: TopRatedComponent, data: { animation: 'TypeTopRated' } }
       ]},
+      { 
+        path: 'movies/type/:movieType', component: MoviesTypeComponent, data: { animation: 'MovieType'}
+      },
+      {
+        path: 'movies/category/:categoryId', component: MoviesCategoryComponent, data: { animation: 'MovieCategory'}
+      },
       { path: 'movies/:tmdbId', component: MovieDetailsComponent, data: { animation: 'MovieDetails'}},
       { path: 'user/account', component: UserAccountComponent, canActivate: [UserAccountGuard], children: [
         { path: '', redirectTo: 'profile-details'},

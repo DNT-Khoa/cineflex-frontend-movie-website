@@ -36,6 +36,10 @@ import { CategoryNavigatorComponent } from './home/news/news-utilities/category-
 import { TopNewsComponent } from './home/news/news-utilities/top-news/top-news.component';
 import { AdminCredentialsComponent } from './home/admin-credentials/admin-credentials.component';
 import { ResetPasswordComponent } from './home/reset-password/reset-password.component';
+import { MoviesTypeComponent } from './home/movies-type/movies-type.component';
+import { MoviesUtilitiesComponent } from './home/movies-type/movies-utilities/movies-utilities.component';
+import { MovieCategoryNavigatorComponent } from './home/movies-type/movies-utilities/movie-category-navigator/movie-category-navigator.component';
+import { MoviesCategoryComponent } from './home/movies-category/movies-category.component';
 
 
 @NgModule({
@@ -70,7 +74,11 @@ import { ResetPasswordComponent } from './home/reset-password/reset-password.com
     CategoryNavigatorComponent,
     TopNewsComponent,
     AdminCredentialsComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    MoviesTypeComponent,
+    MoviesUtilitiesComponent,
+    MovieCategoryNavigatorComponent,
+    MoviesCategoryComponent,
   ],
   imports: [
     CommonModule,

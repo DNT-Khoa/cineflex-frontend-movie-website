@@ -1,6 +1,6 @@
 import { animate, animateChild, query, style, transition, trigger, group } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
@@ -44,7 +44,7 @@ export class MovieTypeNavigatorComponent implements OnInit, OnDestroy, AfterView
 
   @ViewChild("apiSearchInput") apiSearchInput: ElementRef;
 
-  constructor(private movieService: MovieService, private toastr: ToastrService) { }
+  constructor(private movieService: MovieService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -84,5 +84,17 @@ export class MovieTypeNavigatorComponent implements OnInit, OnDestroy, AfterView
 
   getAnimationData(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+  }
+
+  navigateToUrl() {
+    if (this.router.url.indexOf("nowplaying") !== -1) {
+      this.router.navigateByUrl("/home/movies/type/nowplaying");
+    } else if (this.router.url.indexOf("comingsoon") !== -1) {
+      this.router.navigateByUrl("/home/movies/type/comingsoon");
+    } else if (this.router.url.indexOf("toprated") !== -1) {
+      this.router.navigateByUrl("/home/movies/type/toprated");
+    } else {
+      this.router.navigateByUrl("/home/movies/type/all");
+    }
   }
 }

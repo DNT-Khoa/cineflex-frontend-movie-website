@@ -1,0 +1,35 @@
+<section id="MoviesCategorySection" class="overflow-y-scroll bg-white">
+    <!-- Top Banner -->
+    <div class="relative" id="MoviesCategoryBanner">
+        <img src="../../../../assets/img/movie-type-category.jpg" class="object-cover object-center w-full h-full absolute inset-0">
+        <div class="container mx-auto absolute w-full inset-0">
+            <h1 class="font-bold md:text-5xl text-3xl ml-3 md:ml-0 mt-40 text-white tracking-wide">Movie Type</h1>
+        </div>
+    </div>
+
+    <!-- All News Main Content -->
+    <div class="container mx-auto flex md:flex-no-wrap flex-wrap mt-20">
+        <!-- Left main details -->
+        <div id="leftDetailsContent" class="md:w-2/3 w-full md:px-5 pl-3">
+            <h2 class="font-bold text-xl text-primary">{{ "Movies Category: " + categoryName }}</h2>
+            <!-- Movie Item -->
+            <div class="grid grid-cols-6 mt-10">
+                <div *ngFor="let movie of movies" class="sm:px-5 px-1 md:w-56 col-span-3 md:col-span-2 w-48 mt-5">
+                    <div [routerLink]="['/home/movies/', movie.tmdbId]" class="relative transform hover:-translate-y-3 duration-200 hover:scale-105 focus:outline-none">
+                        <img src="{{ movie.posterLink }}" alt="" class="lg:w-56 rounded-lg shadow-xl cursor-pointer block mx-auto ">
+                        <i class="border ml-1 mb-2 fa fa-play-circle bottom-0 text-2xl text-white text-opacity-50 hover:text-white bg-transparent duration-200 absolute hover:bg-primary rounded-full" id="playButton"></i>
+                        <span class="inline-block absolute bottom-0 right-0 bg-white rounded-full text-xs px-3 font-bold mr-1 mb-2">{{ movie.rating }}</span>
+                    </div>
+                    <h2 class="text-xs font-semibold text-blue-500 text-center">{{ movie.movieType }}</h2>
+                    <h2 class="font-bold mt-5 md:text-base text-xs">{{ movie.title }}</h2>
+                    <p class="md:text-sm text-xs font-bold text-gray-500 mt-2">{{ movie.categories | categoryCommaSeparatorPipe:20 }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right content -->
+        <div id="rightDetailsContent" class="md:w-1/3 w-full px-5 mt-20 md:mt-0">
+            <app-movies-utilities></app-movies-utilities>
+        </div>
+    </div>
+</section>

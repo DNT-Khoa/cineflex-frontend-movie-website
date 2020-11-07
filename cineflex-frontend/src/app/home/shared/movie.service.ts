@@ -19,6 +19,38 @@ export class MovieService {
         });
     }
 
+    getAllMovies() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/all");
+    }
+
+    getAllTopRatedMovies() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/toprated");
+    }
+
+    getAllNowplayingMovies() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/nowplaying");
+    }
+
+    getAllComingSoonMovies() {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/comingsoon");
+    }
+
+    getCountMoviePerCategory(categoryId: number) {
+        return this.httpClient.get<number>(this.httpConfigService.getBaseUrl() + "/api/movies/count", {
+            params: {
+                categoryId: categoryId.toString()
+            }
+        })
+    }
+
+    getAllMoviesByCategory(categoryId: number) {
+        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/byCategory", {
+            params: {
+                categoryId: categoryId.toString()
+            }
+        })
+    }
+
     checkIfMovieIsInDatabse(tmdbId: number) {
         return this.httpClient.get<boolean>(this.httpConfigService.getBaseUrl() + "/api/movies/checkExists/" + tmdbId);
     }
@@ -29,10 +61,6 @@ export class MovieService {
 
     getFourLatestComingSoonMovies() {
         return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/comingsoon/4");
-    }
-
-    getTopRatedMovies() {
-        return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/api/movies/toprated");
     }
 
     getFourTopRatedMovies() {

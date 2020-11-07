@@ -1,0 +1,12 @@
+<div id="categoryNavigator">
+    <h2 class="text-primary font-bold text-xl">Categories</h2>
+
+    <!-- Category list -->
+    <div class="mt-8">
+        <div class="flex justify-between my-4" *ngFor="let category of categories">
+            <span class="text-sm font-bold duration-200 hover:text-primary cursor-pointer focus:outline-none" (click)="navigateToUrl(category)">{{ category.name }}</span>
+            <span class="flex-1 bg-gray-200 line self-center mx-3"></span>
+            <span class="text-sm text-primary font-bold">{{ category.numOfPosts }}</span>
+        </div>
+    </div>
+</div>

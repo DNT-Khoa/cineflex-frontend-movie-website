@@ -1,0 +1,23 @@
+#MoviesTypeSection {
+    min-height: 100vh;
+    #MoviesTypeBanner {
+        height: 320px;
+    }
+
+    #leftDetailsContent {
+        #moviesTypeBackdropImage {
+            height: 330px;
+        }
+        
+    }
+}
+
+.newsDetailsWrapper {
+    position: relative;
+    margin-top: -40px;
+}
+
+#newsMainContent {
+    font-size: 0.875rem;
+    color: #718096;
+}
