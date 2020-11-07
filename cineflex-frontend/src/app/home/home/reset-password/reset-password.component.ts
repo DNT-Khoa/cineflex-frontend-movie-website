@@ -40,6 +40,8 @@ export class ResetPasswordComponent implements OnInit {
       }, error => {
         if (error.error === 'INVALID_TOKEN') {
           this.toastr.error("Invalid Token");
+        } else if (error.error === 'EXPIRED_TOKEN') {
+          this.toastr.error("Your token has expired. Please request another one");
         } else {
           this.toastr.error("Something wrong happened with the server. Please try again later");
         }
