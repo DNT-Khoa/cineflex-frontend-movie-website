@@ -139,6 +139,7 @@ export class LoginComponent implements OnInit {
     this.authService.forgotPassword(email).subscribe(
       data => {
         this.toastr.success("Successfully sent the reset password link to email: " + email);
+        this.isForgotPasswordFormOpen = false;
       }, error => {
         if (error.error === 'NO_EXIST_EMAIL') {
           this.toastr.error("Email does not exists. Please try again!");
