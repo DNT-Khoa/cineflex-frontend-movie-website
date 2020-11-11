@@ -11,10 +11,12 @@ import { TokenInterceptor } from './auth/token-interceptor';
 import { NavigationEnd, Router, RouteReuseStrategy, Scroll } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { filter, map, pairwise, tap, withLatestFrom } from 'rxjs/operators';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
