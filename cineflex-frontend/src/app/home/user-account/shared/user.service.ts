@@ -21,6 +21,14 @@ export class UserService {
         });
     }
 
+    getUserDetailsByEmail(email: string) {
+        return this.httpClient.get<UserDetailsModal>(this.httpConfigService.getBaseUrl() + '/user', {
+            params: {
+                email: email
+            }
+        });
+    }
+
     getLikedMovies() {
         return this.httpClient.get<MovieModal[]>(this.httpConfigService.getBaseUrl() + "/user/likedMovies", {
             params: {

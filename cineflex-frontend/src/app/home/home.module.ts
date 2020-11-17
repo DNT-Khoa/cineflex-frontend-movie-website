@@ -42,6 +42,8 @@ import { MovieCategoryNavigatorComponent } from './home/movies-type/movies-utili
 import { MoviesCategoryComponent } from './home/movies-category/movies-category.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './home/about/about.component';
+import { CommentsComponent } from './home/comments/comments.component';
+import { CommentItemComponent } from './home/comments/comment-item/comment-item.component';
 
 
 @NgModule({
@@ -83,6 +85,8 @@ import { AboutComponent } from './home/about/about.component';
     MoviesCategoryComponent,
     FooterComponent,
     AboutComponent,
+    CommentsComponent,
+    CommentItemComponent,
   ],
   imports: [
     CommonModule,

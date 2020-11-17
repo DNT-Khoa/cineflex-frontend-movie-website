@@ -1,0 +1,22 @@
+<section id="commentSection" class="bg-white" *ngIf="isUserLoggedIn">
+    <div class="container mx-auto">
+        <h2 class="text-primary font-bold text-xl mb-8">Comments (<span>{{ comments && comments.length }})</span></h2>
+
+        <!-- Comments area -->
+        <div [@popupAnimation]>
+            <div class="my-6" *ngFor="let comment of comments">
+                <app-comment-item [comment]="comment" (getCommentsNotifyEmitter)="getComments()"></app-comment-item>
+            </div>
+        </div>
+        
+        <!-- Add comment area -->
+        <h2 class="font-semibold text-lg mb-5">Add Your Comment</h2>
+
+        <textarea id="commentInputField" class="focus:outline-none p-3" [(ngModel)]="commentInputValue">
+        </textarea>
+
+        <div class="mt-5 text-right">
+            <a class="px-4 py-3 bg-primary rounded-full cursor-pointer text-white text-sm font-semibold duration-200 border-2 border-primary hover:bg-white hover:text-primary shadow-lg" (click)="addNewComment()">Post Comment</a>
+        </div>
+    </div>
+</section>
