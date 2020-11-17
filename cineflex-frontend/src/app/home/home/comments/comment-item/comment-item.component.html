@@ -19,7 +19,8 @@
 
             <div>
                 <span class="mr-2 text-sm">{{ numberOfLikedUser }}</span>
-                <i class="fa fa-heart text-gray-300 cursor-pointer text-sm"></i>
+                <i class="fa fa-heart text-gray-300 cursor-pointer text-sm duration-200 hover:text-primary" (click)="likeComment()" *ngIf="!hasTheUserLikedTheComment"></i>
+                <i class="fa fa-heart text-primary cursor-pointer text-sm" (click)="unlikeComment()" *ngIf="hasTheUserLikedTheComment"></i>
             </div>
         </div>
 

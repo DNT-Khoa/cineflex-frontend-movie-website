@@ -47,6 +47,7 @@ export class CommentItemComponent implements OnInit {
   user: UserDetailsModal;
   movieOrPostId: number;
   commentType: string;
+  hasTheUserLikedTheComment = false;
 
   @Input() comment: CommentResponseModal;
   @Output() getCommentsNotifyEmitter: EventEmitter<any> = new EventEmitter<any>();
@@ -60,11 +61,7 @@ export class CommentItemComponent implements OnInit {
     this.getUser(this.comment.email);
     this.getAvatarOfUserByEmail(this.comment.email);
 
-    if (this.comment.likedByUsers.length == 0) {
-      this.numberOfLikedUser = '';
-    } else {
-      this.numberOfLikedUser = this.comment.likedByUsers.length.toString();
-    }
+    this.updateNumberOfLikeUsers(this.comment.likedByUsers.length);
 
     if (this.authService.getEmail() === this.comment.email) {
       this.shouldTheDeleteButtonIsShown = true;
@@ -88,7 +85,21 @@ export class CommentItemComponent implements OnInit {
     }
 
     this.calculateCommentLevel();
+
+    for (let user of this.comment.likedByUsers) {
+      if (user.email === this.authService.getEmail()) {
+        this.hasTheUserLikedTheComment = true;
+      }
+    }
     
+  }
+
+  updateNumberOfLikeUsers(amount: number) {
+    if (amount == 0) {
+      this.numberOfLikedUser = '';
+    } else {
+      this.numberOfLikedUser = amount.toString();
+    }
   }
 
   getAvatarOfUserByEmail(email: string) {
@@ -152,6 +163,43 @@ export class CommentItemComponent implements OnInit {
         this.toastrService.error("Something wrong happened");
       }
     )
+  }
+
+  likeComment() {
+    this.commentService.likeComment(this.comment.id).subscribe(
+      data => {
+        this.toastrService.success("Successfully liked the comment");
+        this.updateNumberOfLikeUsers(this.comment.likedByUsers.length + 1);
+        this.removeUserFromLikedByUser(this.comment.email);
+        this.hasTheUserLikedTheComment = true;
+      }, error => {
+        console.log(error);
+        this.toastrService.error("Something wrong happened");
+      }
+    )
+  }
+
+  unlikeComment() {
+    this.commentService.unlikeComment(this.comment.id).subscribe(
+      data => {
+        this.toastrService.success("Successfully unliked the comment");
+        this.updateNumberOfLikeUsers(this.comment.likedByUsers.length - 1);
+        this.removeUserFromLikedByUser(this.comment.email);
+        this.hasTheUserLikedTheComment = false;
+      }, error => {
+        console.log(error);
+        this.toastrService.error("Something wrong happened");
+      }
+    )
+  }
+
+  removeUserFromLikedByUser(email: string) {
+    for (let i = 0; i < this.comment.likedByUsers.length; i++) {
+      if (this.comment.likedByUsers[i].email === email) {
+        this.comment.likedByUsers.splice(0, 1);
+        return;
+      }
+    }
   }
 
   calculateCommentLevel() {

@@ -20,6 +20,10 @@ export class CommentService {
         return this.httpClient.get<CommentResponseModal[]>(this.httpConfigService.getBaseUrl() + "/user/comments/byPostId/" + postId);
     }
 
+    getCommentByCommentId(commentId: number) {
+        return this.httpClient.get<CommentResponseModal>(this.httpConfigService.getBaseUrl() + "/user/comments/" + commentId);
+    }
+
     addNewComment(commentRequest: CommentRequestModal) {
         return this.httpClient.post<CommentResponseModal>(this.httpConfigService.getBaseUrl() + "/user/comments", commentRequest, {
             params: {
@@ -29,7 +33,7 @@ export class CommentService {
     }
 
     likeComment(commentId: number) {
-        return this.httpClient.post<null>(this.httpConfigService.getBaseUrl() + "/user/comments/likeComment", null, {
+        return this.httpClient.post<null>(this.httpConfigService.getBaseUrl() + "/user/comments/likeComment/" + commentId, null, {
             params: {
                 email: this.authService.getEmail()
             }
@@ -37,7 +41,7 @@ export class CommentService {
     }
 
     unlikeComment(commentId: number) {
-        return this.httpClient.post<null>(this.httpConfigService.getBaseUrl() + "/user/comments/unLikeComment", null, {
+        return this.httpClient.post<null>(this.httpConfigService.getBaseUrl() + "/user/comments/unLikeComment/" + commentId, null, {
             params: {
                 email: this.authService.getEmail()
             }
