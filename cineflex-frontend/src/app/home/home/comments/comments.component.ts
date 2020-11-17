@@ -78,7 +78,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
       this.movieService.getMovieByTmdbId(tmdbId).subscribe(
         data => {
           this.movieOrPostId = data.id;
-        this.getAllCommentsByMovieId(this.movieOrPostId);
+          this.getAllCommentsByMovieId(this.movieOrPostId);
         }
       )
     } else {
