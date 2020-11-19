@@ -39,6 +39,7 @@ import { CommentService } from './shared/comments.service';
 })
 export class CommentsComponent implements OnInit, OnDestroy {
   commentInputValue: string;
+  isMovieAvailable = true;
   movieOrPostId: number;
   commentType: string;
   comments: CommentResponseModal[];
@@ -88,7 +89,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
               }
             )
           } else {
-            this.comments = [];
+            this.isMovieAvailable = false;
           }
         }
       )

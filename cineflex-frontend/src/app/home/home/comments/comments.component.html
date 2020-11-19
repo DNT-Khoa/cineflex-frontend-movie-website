@@ -1,4 +1,4 @@
-<section id="commentSection" class="bg-white" *ngIf="isUserLoggedIn">
+<section id="commentSection" class="bg-white" *ngIf="isUserLoggedIn && isMovieAvailable">
     <div class="container mx-auto">
         <h2 class="text-primary font-bold text-xl mb-8">Comments (<span>{{ comments && comments.length }})</span></h2>
 
