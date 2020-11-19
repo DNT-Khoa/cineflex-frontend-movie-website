@@ -66,6 +66,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     this.isUserLoggedInSubscription.unsubscribe();
   }
 
+
   getComments() {
     if (this.router.url.indexOf("/movies") !== -1) {
       this.commentType = "Movie";
@@ -75,12 +76,23 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
     if (this.commentType == "Movie") {
       let tmdbId = this.activatedRoute.snapshot.params["tmdbId"];
-      this.movieService.getMovieByTmdbId(tmdbId).subscribe(
+
+      // Check if movie with the current tmdbId exists in database
+      this.movieService.checkIfMovieIsInDatabse(tmdbId).subscribe(
         data => {
-          this.movieOrPostId = data.id;
-          this.getAllCommentsByMovieId(this.movieOrPostId);
+          if (data) {
+            this.movieService.getMovieByTmdbId(tmdbId).subscribe(
+              data => {
+                this.movieOrPostId = data.id;
+                this.getAllCommentsByMovieId(this.movieOrPostId);
+              }
+            )
+          } else {
+            this.comments = [];
+          }
         }
       )
+      
     } else {
       this.movieOrPostId = this.activatedRoute.snapshot.params["postId"];
       this.getAllCommentByPostId(this.movieOrPostId);
