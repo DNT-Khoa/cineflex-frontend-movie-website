@@ -22,9 +22,9 @@ import { TypeAllComponent } from './home/homepage/movie-type-navigator/type-all/
 import { TypeComingSoonComponent } from './home/homepage/movie-type-navigator/type-coming-soon/type-coming-soon.component';
 import { TopRatedComponent } from './home/homepage/movie-type-navigator/top-rated/top-rated.component';
 import { TypeNowplayingComponent } from './home/homepage/movie-type-navigator/type-nowplaying/type-nowplaying.component';
-import { TooltipModule } from '../tooltip-pro-ng7/tooltip.module';
 import { RecommendationsComponent } from './home/recommendations/recommendations.component';
 import { IvyCarouselModule } from '../ivyсarousel_pro/carousel.module';
+import { TooltipModule } from '../tooltip-pro-ng7/tooltip.module';
 import { CategoryCommaSeparatorTMDBMoviePipe } from './shared/categoryCommaSeparatorTMDBMovie.pipe';
 import { NewsDetailsComponent } from './home/news/news-details/news-details.component';
 import { NewsComponent } from './home/news/news.component';
