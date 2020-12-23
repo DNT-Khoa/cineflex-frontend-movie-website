@@ -1,11 +1,11 @@
 build:
   script:
-    - ng build
+    - npm run build
  
 test:
   stage: test
   script:
-    - ./npx cypress run
+    - ./node_modules/.bin/cypress run
  
 after_script:
   - echo "End CI"
