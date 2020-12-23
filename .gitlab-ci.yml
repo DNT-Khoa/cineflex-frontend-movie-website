@@ -4,3 +4,5 @@ job:
     - angular-ci
   script:
     - ./ng build
+
+# CHekc 
