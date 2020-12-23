@@ -1,6 +1,6 @@
 build:
   script:
-    - npm run build
+    - ./node_modules/.bin/ng build 
  
 test:
   stage: test
