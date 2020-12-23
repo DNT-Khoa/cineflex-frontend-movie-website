@@ -1,11 +1,19 @@
-build:
+cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - node_modules/
+
+stages:
+  - setup
+  - test
+
+setup:
+  stage: setup
   script:
-    - ng build --prod 
- 
+    - npm install
+
 test:
   stage: test
   script:
     - ./node_modules/.bin/cypress run
- 
-after_script:
-  - echo "End CI"
