@@ -1,7 +1,6 @@
 build:
   script:
-    - npm install @angular/cli
-    - ./node_modules/.bin/ng build 
+    - ng build --prod 
  
 test:
   stage: test
