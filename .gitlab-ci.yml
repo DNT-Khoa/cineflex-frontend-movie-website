@@ -9,7 +9,6 @@ stages:
   - test
 
 build:
-  stage: build
   script: 
     - npm run build
 
