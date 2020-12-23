@@ -1,25 +1,10 @@
-cache:
-  untracked: true
-  key: "$CI_COMMIT_REF_NAME"
-  paths:
-    - node_modules/
+image: cypress/base:10
 
 stages:
-  - setup
   - test
-
-build:
-  script: 
-    - npm run build
-
-setup:
-  stage: setup
-  script:
-    - npm install
 
 test:
   stage: test
-  script:
-    - ./node_modules/.bin/cypress run
-
-    #
+  script: 
+    - npm install 
+    - npm run runHeadless
