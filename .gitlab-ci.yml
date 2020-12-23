@@ -1,6 +1,11 @@
-job:
-  stage: build
+build:
   script:
-    - ./ng build
-
-# CHekc 
+    - ng build
+ 
+test:
+  stage: test
+  script:
+    - ./npx cypress run
+ 
+after_script:
+  - echo "End CI"
