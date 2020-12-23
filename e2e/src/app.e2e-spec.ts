@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { browser, by, element, logging } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display spiderman title', (key) => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('cineflex-frontend app is running!');
+    expect(page.getSpiderManTitle()).toEqual('Spider-Man: Into the Spider-Verse');
   });
 
   afterEach(async () => {
