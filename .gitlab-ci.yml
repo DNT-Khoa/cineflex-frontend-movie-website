@@ -1,6 +1,7 @@
-build:
+job:
+  stage:
+    - build 
+  tags: 
+    - angular-ci
   script:
-    - ./mvnw compile
-
-after_script:
-  - echo "End CI"
+    - ./ng build
