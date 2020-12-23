@@ -2,5 +2,6 @@ build:
   script:
     - ./mvnw compile
     
+    
 after_script:
   - echo "End CI"
