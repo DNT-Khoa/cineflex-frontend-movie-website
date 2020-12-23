@@ -1,11 +1,26 @@
-image: cypress/base:10
+image: node:latest
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules/
 
 stages:
+  - install
   - test
+  - build
+
+install_dependencies:
+  stage: install
+  script:
+    - npm install
 
 test:
   stage: test
-  script: 
-    - npm install 
+  script:
     - npm run runHeadless
 
+build:
+  stage: build
+  script:
+    - npm run build
