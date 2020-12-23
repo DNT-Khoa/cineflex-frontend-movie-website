@@ -1,6 +1,5 @@
 job:
-  stage:
-    - build 
+  stage: build
   tags: 
     - angular-ci
   script:
