@@ -1,12 +1,17 @@
 cache:
   untracked: true
-  key: "$CI_BUILD_REF_NAME"
+  key: "$CI_COMMIT_REF_NAME"
   paths:
     - node_modules/
 
 stages:
   - setup
   - test
+
+build:
+  stage: build
+  script: 
+    - npm run build
 
 setup:
   stage: setup
