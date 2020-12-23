@@ -21,6 +21,3 @@ test:
   stage: test
   script:
     - ./node_modules/.bin/cypress run
-
-after_script:
-  - git clean -ffdx
