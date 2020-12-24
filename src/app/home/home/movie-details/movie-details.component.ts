@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnDestroy, OnInit, SecurityContext } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -79,6 +79,12 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   selectedImage: any;
   movieLink: any;
   userLoggedInSubscription: Subscription;
+
+  // Close the tooltip when user click somewhere outside 
+  @HostListener('document:click', ['$event']) onDocumentClick(event) {
+    this.isTooltipOpen = false;
+    this.currentStarValue = this.ratedValue;
+  }
 
   constructor(private movieService: MovieService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private sanitizer: DomSanitizer, private authService: AuthService, private router: Router) { 
     // In case user navigates back or forth a navigation link on the same route, we want to reload component on that case

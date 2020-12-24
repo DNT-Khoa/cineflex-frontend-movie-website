@@ -40,24 +40,33 @@
                         <i class="fa fa-fire inline-block ml-2 text-lg text-primary group-hover:text-primary duration-200 animate-bounce"></i>
                     </a>
 
-                    <!-- Rate Button -->
-                    <a [tooltipTriggerFor]="ratingTooltip" trigger="click" theme="dark" class="inline-block ml-3 px-5 py-2 bg-blue-500 mt-12 rounded-full border-2 border-blue-700 hover:bg-white cursor-pointer duration-200 group" *ngIf="isUserLoggedIn && ratedValue === 0 && isMovieAvailable">
-                        <span class="text-white font-semibold text-sm group-hover:text-blue-500 duration-200">Rate It!</span>
-                        <i class="fa fa-star inline-block ml-2 text-lg star-color duration-200 animate-bounce"></i>
-                    </a>
+                    <!-- Rate and unrated button containers -->
+                    <span class="inline-block relative" id="tooltip">
+                        <!-- Rate Button -->
+                        <a class="z-10 inline-block ml-3 px-5 py-2 bg-blue-500 mt-12 rounded-full border-2 border-blue-700 hover:bg-white cursor-pointer duration-200 group" *ngIf="isUserLoggedIn && ratedValue === 0 && isMovieAvailable" (click)="isTooltipOpen = !isTooltipOpen; $event.stopPropagation()">
+                            <span class="text-white font-semibold text-sm group-hover:text-blue-500 duration-200">Rate It!</span>
+                            <i class="fa fa-star inline-block ml-2 text-lg star-color duration-200 animate-bounce"></i>
+                        </a>
 
-                    <!-- Rated Button -->
-                    <a [tooltipTriggerFor]="ratingTooltip" trigger="click" theme="dark" class="inline-block ml-3 px-5 py-2 bg-blue-500 mt-12 rounded-full border-2 border-blue-700 hover:bg-white cursor-pointer duration-200 group" *ngIf="isUserLoggedIn && ratedValue !== 0 && isMovieAvailable">
-                        <span class="text-white font-semibold text-sm group-hover:text-blue-500 duration-200">You Rated {{ ratedValue }}</span>
-                        <i class="fa fa-star inline-block ml-2 text-lg star-color duration-200 animate-bounce"></i>
-                    </a>
+                        <!-- Rated Button -->
+                        <a class="z-10 inline-block ml-3 px-5 py-2 bg-blue-500 mt-12 rounded-full border-2 border-blue-700 hover:bg-white cursor-pointer duration-200 group" *ngIf="isUserLoggedIn && ratedValue !== 0 && isMovieAvailable" (click)="isTooltipOpen = !isTooltipOpen; $event.stopPropagation()">
+                            <span class="text-white font-semibold text-sm group-hover:text-blue-500 duration-200">You Rated {{ ratedValue }}</span>
+                            <i class="fa fa-star inline-block ml-2 text-lg star-color duration-200 animate-bounce"></i>
+                        </a>
 
-                    <tooltip #ratingTooltip="tooltip">
+                        <div class="absolute bg-black w-auto top-0 left-0 p-1 mt-3 rounded-full" id="tooltipText" *ngIf="isTooltipOpen" [@popupAnimation] (click)="$event.stopPropagation()">
+                            <i class="fa fa-minus-circle cursor-pointer mx-1 text-white" (click)="deleteMovieRating(); isTooltipOpen = false" (mouseenter)="currentStarValue = 0"></i>
+                            <i class="fa fa-star text-xl text-white cursor-pointer mx-1" [ngClass]="{ 'star-color': i <= currentStarValue}" *ngFor="let i of [1, 2, 3, 4, 5]" (mouseenter)="currentStarValue = i" (click)="rateMovie(i); ratedValue = i; currentStarValue = ratedValue; isTooltipOpen = false"></i>
+                        </div>
+
+                    </span>
+
+                    <!-- <tooltip #ratingTooltip="tooltip">
                         <div class="">
                             <i class="fa fa-minus-circle cursor-pointer mx-1" (click)="deleteMovieRating()" (mouseenter)="currentStarValue = 0"></i>
                             <i class="fa fa-star text-xl text-white cursor-pointer mx-1" [ngClass]="{ 'star-color': i <= currentStarValue}" *ngFor="let i of [1, 2, 3, 4, 5]" (mouseenter)="currentStarValue = i" (click)="rateMovie(i); ratedValue = i; currentStarValue = ratedValue"></i>
                         </div>
-                    </tooltip>
+                    </tooltip> -->
 
                 </div>
             </div>

@@ -24,7 +24,6 @@ import { TopRatedComponent } from './home/homepage/movie-type-navigator/top-rate
 import { TypeNowplayingComponent } from './home/homepage/movie-type-navigator/type-nowplaying/type-nowplaying.component';
 import { RecommendationsComponent } from './home/recommendations/recommendations.component';
 import { IvyCarouselModule } from '../ivyсarousel_pro/carousel.module';
-import { TooltipModule } from '../tooltip-pro-ng7/tooltip.module';
 import { CategoryCommaSeparatorTMDBMoviePipe } from './shared/categoryCommaSeparatorTMDBMovie.pipe';
 import { NewsDetailsComponent } from './home/news/news-details/news-details.component';
 import { NewsComponent } from './home/news/news.component';
@@ -92,7 +91,6 @@ import { CommentItemComponent } from './home/comments/comment-item/comment-item.
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
-    TooltipModule,
     IvyCarouselModule,
     FormsModule,
   ]
