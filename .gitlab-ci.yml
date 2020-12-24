@@ -11,6 +11,7 @@ stages:
 build:
   stage: build
   image: node:latest
+  image: cypress/base:10
   only:
     - master
   script:
