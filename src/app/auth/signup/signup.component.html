@@ -33,7 +33,7 @@
                 <!-- Password input -->
                 <div class="mt-1 md:mt-7 h-24 relative">
                     <label for="password" class="font-bold block mb-1">Password</label>
-                    <input #password [formControlName]="'password'" [type]="isPasswordVisible ? 'text' : 'password'" id="email" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
+                    <input #password [formControlName]="'password'" [type]="isPasswordVisible ? 'text' : 'password'" id="password" class="bg-gray-300 rounded-lg py-2 w-full pl-3 shadow-inner focus:outline-none focus:shadow-outline">
                     <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched" class="block text-right md:text-left text-sm text-red-600 font-semibold">* Password required</span>
                     <span class="absolute right-0 inline-block mr-3 mt-2 cursor-pointer" *ngIf="password.value" (click)="isPasswordVisible = !isPasswordVisible">
                         <i class="fa fa-eye text-xl" *ngIf="!isPasswordVisible"></i>

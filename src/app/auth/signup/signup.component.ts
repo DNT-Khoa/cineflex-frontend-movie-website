@@ -63,7 +63,7 @@ export class SignupComponent implements OnInit {
           this.isLoading = false;
 
           if (error.status === 409) {
-            this.toastr.error('Email already exists. Please login!');
+            this.toastr.error('Email already exists. Please log in!');
           } else {
             this.toastr.error('Registration failed! Please try again');
           }

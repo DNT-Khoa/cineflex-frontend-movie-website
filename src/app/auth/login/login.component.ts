@@ -120,7 +120,7 @@ export class LoginComponent implements OnInit {
           if (error.error.message === 'INVALID_CREDENTIALS') {
             this.toastr.error('Incorrect Password. Please try again');
           } else if (error.error.message === 'EMAIL_NOT_EXISTS') {
-            this.toastr.error('Email does not exits! Please sign up first');
+            this.toastr.error('Email does not exist! Please sign up first');
           } else {
             this.toastr.error('Something wrong happened. Please try again later');
           }
