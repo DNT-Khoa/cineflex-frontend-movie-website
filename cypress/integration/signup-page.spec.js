@@ -13,7 +13,7 @@ describe('signup page test', () => {
 
         cy.get('button[type="submit"]').click();
 
-        // Check if the page contains the error toast notification'
+        // Check if the page contains the error toast notification
         cy.get('div[role="alertdialog"]').contains('Email already exists. Please log in!');
     })
 
