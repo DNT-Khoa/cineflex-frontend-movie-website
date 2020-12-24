@@ -2,18 +2,19 @@
 # Then execute this command "git config --global core.longpaths true"
 # reference: https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows
 image: node:latest
+image: cypress:latest
 
 
 stages:
-  - test
   - build
-
-test:
-  stage: test
-  script:
-    - npm run runHeadless
+  - test
 
 build:
   stage: build
   script:
     - npm run build
+
+test:
+  stage: test
+  script:
+    - npm run runHeadless
