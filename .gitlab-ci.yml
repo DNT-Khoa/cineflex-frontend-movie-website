@@ -3,20 +3,10 @@
 # reference: https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows
 image: node:latest
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-  - node_modules/
 
 stages:
-  - install
   - test
   - build
-
-install_dependencies:
-  stage: install
-  script:
-    - npm install
 
 test:
   stage: test
