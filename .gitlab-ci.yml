@@ -5,21 +5,17 @@ image: node:latest
 
 
 stages:
-  - install
   - build
   - test
-
-install_dependencies:
-  stage: install
-  script:
-    - npm install
 
 build:
   stage: build
   script:
+    - npm install
     - npm run build
 
 test:
   stage: test
   script:
     - npm run runHeadless
+
