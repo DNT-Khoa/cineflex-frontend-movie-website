@@ -7,24 +7,15 @@ stages:
 
 build:
   stage: build
-  image: node:latest
   only:
     - master
   script:
-    - npm install -g @angular/cli@10.1.4
     - npm install
     - npm run build
-  artifacts:
-    paths:
-      - dist/
-    expire_in: 2 hours
-  cache:
-    paths:
-      - node_modules/
 
 test:
   stage: test
-  image: cypress/base:10
   script:
+    - npm install
     - npm run runHeadless
 
