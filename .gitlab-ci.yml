@@ -16,7 +16,7 @@ build:
   script:
     - npm install -g @angular/cli@10.1.4
     - npm install
-    - ng build 
+    - npm run build
   artifacts:
     paths:
       - dist/
