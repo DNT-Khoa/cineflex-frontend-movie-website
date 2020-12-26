@@ -17,7 +17,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // We don't want to intercept the login, signup, refresh and api requests
-        if (req.url.indexOf('refresh') !== -1 || req.url.indexOf('login') !== -1 || req.url.indexOf('signup') !== -1 || req.url.indexOf('api') !== -1) {
+        if (req.url.indexOf('refresh') !== -1 || req.url.indexOf('login') !== -1 || req.url.indexOf('signup') !== -1) {
             if (req.url.indexOf('refresh') !== -1) {
                 console.log("contains refresh");
             } else if (req.url.indexOf('login') !== -1) {
@@ -27,7 +27,7 @@ export class TokenInterceptor implements HttpInterceptor {
             } else if (req.url.indexOf('api') !== -1) {
                 console.log("contains api");
             }
-            
+
             return next.handle(req); 
         }
 
