@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "cypress open",
-    "runHeadless": "./node_modules/.bin/cypress run --headed"
+    "runHeadless": "./node_modules/.bin/cypress run --headless"
   },
   "private": true,
   "dependencies": {
