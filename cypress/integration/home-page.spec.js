@@ -21,7 +21,7 @@ describe('home page test', () => {
         cy.request('http://localhost:8080/api/movies/toprated/4').then((response) => {
             expect(response).to.have.property('status', 200);
             expect(response.body).to.not.be.null;
-            expect(response.body).to.have.length(3);
+            expect(response.body).to.have.length(2);
             expect(response.body[1].title).equal("Coco");
         })
     })
@@ -32,7 +32,7 @@ describe('home page test', () => {
             expect(response).to.have.property('status', 200);
             expect(response.body).to.not.be.null;
             expect(response.body).to.have.length(4);
-            expect(response.body[1].title).equal("Love and Monsters");
+            expect(response.body[1].title).equal("The SpongeBob Movie: Sponge on the Run");
         })
     })
 
@@ -41,8 +41,8 @@ describe('home page test', () => {
         cy.request('http://localhost:8080/api/movies/comingsoon/4').then((response) => {
             expect(response).to.have.property('status', 200);
             expect(response.body).to.not.be.null;
-            expect(response.body).to.have.length(1);
-            expect(response.body[0].title).equal("Love and Monsters");
+            expect(response.body).to.have.length(2);
+            expect(response.body[0].title).equal("Wonder Woman 1984");
         })
     })
 
@@ -52,7 +52,7 @@ describe('home page test', () => {
             expect(response).to.have.property('status', 200);
             expect(response.body).to.not.be.null;
             expect(response.body).to.have.length(4);
-            expect(response.body[2].title).equal("Paddington 2");
+            expect(response.body[2].title).equal("Coco");
         })
     })
 
@@ -62,7 +62,7 @@ describe('home page test', () => {
             expect(response).to.have.property('status', 200);
             expect(response.body).to.not.be.null;
             expect(response.body).to.have.length(4);
-            expect(response.body[0].title).equal("Avengers Endgame: how the Marvel Universe helps children (and adults) understand the world around them");
+            expect(response.body[0].title).equal("How to Watch the DC Movies in Order (Chronologically and by Release Date)");
         })
     })
 
