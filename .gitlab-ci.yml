@@ -4,28 +4,28 @@
 
 
 stages:
-  - build
-  - test
+  # - build
+  # - test
   - deploy
 
-build:
-  image: node:latest
-  stage: build
-  only:
-    - master
-  script:
-    - npm install
-    - npm run build
-  tags: 
-    - docker
+# build:
+#   image: node:latest
+#   stage: build
+#   only:
+#     - master
+#   script:
+#     - npm install
+#     - npm run build
+#   tags: 
+#     - docker
 
-test:
-  stage: test
-  script:
-    - npm install
-    - npm run runHeadless
-  tags: 
-    - shell
+# test:
+#   stage: test
+#   script:
+#     - npm install
+#     - npm run runHeadless
+#   tags: 
+#     - shell
 
 deploy:
   stage: deploy
