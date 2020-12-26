@@ -117,7 +117,6 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.categoriesService.getAllCategories().subscribe(
       (data) => {
         this.categories = data;
-        console.log(this.categories)
       },
       (error) => {
         console.log(error);
