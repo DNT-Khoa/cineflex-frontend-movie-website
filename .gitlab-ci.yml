@@ -19,7 +19,6 @@ build:
     - docker
 
 test:
-  image: cypress/base:10
   stage: test
   script:
     - npm install
@@ -27,3 +26,10 @@ test:
   tags: 
     - shell
 
+deploy:
+  stage: deploy
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APPNAME --api-key=$HEROKU_APIKEY
+  tags: 
+    - docker
