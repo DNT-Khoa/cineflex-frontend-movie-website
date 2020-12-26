@@ -219,6 +219,7 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.getAllPosts();
         this.isAddModalOpen = false;
         this.isCategoryDropdownOpen = false;
+        this.addNewsForm.reset();
       },
       (error) => {
         console.log(error);
