@@ -3,6 +3,10 @@
 # reference: https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows: 
 image: node:latest
 
+cache:
+  paths:
+    - node_modules/
+
 stages:
   - build
   - test
@@ -12,10 +16,12 @@ build:
   only:
     - master
   script:
+    - npm install
     - npm run build
 
 test:
   stage: test
   script:
+    - npm install
     - npm run runHeadless
 
