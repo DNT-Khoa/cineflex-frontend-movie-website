@@ -123,14 +123,14 @@ export class AdminProfileComponent implements OnInit {
     this.adminService.editAdminDetails({ firstName: this.admin.firstName, lastName: this.admin.lastName, oldEmail: this.oldEmail, newEmail: this.admin.email})
     .subscribe(
       (data) => {
-        this.toastr.success("Successfully updated your information");
+        this.toastr.success("Successfully updated your information.");
         this.isEditProfileFormOpen = false;
       }, 
       (error) => {
         if (error.status === 409) {
-          this.toastr.error("Email already exits! Please try a different email");
+          this.toastr.error("Email already exists! Please try a different email.");
         } else {
-          this.toastr.error("Something wrong happened with the server. Please try again later");
+          this.toastr.error("Something wrong happened with the server. Please try again later.");
         }
         
       }
@@ -139,7 +139,7 @@ export class AdminProfileComponent implements OnInit {
 
   changePassword() {
     if (!this.changePasswordForm.valid) {
-      this.toastr.error("Please make sure to check your form before submitting");
+      this.toastr.error("Please make sure to check your form before submitting.");
       return;
     }
 
@@ -149,15 +149,15 @@ export class AdminProfileComponent implements OnInit {
     let newPassword = this.changePasswordForm.get('newPassword').value;
     this.adminService.changePassword({email: this.admin.email, oldPassword: oldPassword, newPassword: newPassword}).subscribe(
       (data) => {
-        this.toastr.success("Successfully changed your password");
+        this.toastr.success("Successfully changed your password.");
         this.isChangePasswordFormOpen = false;
         this.changePasswordForm.reset();
       }, error => {
         console.log(error);
         if (error.status === 500) {
-          this.toastr.error("Incorrect password! Please try again");
+          this.toastr.error("Incorrect password! Please try again.");
         } else {
-          this.toastr.error("Something wrong happened with the server. Please try again later");
+          this.toastr.error("Something wrong happened with the server. Please try again later.");
         }
       }
     )
@@ -165,7 +165,7 @@ export class AdminProfileComponent implements OnInit {
 
   deleteAccount() {
     if (!this.deleteAccountForm.valid) {
-      this.toastr.error("Please check your form carefully before submitting");
+      this.toastr.error("Please check your form carefully before submitting.");
       return;
     }
 
@@ -181,10 +181,10 @@ export class AdminProfileComponent implements OnInit {
       (error) => {
         console.log("error");
         if (error.error === 'INVALID_CREDENTIALS') {
-          this.toastr.error("Incorrect password! Please try again");
+          this.toastr.error("Incorrect password! Please try again.");
         } else {
           console.log(error);
-          this.toastr.error("Something wrong happened with the server. Please try again later");
+          this.toastr.error("Something wrong happened with the server. Please try again later.");
         } 
       } 
     )

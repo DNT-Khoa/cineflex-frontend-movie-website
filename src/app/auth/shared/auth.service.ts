@@ -85,12 +85,12 @@ export class AuthService {
     this.httpClient.post(this.httpConfigService.getBaseUrl() + '/api/auth/logout', this.refreshTokenPayload, { responseType: 'text'})
       .subscribe(
         data => {
-          this.toastr.success('Logout Successful!');
+          this.toastr.success('Successfully logged out!');
           this.loggedInSubject.next(false);
           this.router.navigateByUrl('/');
         }, error => {
           throwError(error);
-          this.toastr.error('Something wrong happend. Please try again later!');
+          this.toastr.error('Something wrong happened. Please try again later!');
         }
       );
     

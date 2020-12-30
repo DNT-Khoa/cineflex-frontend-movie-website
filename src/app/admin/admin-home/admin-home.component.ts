@@ -87,7 +87,7 @@ export class AdminHomeComponent implements OnInit, OnDestroy {
         this.admin = data;
       }, error => {
         console.log(error);
-        this.toastr.error("Something wrong happened with the server. Please try again later");
+        this.toastr.error("Something wrong happened with the server. Please try again later.");
       }
     )
   }

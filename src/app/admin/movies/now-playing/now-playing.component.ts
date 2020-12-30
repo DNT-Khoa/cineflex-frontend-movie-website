@@ -155,7 +155,7 @@ export class NowPlayingComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       (error) => {
         console.log(error);
-        this.toastr.error('Something wrong happen with the server. Please try again later.');
+        this.toastr.error('Something wrong happenned with the server. Please try again later.');
       }
     )
   }
@@ -226,7 +226,7 @@ export class NowPlayingComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       (error) => {
         if (error.status === 409) {
-          this.toastr.error('Movie already exits. Please choose a different movie');
+          this.toastr.error('Movie already exists. Please choose a different movie');
         } else {
           this.toastr.error('Something wrong happened. Please try again later');
         }

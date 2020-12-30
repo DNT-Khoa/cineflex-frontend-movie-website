@@ -120,7 +120,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       (error) => {
         console.log(error);
-        this.toastr.error('Something wrong happen with the server. Please try again later.');
+        this.toastr.error('Something wrong happened with the server. Please try again later.');
       }
     )
   }
@@ -159,7 +159,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       (error) => {
         if (error.status === 409) {
-          this.toastr.error('Name already exits. Please choose a different category name');
+          this.toastr.error('Name already exists. Please choose a different category name');
         } else {
           this.toastr.error('Something wrong happened. Please try again later');
         }

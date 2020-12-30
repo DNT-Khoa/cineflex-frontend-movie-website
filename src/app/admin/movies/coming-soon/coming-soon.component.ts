@@ -156,7 +156,7 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       (error) => {
         console.log(error);
-        this.toastr.error('Something wrong happen with the server. Please try again later.');
+        this.toastr.error('Something wrong happened with the server. Please try again later.');
       }
     )
   }
@@ -232,7 +232,7 @@ export class ComingSoonComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       (error) => {
         if (error.status === 409) {
-          this.toastr.error('Movie already exits. Please choose a different movie');
+          this.toastr.error('Movie already exists. Please choose a different movie');
         } else {
           this.toastr.error('Something wrong happened. Please try again later');
         }
