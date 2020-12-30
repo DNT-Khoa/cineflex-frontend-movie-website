@@ -29,7 +29,7 @@ export class TokenInterceptor implements HttpInterceptor {
         }
 
         return next.handle(req).pipe(catchError( error => {
-            console.log(error);
+            // console.log(error);
             if (error instanceof HttpErrorResponse && error.status === 401) {
                 // This will check for the case { responseType: 'text' } and { responseType: 'json'}
                 if ( (error.error.cause && error.error.cause.includes("EXPIRED_TOKEN")) || (error.error && error.error.includes("EXPIRED_TOKEN")) ) {
