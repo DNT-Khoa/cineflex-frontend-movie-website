@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ResetPasswordService } from './shared/reset-password.service';
 
@@ -14,7 +14,7 @@ export class ResetPasswordComponent implements OnInit {
   isPasswordVisible: false;
   token: string;
 
-  constructor(private resetPasswordService: ResetPasswordService, private activedRoute: ActivatedRoute, private toastr: ToastrService) { }
+  constructor(private resetPasswordService: ResetPasswordService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.initializedResetPasswordForm();
@@ -37,6 +37,7 @@ export class ResetPasswordComponent implements OnInit {
     this.resetPasswordService.resetPassword(password, this.token).subscribe(
       data => {
         this.toastr.success("Successfully reset your password. You can log in now");
+        this.router.navigateByUrl("/auth/login")
       }, error => {
         if (error.error === 'INVALID_TOKEN') {
           this.toastr.error("Invalid Token");

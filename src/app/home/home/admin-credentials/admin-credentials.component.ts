@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { AdminCredentialsService } from './shared/admin-credentials.service';
 
@@ -14,7 +14,7 @@ export class AdminCredentialsComponent implements OnInit {
   isPasswordVisible: false;
   token: string;
 
-  constructor(private adminCredentialsService: AdminCredentialsService, private activedRoute: ActivatedRoute, private toastr: ToastrService) { }
+  constructor(private adminCredentialsService: AdminCredentialsService, private activedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.initializedAdminCredentialsForm();
@@ -46,6 +46,7 @@ export class AdminCredentialsComponent implements OnInit {
     }).subscribe(
       data => {
         this.toastr.success("We have successfully registered you as an admin. Please login");
+        this.router.navigateByUrl("/auth/login");
       }, error => {
         if (error.error === 'ADMIN_ALREADY_REGISTERED') {
           this.toastr.error("You have already joined us! Please log in or ask us to send another invitation link for you");
