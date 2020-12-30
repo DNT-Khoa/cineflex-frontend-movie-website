@@ -125,7 +125,6 @@ export class AdminProfileComponent implements OnInit {
       (data) => {
         this.toastr.success("Successfully updated your information");
         this.isEditProfileFormOpen = false;
-        this.editProfileForm.reset();
       }, 
       (error) => {
         if (error.status === 409) {
