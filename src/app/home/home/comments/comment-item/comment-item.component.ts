@@ -169,7 +169,7 @@ export class CommentItemComponent implements OnInit {
     this.commentService.likeComment(this.comment.id).subscribe(
       data => {
         this.toastrService.success("Successfully liked the comment");
-        this.updateNumberOfLikeUsers(this.comment.likedByUsers.length + 1);
+        this.updateNumberOfLikeUsers(+this.numberOfLikedUser + 1);
         this.removeUserFromLikedByUser(this.comment.email);
         this.hasTheUserLikedTheComment = true;
       }, error => {
@@ -183,7 +183,7 @@ export class CommentItemComponent implements OnInit {
     this.commentService.unlikeComment(this.comment.id).subscribe(
       data => {
         this.toastrService.success("Successfully unliked the comment");
-        this.updateNumberOfLikeUsers(this.comment.likedByUsers.length - 1);
+        this.updateNumberOfLikeUsers(+this.numberOfLikedUser - 1);
         this.removeUserFromLikedByUser(this.comment.email);
         this.hasTheUserLikedTheComment = false;
       }, error => {
