@@ -124,6 +124,7 @@ export class AdminProfileComponent implements OnInit {
     .subscribe(
       (data) => {
         this.toastr.success("Successfully updated your information");
+        this.isEditProfileFormOpen = false;
       }, 
       (error) => {
         if (error.status === 409) {
@@ -149,6 +150,7 @@ export class AdminProfileComponent implements OnInit {
     this.adminService.changePassword({email: this.admin.email, oldPassword: oldPassword, newPassword: newPassword}).subscribe(
       (data) => {
         this.toastr.success("Successfully changed your password");
+        this.isChangePasswordFormOpen = false;
       }, error => {
         console.log(error);
         if (error.status === 500) {
