@@ -125,6 +125,7 @@ export class AdminProfileComponent implements OnInit {
       (data) => {
         this.toastr.success("Successfully updated your information");
         this.isEditProfileFormOpen = false;
+        this.editProfileForm.reset();
       }, 
       (error) => {
         if (error.status === 409) {
@@ -151,6 +152,7 @@ export class AdminProfileComponent implements OnInit {
       (data) => {
         this.toastr.success("Successfully changed your password");
         this.isChangePasswordFormOpen = false;
+        this.changePasswordForm.reset();
       }, error => {
         console.log(error);
         if (error.status === 500) {
