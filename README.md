@@ -21,15 +21,21 @@ The COVID-19 pandemic has had a substantial impact on the film industry in 2020.
 ![wireframes](https://res.cloudinary.com/dkggp2lec/image/upload/v1621389686/Khoa%27s%20Portfolio%20/CineFlex/cineflex_another_wgnqsp.png)
 
 ## Admin pages
+Admins can perform all CRUD operations on the website. This includes adding, editing, removing, getting films, news and new admin. These resources will be saved to the database for permanent storage. A third-party API called TMDB (The Movie Database) is also integrated to help admins get the details of any movie in the industry. This helps provide the profundity for movie resources.
+
 ![admin 1](https://res.cloudinary.com/dkggp2lec/image/upload/v1621389747/Khoa%27s%20Portfolio%20/CineFlex/CineFlex_10_mqb3fd.png)
 ![admin 2](https://res.cloudinary.com/dkggp2lec/image/upload/v1621389746/Khoa%27s%20Portfolio%20/CineFlex/CineFlex_11_z9bm6n.png)
 ![admin 3](https://res.cloudinary.com/dkggp2lec/image/upload/v1621389746/Khoa%27s%20Portfolio%20/CineFlex/CineFlex_8_mlwucq.png)
 
 ## User pages
+There are two types of normal users, guest and registered users. As a guest, you can watch movies and read news. However, you have to register an acccount if you want some other advanced features, such as liking, commenting and rating movies. Movies that user likes will be saved to their account so they can access them more easily in their profile page.
+
 ![user 1](https://res.cloudinary.com/dkggp2lec/image/upload/v1621389749/Khoa%27s%20Portfolio%20/CineFlex/CineFlex_4_nif3jv.png)
 ![user 2](https://res.cloudinary.com/dkggp2lec/image/upload/v1621389749/Khoa%27s%20Portfolio%20/CineFlex/CineFlex_1_wlxto0.png)
 
 ## Responsiveness
+
+The website is totally responsive on different viewport sizes or devices. Using TailwindCSS as a CSS library, the development process has been optimized. On the other hand, the library also helps keep the page consistent and well-aligned.
 ![responsiveness](https://res.cloudinary.com/dkggp2lec/image/upload/v1621390630/Khoa%27s%20Portfolio%20/CineFlex/Group_37_ikjnxf.png)
 
 ## Conclusion
