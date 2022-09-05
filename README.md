@@ -6,6 +6,7 @@
 
 ## Technology stack
 - Angular 
+- TailwindCSS
 - Spring Boot
 - MySQL
 - TMDB API
